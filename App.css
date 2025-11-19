@@ -17,7 +17,7 @@
 .menu,
 .search,  
 .filter,
-.settings {
+.settings { 
   padding: 2px;
   height: 13px;
 }
@@ -35,7 +35,6 @@
 }
 .add-icon-left,
 .add-icon-right {
-  display: inline-block;
   border: none;
   height: 16px;
   margin-right: 5px;
@@ -48,4 +47,16 @@
   font-size: 14px;
   cursor: pointer;
   background: none;
+}
+.tasks {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.vl {
+  border-left: 1.5px grey solid;
+  height: 460px;
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  top: 85px;
 }
