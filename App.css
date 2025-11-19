@@ -12,13 +12,19 @@
   align-items: center;
   margin: 0;
 }
+.menu-button-flex,
+.filter-button-flex {
+  display: flex;
+  flex: 1;
+}
 .search-bar {
   display: flex;
+  flex-direction: row;
   padding: 8px 12px;
   border-radius: 30px;
   border: 1.5px black solid;
   font-size: 18px;
-  width: 400px;
+  width: 350px;
   background-color: white;
 }
 .menu,
@@ -42,11 +48,6 @@
   border-radius: 30px;
   background-color: white;
   margin: 3px;
-}
-.menu-button-flex,
-.filter-button-flex {
-  display: flex;
-  flex: 1;
 }
 .add-icon-left,
 .add-icon-right {
