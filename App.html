@@ -2,23 +2,34 @@
 <html>
   <head>
     <title>Task Manager</title>
+    <link rel="stylesheet" href="App.css">
   </head>
   <body>
     <div class="topbar">
-      <button class="menubutton"></button>
-      <button class="searchbox searchboxblack">Search</button>
-
+      <div>
+        <button class="menu-button" id="Menu"><img src="Icons/menu-burger.png" class="menu"></button>
+      </div>
+      <div>
+        <button class="search-button"><img src="Icons/search.png" class="search"></button>
+      </div>
+      <div>
+        <input type="text" class="search-bar" placeholder="Search">
+      </div>
+      <div>
+        <button class="filter-button"><img src="Icons/filter-icon.png" class="filter"></button>
+      </div>
+      <div>
+        <button class="settings-button"><img src="Icons/settings-icon.png" class="settings"></button>
+      </div>
     </div>
-    <div>
-      <button class="Newtask" float="left">New Task</button>
-      <button class="Taskgroups" float="right"><img src="">New Group</button>
+    <div class="tasks">
+      <div>
+        <button class="newtask"><img src="Icons/add-icon.png" class="add-icon-left">New Task</button>
+      </div>
+      <div>
+        <button class="taskgroups"><img src="Icons/add-icon.png" class="add-icon-right">New Group</button>
+      </div>
     </div>
-
-
-
-
-
-
     <script>
     </script>
   </body>
