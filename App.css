@@ -19,14 +19,16 @@
 .menu,
 .search,  
 .filter,
-.settings { 
+.settings,
+.tile { 
   padding: 2px;
   height: 13px;
 }
 .menu-button,
 .search-button,
 .filter-button,
-.settings-button {
+.settings-button,
+.view-type-button {
   display: flex;
   border: 1.5px solid black;
   height: 40px;
