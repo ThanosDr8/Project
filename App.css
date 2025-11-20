@@ -53,10 +53,18 @@
   border: 1.5px solid black;
   height: 40px;
   padding: 10px;
-  cursor: pointer;
   border-radius: 30px;
   background-color: white;
   margin: 3px;
+}
+.menu-button:hover,
+.search-button:hover,
+.filter-button:hover,
+.settings-button:hover,
+.view-type-button:hover {
+  cursor: pointer;
+  background-color: rgb(234, 234, 234);
+  transition: 0.1s;
 }
 .add-icon-left,
 .add-icon-right {
