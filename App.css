@@ -1,6 +1,7 @@
 .body {
   margin: 0;
   font-family: Arial;
+  z-index: 1;
 }
 .header {
   background-color: rgb(81, 81, 81);
@@ -10,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  z-index: 1;
 }
 .left-section {
   margin-left: 5px;
@@ -40,19 +42,17 @@
 .search,  
 .filter,
 .settings,
-.tile { 
+.tile,
+.close { 
   padding: 2px;
   height: 13px;
-}
-.close {
-  border: none;
-  height: 20px;
 }
 .menu-button,
 .search-button,
 .filter-button,
 .settings-button,
-.view-type-button {
+.view-type-button,
+.close-button {
   display: flex;
   border: 1.5px solid black;
   height: 40px;
@@ -65,7 +65,8 @@
 .search-button:hover,
 .filter-button:hover,
 .settings-button:hover,
-.view-type-button:hover {
+.view-type-button:hover,
+.close-button:hover {
   cursor: pointer;
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
@@ -96,57 +97,38 @@
   left: 50%;
   top: 85px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .sidebar {
+  display: flex;
   height: 100%;
-  width: 0;
+  width: 0px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: rgb(81, 81, 81);
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.1s;
   padding-top: 60px;
 }
-
 .sidebar a {
-  padding: 8px 8px 8px 32px;
+  display: flex;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
-  display: block;
-  transition: 0.3s;
+  transition: 0.1s;
 }
-
 .sidebar a:hover {
   color: #f1f1f1;
 }
-
 .sidebar .closebtn {
+  display: flex;
   position: absolute;
-  top: 0;
-  right: 25px;
+  top: 7px;
   font-size: 36px;
-  margin-left: 50px;
+  margin-left: 5px;
 }
-
 .openbtn {
+  display: flex;
   font-size: 20px;
   cursor: pointer;
   background-color: #111;
@@ -154,16 +136,10 @@
   padding: 10px 15px;
   border: none;
 }
-
 .openbtn:hover {
+  display: flex;
   background-color: #444;
 }
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
