@@ -7,21 +7,24 @@
   <body class="body">
     <div class="header">
       <div class="left-section">
-        <button class="menu-button" id="Menu"><img src="Icons/menu-burger.png" class="menu"></button>
+        <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
+      </div>
+      <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="Icons/cross.png" class="close"></a>
+        <button id="settings-button" class="settings-button"><img src="Icons/settings-icon.png" class="settings"></button>
       </div>
       <div class="mid-section">
-        <input type="text" class="search-bar" placeholder="Search">
-        <button class="search-button"><img src="Icons/search.png" class="search"></button>
-        <button class="filter-button"><img src="Icons/filter-icon.png" class="filter"></button>
+        <input id="search-bar" type="text" class="search-bar" placeholder="Search">
+        <button id="search-button" class="search-button"><img src="Icons/search.png" class="search"></button>
+        <button id="filter-button" class="filter-button"><img src="Icons/filter-icon.png" class="filter"></button>
       </div>
       <div class="right-section">
-        <button class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
-        <button class="settings-button"><img src="Icons/settings-icon.png" class="settings"></button>
+        <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
     </div>
     <div class="tasks">
       <div>
-        <button class="newtask"><img src="Icons/add-icon.png" class="add-icon-left">
+        <button id="newtask-button" class="newtask"><img src="Icons/add-icon.png" class="add-icon-left">
           New Task
         </button>
       </div>
@@ -29,12 +32,11 @@
         <!-- vertical line -->
       </div>
       <div>
-        <button class="taskgroups"><img src="Icons/add-icon.png" class="add-icon-right">
+        <button id="taskgroups-button" class="taskgroups"><img src="Icons/add-icon.png" class="add-icon-right">
           New Group
         </button>
       </div>
     </div>
-    <script>
-    </script>
+    <script src="App.js"></script>
   </body>
 </html>
