@@ -41,16 +41,20 @@
 .menu,
 .search,  
 .filter,
-.settings,
 .tile,
-.close { 
+.close{ 
   padding: 2px;
   height: 13px;
+}
+.info,
+.settings {
+  height: 20px;
+  padding-right: 3px;
+  padding-left: 13.3px
 }
 .menu-button,
 .search-button,
 .filter-button,
-.settings-button,
 .view-type-button,
 .close-button {
   display: flex;
@@ -64,7 +68,6 @@
 .menu-button:hover,
 .search-button:hover,
 .filter-button:hover,
-.settings-button:hover,
 .view-type-button:hover,
 .close-button:hover {
   cursor: pointer;
@@ -85,20 +88,24 @@
   font-size: 14px;
   cursor: pointer;
   background: none;
+  display: flex;
 }
 .tasks {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
 }
 .vl {
   border-left: 1.5px grey solid;
   height: 460px;
   position: absolute;
   left: 50%;
-  top: 85px;
+  top: 15px;
 }
 .sidebar {
-  display: flex;
+  display: block;
   height: 100%;
   width: 0px;
   position: fixed;
@@ -111,10 +118,11 @@
   padding-top: 60px;
 }
 .sidebar a {
-  display: flex;
+  display: block;
+  padding-left: 5px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #c9c9c9;
   transition: 0.1s;
 }
 .sidebar a:hover {
@@ -125,7 +133,6 @@
   position: absolute;
   top: 7px;
   font-size: 36px;
-  margin-left: 5px;
 }
 .openbtn {
   display: flex;
@@ -136,9 +143,8 @@
   padding: 10px 15px;
   border: none;
 }
-.openbtn:hover {
-  display: flex;
-  background-color: #444;
+#main {
+  transition: margin-left 0.1s;
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {

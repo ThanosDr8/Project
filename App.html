@@ -3,9 +3,10 @@
   <head>
     <title>Task Manager</title>
     <link rel="stylesheet" href="App.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-  <body class="body">
-    <div class="header">
+  <body id="main" class="body">
+    <div id="main" class="header">
       <div class="left-section">
         <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
       </div>
@@ -18,8 +19,8 @@
         <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
     </div>
-    <div class="tasks">
-      <div>
+    <div id="main" class="tasks">
+      <div id="main">
         <button id="newtask-button" class="newtask"><img src="Icons/add-icon.png" class="add-icon-left">
           New Task
         </button>
@@ -38,17 +39,9 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
           <button class="close-button"><img src="Icons/cross.png" class="close"></button>
         </a>
-        <a href="#">
-          <button id="settings-button" class="settings-button"><img src="Icons/settings-icon.png" class="settings">Settings</button>
+        <a href="#"><img src="Icons/settings-icon.png" class="settings">Settings
         </a>
-        <a href="#">
-          <button id="settings-button" class="settings-button"><img src="Icons/settings-icon.png" class="settings">Settings</button>
-        </a>
-        <a href="#">
-          <button id="settings-button" class="settings-button"><img src="Icons/settings-icon.png" class="settings">Settings</button>
-        </a>
-        <a href="#">
-          <button id="page-info" class="info-button"><img src></button>
+        <a href="#"><img src="Icons/info.png" class="info">Information
         </a>
         </div>
     </div>
