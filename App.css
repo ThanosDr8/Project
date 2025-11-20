@@ -9,6 +9,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
 }
 .left-section {
   margin-left: 5px;
