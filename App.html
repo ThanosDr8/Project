@@ -32,7 +32,7 @@
             <span class="close"><img src="Icons/cross.png" class="close"></span>
             <input type="text" class="task-search-bar" placeholder="Task Name">
             <input type="date" class="task-due-date">Due Date<br>
-            <select class="task-priority" lang="en">
+            <select class="task-priority">
               <option value="" disabled selected>Priority</option>
               <option value="high">High</option>
               <option value="medium">Medium</option>
@@ -40,8 +40,21 @@
               <option value="pending">Pending</option>
             </select>
             <br>
-            <input type="" class="description" value="Description..."><br>
+            <select class="category">
+              <option value="" disabled selected>Select a category</option>
+              <option value="house-work">House Work</option>
+              <option value="shopping">Shopping</option>
+              <option value="work">Work</option>
+              <option value="school-work">School Work</option>
+              <option value="hobbys">Hobbys</option>
+              <option value="other">Other</option>
+              <!--<option value=""></option>-->
+            </select>
+            <br>
+            <textarea maxlength="246" class="description" placeholder="Description..."></textarea>
+            <br>
             <input type="submit" class="submit-button" value="Submit">
+            <br>
           </div>
 
         </div>
