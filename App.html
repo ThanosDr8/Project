@@ -19,29 +19,31 @@
         <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
     </div>
-    <div>
-      <p>This is a small project for creating new tasks and managing them efficiently.</p>
+    <div id="main" class="tasks">
+      <div id="main">
+        <button id="newtask-button" class="newtask"><img src="Icons/add-icon.png" class="add-icon-left">
+          New Task
+        </button>
+      </div>
+      <div class="vl">
+        <!-- vertical line -->
+      </div>
+      <div>
+        <button id="taskgroups-button" class="taskgroups"><img src="Icons/add-icon.png" class="add-icon-right">
+          New Group
+        </button>
+      </div>
     </div>
     <div id="mySidebar" class="sidebar">
-    <!-- sidebar content -->
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-        <button class="close-button"><img src="Icons/cross.png" class="close"></button>
-      </a>
-      <a href="#">
-        <img src="Icons/add-icon.png" class="add-icon">New Task
-      </a>
-      <a href="#">
-        <img src="Icons/add-icon.png" class="add-icon">New Group
-      </a>
-      <a href="#">
-        <img src="Icons/settings-icon.png" class="settings">Settings
-      </a>
-      <a href="#">
-        <img src="Icons/info.png" class="info">Information
-      </a>
-      <a href="#">
-        <img src="Icons/chart-histogram.png" class="charts">See productivity
-      </a>
+        <!-- sidebar content -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+          <button class="close-button"><img src="Icons/cross.png" class="close"></button>
+        </a>
+        <a href="#"><img src="Icons/settings-icon.png" class="settings">Settings
+        </a>
+        <a href="#"><img src="Icons/info.png" class="info">Information
+        </a>
+        </div>
     </div>
     <script src="App.js"></script>
   </body>
