@@ -29,7 +29,8 @@
   display: flex;
   align-items: center;
 }
-.search-bar {
+.search-bar,
+.task-search-bar {
   display: flex;
   flex: 1;
   padding: 8px 12px;
@@ -47,10 +48,12 @@
   height: 13px;
 }
 .info,
-.settings {
+.settings,
+.chart {
   height: 20px;
   padding-right: 3px;
-  padding-left: 13.3px
+  padding-left: 13.3px;
+  margin-right: 3px;
 }
 .menu-button,
 .search-button,
@@ -124,6 +127,7 @@
   font-size: 25px;
   color: #c9c9c9;
   transition: 0.1s;
+  margin-top: 5px;
 }
 .sidebar a:hover {
   color: #f1f1f1;
@@ -185,7 +189,7 @@
   cursor: pointer;
 }
 .submit-button {
-  background-color: rgb(37, 218, 27);
+  background-color: rgb(35, 201, 26);
   color: white;
   padding: 8px 10px;
   border: 1.7px rgb(166, 221, 239) solid;;
@@ -196,4 +200,10 @@
 }
 .submit-button:hover {
   background-color: rgb(15, 191, 15);
+}
+.task-due-date,
+.task-priority,
+.description,
+.task-search-bar {
+  margin: 0px 5px 5px 0px;
 }
