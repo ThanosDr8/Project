@@ -174,7 +174,7 @@
   background-color: #fefefe;
   margin: auto;
   padding: 20px 20px 50px 20px;
-  width: 80%;
+  width: 40%;
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
@@ -196,6 +196,7 @@
   border-radius: 13px;
   cursor: pointer;
   float: right;
+  float: bottom;
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
 }
 .submit-button:hover {
@@ -206,4 +207,14 @@
 .description,
 .task-search-bar {
   margin: 0px 5px 5px 0px;
+}
+.task-search-bar {
+  display: flex;
+  width: 65%;
+}
+.task-due-date,
+.task-priority {
+  border: 1.7px rgb(166, 221, 239) solid;
+  border-radius: 13px;
+  padding: 5px;
 }
