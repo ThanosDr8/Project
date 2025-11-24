@@ -47,10 +47,13 @@
   height: 13px;
 }
 .info,
-.settings {
+.settings,
+.add-icon-left,
+.add-icon-right {
   height: 20px;
   padding-right: 3px;
-  padding-left: 13.3px
+  padding-left: 13.3px;
+  margin-top: 10px;
 }
 .menu-button,
 .search-button,
@@ -73,22 +76,6 @@
   cursor: pointer;
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
-}
-.add-icon-left,
-.add-icon-right {
-  border: none;
-  height: 16px;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-.newtask,
-.taskgroups {
-  border: none;
-  padding: 8px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  background: none;
-  display: flex;
 }
 .tasks {
   display: flex;
