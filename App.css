@@ -48,8 +48,8 @@
 }
 .info,
 .settings,
-.add-icon-left,
-.add-icon-right {
+.add-icon,
+.charts {
   height: 20px;
   padding-right: 3px;
   padding-left: 13.3px;
