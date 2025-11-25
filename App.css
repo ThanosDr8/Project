@@ -266,7 +266,6 @@ h3 {
   width: 40%;
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
-  overflow: auto;
 }
 .filter-close {
   float: right;
@@ -298,3 +297,4 @@ h3 {
   border-radius: 13px;
   padding: 5px;
 }
+/*line 300 just bc*/

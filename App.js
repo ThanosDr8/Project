@@ -9,6 +9,7 @@ function closeNav() {
   document.getElementById("main").style.marginLeft = "0";
   document.getElementById("menu-button").style.display = "initial"
 }
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -23,7 +24,6 @@ btn.onclick = function() {
   modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 }
@@ -40,18 +40,4 @@ filterBtn.onclick = function() {
 
 filterSpan.onclick = function() {
   filterModal.style.display = "none";
-}
-function myFunction() {
-    var input, filter, i, a, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
 }
