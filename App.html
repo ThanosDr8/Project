@@ -20,13 +20,15 @@
           <!-- Filter Modal content -->
           <div class="filter-modal-content">
             <span class="filter-close" id="close-filter"><img src="Icons/cross.png" class="close"></span>
-            <label><input type="checkbox" class="filter-option" value="high"> High Priority</label><br>
-            <label><input type="checkbox" class="filter-option" value="medium"> Medium Priority</label><br>
-            <label><input type="checkbox" class="filter-option" value="low"> Low Priority</label><br>
-            <label><input type="checkbox" class="filter-option" value="pending"> Pending</label><br>
-            <label><input type="checkbox" class="filter-option" value="open"> Open Status</label><br>
-            <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status</label><br>
-            <label><input type="checkbox" class="filter-option" value="done"> Done Status</label><br>
+            <h3>Priority and Status</h3><br>
+            <label><input type="checkbox" class="filter-option" value="high"> High Priority |</label>
+            <label><input type="checkbox" class="filter-option" value="medium"> Medium Priority |</label>
+            <label><input type="checkbox" class="filter-option" value="low"> Low Priority |</label>
+            <label><input type="checkbox" class="filter-option" value="pending"> Pending |</label>
+            <label><input type="checkbox" class="filter-option" value="open"> Open Status |</label>
+            <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status |</label>
+            <label><input type="checkbox" class="filter-option" value="done"> Done Status |</label>
+            <h3>Sort by date</h3><br>
             <select>
               <option value="" disabled selected>Sort By</option>
               <option value="due-date-asc">Due Date (Ascending)</option>
@@ -34,15 +36,14 @@
               <option value="priority-asc">Priority (Ascending)</option>
               <option value="priority-desc">Priority (Descending)</option>
             </select>
-            <select>
-              <option value="" disabled selected>Category</option>
-              <option value="house-work">House Work</option>
-              <option value="shopping">Shopping</option>
-              <option value="work">Work</option>
-              <option value="school-work">School Work</option>
-              <option value="hobbys">Hobbys</option>
-              <option value="other">Other</option>
-            </select>
+            <h3>Category</h3><br>
+            <label><input type="checkbox" class="filter-option" value="house-work"> House Work |</label>
+            <label><input type="checkbox" class="filter-option" value="shopping"> Shopping |</label>
+            <label><input type="checkbox" class="filter-option" value="work"> Work |</label>
+            <label><input type="checkbox" class="filter-option" value="school-work"> School Work |</label>
+            <label><input type="checkbox" class="filter-option" value="hobbys"> Hobbys |</label>
+            <label><input type="checkbox" class="filter-option" value="other">Other |</label>
+            <!--<label><input type="checkbox" class="filter-option" value="other"></label>-->
             <br>
             <button id="apply-filters-button" class="apply-filters-button">Apply</button>
           </div>
