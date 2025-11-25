@@ -7,10 +7,13 @@
   </head>
   <body id="main">
     <div class="vl"></div>
+    <!-- The Header of the website-->
     <div class="header">
+      <!-- Left section with menu button of the header-->
       <div class="left-section">
         <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
       </div>
+      <!-- Middle section with search bar and filter button of the header-->
       <div class="mid-section">
         <input id="search-bar" type="text" class="search-bar" placeholder="Search">
         <button id="search-button" class="search-button"><img src="Icons/search.png" class="search"></button>
@@ -29,7 +32,7 @@
             <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status |</label>
             <label><input type="checkbox" class="filter-option" value="done"> Done Status |</label>
             <h3>Sort by date</h3><br>
-            <select>
+            <select class="asc-desc-select" id="sort-select">
               <option value="" disabled selected>Sort By</option>
               <option value="due-date-asc">Due Date (Ascending)</option>
               <option value="due-date-desc">Due Date (Descending)</option>
@@ -49,11 +52,13 @@
           </div>
         </div>
       </div>
+      <!-- Right section with view type button of the header-->
       <div class="right-section">
         <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
     </div>
-    <div class="tasks">
+  ` <!--Task creation and group sorting buttons-->
+    <div class="tasks" style="z-index: -1;">
       <div>
         <button class="newtask" id="myBtn"><img src="Icons/add-icon.png" class="add-icon-left">
           New Task
