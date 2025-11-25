@@ -2,7 +2,7 @@
 import Project from "../models/Project.js";
 
 export const createProject = async (req, res) => {
-  const project = await Project.create({...req.budy, user: req.user });
+  const project = await Project.create({ ...req.body, user: req.user });
   res.json(project);
 };
 
