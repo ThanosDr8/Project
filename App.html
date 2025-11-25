@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="App.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-  <body id="main" class="body">
-    <div id="main" class="header">
+  <body id="main">
+    <div class="vl"></div>
+    <div class="header">
       <div class="left-section">
         <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
       </div>
@@ -19,8 +20,8 @@
         <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
     </div>
-    <div id="main" class="tasks">
-      <div id="main">
+    <div class="tasks">
+      <div>
         <button class="newtask" id="myBtn"><img src="Icons/add-icon.png" class="add-icon-left">
           New Task
         </button>
@@ -51,6 +52,13 @@
               <!--<option value=""></option>-->
             </select>
             <br>
+            <select class="status"> 
+              <option value="" disabled selected>Status</option>
+              <option value="open">Open</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+            <br>
             <textarea maxlength="246" class="description" placeholder="Description..."></textarea>
             <br>
             <input type="submit" class="submit-button" value="Submit">
@@ -58,9 +66,6 @@
           </div>
 
         </div>
-      </div>
-      <div class="vl">
-        <!-- vertical line -->
       </div>
       <div>
         <button id="taskgroups-button" class="taskgroups"><img src="Icons/add-icon.png" class="add-icon-right">

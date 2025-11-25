@@ -1,7 +1,8 @@
-.body {
+html {
+  height: 100%;
+}
+body {
   margin: 0;
-  font-family: Arial;
-  z-index: 1;
 }
 .header {
   background-color: rgb(81, 81, 81);
@@ -107,13 +108,6 @@
   align-items: center;
   position: sticky;
 }
-.vl {
-  border-left: 1.5px grey solid;
-  height: 460px;
-  position: absolute;
-  right: 51%;
-  top: 20.5px;
-}
 .sidebar {
   display: block;
   height: 100%;
@@ -196,6 +190,7 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+  transition: 0.1s;
 }
 .submit-button {
   background-color: rgb(35, 201, 26);
@@ -210,13 +205,15 @@
 }
 .submit-button:hover {
   background-color: rgb(15, 191, 15);
+  transition: 0.1s;
 }
 .task-due-date,
 .task-priority,
 .description,
 .task-search-bar,
 .category,
-.description {
+.description,
+.status {
   margin: 0px 5px 5px 0px;
 }
 .task-search-bar {
@@ -225,7 +222,8 @@
 }
 .task-due-date,
 .task-priority,
-.category {
+.category,
+.status {
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
   padding: 5px;
