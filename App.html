@@ -15,6 +15,38 @@
         <input id="search-bar" type="text" class="search-bar" placeholder="Search">
         <button id="search-button" class="search-button"><img src="Icons/search.png" class="search"></button>
         <button id="filter-button" class="filter-button"><img src="Icons/filter-icon.png" class="filter"></button>
+        <!-- The Filter Modal -->
+        <div class="filter-modal" id="filterModal">
+          <!-- Filter Modal content -->
+          <div class="filter-modal-content">
+            <span class="filter-close" id="close-filter"><img src="Icons/cross.png" class="close"></span>
+            <label><input type="checkbox" class="filter-option" value="high"> High Priority</label><br>
+            <label><input type="checkbox" class="filter-option" value="medium"> Medium Priority</label><br>
+            <label><input type="checkbox" class="filter-option" value="low"> Low Priority</label><br>
+            <label><input type="checkbox" class="filter-option" value="pending"> Pending</label><br>
+            <label><input type="checkbox" class="filter-option" value="open"> Open Status</label><br>
+            <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status</label><br>
+            <label><input type="checkbox" class="filter-option" value="done"> Done Status</label><br>
+            <select>
+              <option value="" disabled selected>Sort By</option>
+              <option value="due-date-asc">Due Date (Ascending)</option>
+              <option value="due-date-desc">Due Date (Descending)</option>
+              <option value="priority-asc">Priority (Ascending)</option>
+              <option value="priority-desc">Priority (Descending)</option>
+            </select>
+            <select>
+              <option value="" disabled selected>Category</option>
+              <option value="house-work">House Work</option>
+              <option value="shopping">Shopping</option>
+              <option value="work">Work</option>
+              <option value="school-work">School Work</option>
+              <option value="hobbys">Hobbys</option>
+              <option value="other">Other</option>
+            </select>
+            <br>
+            <button id="apply-filters-button" class="apply-filters-button">Apply</button>
+          </div>
+        </div>
       </div>
       <div class="right-section">
         <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
@@ -30,7 +62,7 @@
 
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close"><img src="Icons/cross.png" class="close"></span>
+            <span class="close"><img src="Icons/cross.png" class="close-task-module"></span>
             <input type="text" class="task-search-bar" placeholder="Task Name">
             <input type="date" class="task-due-date">Due Date<br>
             <select class="task-priority">
@@ -73,6 +105,7 @@
         </button>
       </div>
     </div>
+    <!-- The sidebar -->
     <div id="mySidebar" class="sidebar">
         <!-- sidebar content -->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">

@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 body {
   margin: 0;
@@ -44,7 +45,8 @@ body {
 .search,  
 .filter,
 .tile,
-.close{ 
+.close,
+.close-task-module { 
   padding: 2px;
   height: 13px;
 }
@@ -182,11 +184,11 @@ body {
   border-radius: 13px;
 }
 /* The Close Button */
-.close {
+.close-task-module {
   float: right;
 }
-.close:hover,
-.close:focus {
+.close-task-module:hover,
+.close-task-module:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -236,4 +238,50 @@ body {
   resize: none;
   max-lines: 5;
   padding: 8px 0px 0px 5px;
+}
+.filter-modal {
+  display: flex;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.filter-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px 20px 33px 20px;
+  width: 40%;
+  border: 1.7px rgb(166, 221, 239) solid;
+  border-radius: 13px;
+}
+.filter-close {
+  float: right;
+}
+.filter-close:hover,
+.filter-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.apply-filters-button {
+  background-color: rgb(35, 201, 26);
+  color: white;
+  padding: 8px 10px;
+  border: 1.7px rgb(166, 221, 239) solid;;
+  border-radius: 13px;
+  cursor: pointer;
+  float: right;
+  box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
+  margin-top: 5px;
+}
+.apply-filters-button:hover {
+  background-color: rgb(15, 191, 15);
+  transition: 0.1s;
 }
