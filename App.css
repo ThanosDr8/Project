@@ -112,9 +112,10 @@ h3 {
 .tasks {
   display: flex;
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   align-items: center;
   position: sticky;
+  z-index: -3;
 }
 .sidebar {
   display: block;
