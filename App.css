@@ -3,9 +3,12 @@ html {
   z-index: -4;
 }
 body {
+  height: 100vh;
   margin: 0;
+  padding: 0;
   z-index: -4;
   position: sticky;
+  box-shadow: 0px 0px 100px gray inset;
 }
 .header {
   background-color: rgb(81, 81, 81);
@@ -15,9 +18,14 @@ body {
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  box-shadow: -10px 30px 30px -1px rgb(52, 51, 51) inset;
 }
 h3 {
   margin-bottom: 0px;
+}
+hr {
+  border: 0.5px solid rgb(200, 200, 200);
+  margin-top: 10px;
 }
 .left-section {
   margin-left: 5px;
@@ -86,8 +94,7 @@ h3 {
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
 }
-.add-icon-left,
-.add-icon-right {
+.add-icon{
   border: none;
   height: 16px;
   margin-right: 5px;
@@ -95,14 +102,16 @@ h3 {
 }
 .newtask,
 .taskgroups {
-  border: 1.5px black solid;
+  border: none;
   border-radius: 13px;
   margin-top: 5px;
+  margin-left: 5px;
   padding: 8px 10px;
   font-size: 14px;
   cursor: pointer;
   background: none;
   display: flex;
+  width: 99%;
 }
 .newtask:hover,
 .taskgroups:hover {
@@ -110,12 +119,12 @@ h3 {
   transition: 0.1s;
 }
 .tasks {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: block;
+  float: left;
   align-items: center;
   position: sticky;
   z-index: -3;
+  width: 100%;
 }
 .sidebar {
   display: block;
@@ -129,6 +138,7 @@ h3 {
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 60px;
+  box-shadow: 10px 30px 30px -1px rgb(52, 51, 51) inset;
 }
 .sidebar a {
   display: block;
@@ -297,4 +307,3 @@ h3 {
   border-radius: 13px;
   padding: 5px;
 }
-/*line 300 just bc*/
