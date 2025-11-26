@@ -47,3 +47,11 @@ filterBtn.onclick = function() {
 filterSpan.onclick = function() {
   filterModal.style.display = "none";
 }
+
+
+
+
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
