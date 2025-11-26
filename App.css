@@ -13,7 +13,7 @@ body {
   position: sticky;
   box-shadow: 0px 0px 100px rgb(45, 45, 45) inset;
 }
-.dark-mode {
+.light-mode {
   background-color: white;
   color: black;
   box-shadow: 0px 0px 100px gray inset;
@@ -71,17 +71,25 @@ hr {
   margin: 3px;
   padding: 8px 12px;
   border-radius: 30px;
-  border: 1.5px black solid;
+  border: 1.5px rgb(166, 221, 239) solid;
   font-size: 18px;
   background-color: white;
+  height: 21px;
 }
-.menu,
-.search,  
+.search-bar {
+  border-radius: 30px 0px 0px 30px;
+  margin-right: 0px;
+}
+.menu, 
 .filter,
 .tile,
 .close,
 .close-task-module { 
   padding: 2px;
+  height: 13px;
+}
+.search {
+  padding: 2px 2px 2px 7px;
   height: 13px;
 }
 .info,
@@ -93,17 +101,28 @@ hr {
   margin-right: 3px;
 }
 .menu-button,
-.search-button,
 .filter-button,
 .view-type-button,
 .close-button {
+  border: 1.5px rgb(166, 221, 239) solid;
   display: flex;
-  border: 1.5px solid black;
   height: 40px;
   padding: 10px;
   border-radius: 30px;
   background-color: white;
   margin: 3px;
+}
+.search-button {
+  border: 1.5px rgb(166, 221, 239) solid;
+  display: flex;
+  height: 40px;
+  width: 55px;
+  padding: 10px;
+  border-radius: 0px 30px 30px 0px;
+  background-color: white;
+  margin-left: 0px;
+  margin-right: 5px;
+  z-index: 5;
 }
 .menu-button:hover,
 .search-button:hover,

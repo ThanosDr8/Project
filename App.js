@@ -34,6 +34,7 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+
 var filterModal = document.getElementById("filterModal");
 
 var filterBtn = document.getElementById("filter-button");
@@ -48,12 +49,20 @@ filterSpan.onclick = function() {
   filterModal.style.display = "none";
 }
 
-
+// When the user clicks anywhere outside of any modal, close it
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+  if (event.target === filterModal) {
+    filterModal.style.display = "none";
+  }
+}
 
 //Dark mode toggle
 function myFunction() {
   // Body light mode
-  document.getElementById("main").classList.toggle("dark-mode");
+  document.getElementById("main").classList.toggle("light-mode");
 
   // Modal contents
   document.getElementById("new-task-modal-content").classList.toggle("light-modal-content");
