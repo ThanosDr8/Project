@@ -20,6 +20,14 @@ body {
   position: sticky;
   box-shadow: -10px 30px 30px -1px rgb(52, 51, 51) inset;
 }
+.website-info {
+  text-align: center;
+}
+.page-logo {
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 h3 {
   margin-bottom: 0px;
 }
