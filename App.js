@@ -50,8 +50,21 @@ filterSpan.onclick = function() {
 
 
 
-
+//Dark mode toggle
 function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
+  // Body light mode
+  document.getElementById("main").classList.toggle("dark-mode");
+
+  // Modal contents
+  document.getElementById("new-task-modal-content").classList.toggle("light-modal-content");
+  document.getElementById("filter-modal-content").classList.toggle("light-filter-content");
+
+  // Modal backgrounds
+  document.getElementById("myModal").classList.toggle("light-modal-bg");
+  document.getElementById("filterModal").classList.toggle("light-filter-bg");
+  const lightInputs = document.querySelectorAll(
+    ".task-due-date, .task-priority, .description, .task-search-bar, .category, .status, .asc-desc-select"
+  );
+
+  lightInputs.forEach(el => el.classList.toggle("light-input"));
 }

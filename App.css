@@ -1,6 +1,5 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
-  z-index: -4;
 }
 @media (min-width: 600px) {
   .header {grid-area: 1 / span 6;}
@@ -11,7 +10,6 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  z-index: -4;
   position: sticky;
   box-shadow: 0px 0px 100px rgb(45, 45, 45) inset;
 }
@@ -23,6 +21,7 @@ body {
 .header {
   background-color: rgb(81, 81, 81);
   height: 60px;
+  z-index: -2;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -37,12 +36,15 @@ body {
 .page-logo {
   height: 100px;
 }
+::placeholder {
+  color: #c9c9c9;
+}
 h3 {
   margin-bottom: 0px;
 }
 hr {
   border: 0.5px solid rgb(200, 200, 200);
-  margin: 10px;
+  margin: 9px;
 }
 .left-section {
   margin-left: 5px;
@@ -66,6 +68,7 @@ hr {
 .task-search-bar {
   display: flex;
   flex: 1;
+  margin: 3px;
   padding: 8px 12px;
   border-radius: 30px;
   border: 1.5px black solid;
@@ -143,8 +146,8 @@ hr {
   float: left;
   align-items: center;
   position: sticky;
-  z-index: -3;
   width: 100%;
+  z-index: -3;
 }
 .sidebar {
   display: block;
@@ -203,6 +206,7 @@ hr {
   display: flex;
   position: fixed; /* Stay in place */
   padding-top: 65px; /* Location of the box */
+  z-index: -1; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -213,7 +217,7 @@ hr {
 }
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: rgb(90, 90, 90);
   margin: auto;
   padding: 20px 20px 33px 20px;
   width: 40%;
@@ -253,6 +257,8 @@ hr {
 .category,
 .description,
 .status {
+  color: #c9c9c9;
+  background-color: rgb(90, 90, 90);
   margin: 0px 5px 5px 0px;
 }
 .task-search-bar {
@@ -291,7 +297,8 @@ hr {
 }
 .filter-modal-content {
   z-index: 4;
-  background-color: #fefefe;
+  background-color: rgb(90, 90, 90);
+  color: #c9c9c9;
   margin: auto;
   padding: 20px 20px 55px 20px;
   width: 40%;
@@ -327,4 +334,31 @@ hr {
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
   padding: 5px;
+  color: #c9c9c9;
+  background-color: rgb(90, 90, 90);
+}
+.light-modal-bg {
+  background-color: rgba(255,255,255,0.4) !important;
+}
+
+.light-filter-bg {
+  background-color: rgba(255,255,255,0.4) !important;
+}
+
+.light-modal-content {
+  background-color: white !important;
+  color: black !important;
+}
+
+.light-filter-content {
+  background-color: white !important;
+  color: black !important;
+}
+.light-input {
+  background-color: white !important;
+  color: black !important;
+}
+
+.light-input::placeholder {
+  color: black !important;
 }
