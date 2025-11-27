@@ -10,6 +10,11 @@ body {
   position: sticky;
   box-shadow: 0px 0px 100px rgb(45, 45, 45) inset;
 }
+.light-mode {
+  background-color: white;
+  color: black;
+  box-shadow: 0px 0px 100px gray inset;
+}
 .header {
   background-color: rgb(81, 81, 81);
   height: 60px;
@@ -21,7 +26,12 @@ body {
   position: sticky;
   box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
 }
-.menu { 
+h1,
+p {
+  margin: 5px;
+}
+.menu,
+.close { 
   padding: 2px;
   height: 13px;
 }
@@ -33,7 +43,9 @@ body {
   padding: 10px;
   border-radius: 30px;
   background-color: white;
-  margin: 3px;
+}
+.menu-button {
+  margin-left: 5px;
 }
 .home,
 .settings,
@@ -99,4 +111,12 @@ hr {
   color: white;
   padding: 10px 15px;
   border: none;
+}
+#main {
+  transition: margin-left 0.1s;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
 }

@@ -14,3 +14,10 @@ function closeNav() {
   document.getElementById("main").style.marginLeft = "0";
   document.getElementById("menu-button").style.display = "initial"
 }
+//Dark mode toggle
+function myFunction() {
+  // Body light mode
+  document.getElementById("main").classList.toggle("light-mode");
+
+  lightInputs.forEach(el => el.classList.toggle("light-input"));
+}
