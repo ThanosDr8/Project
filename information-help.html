@@ -2,8 +2,13 @@
 <html>
 <head>
   <title>Information about the website</title>
+  <link rel="stylesheet" href="info-help.css">
 </head>
 <body>
+  <div class="header">
+    <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
+  </div>
+
   <h1>Information about the website</h1>
   <p>
     This website provides information and resources to help users understand the features and functionalities available. The website was created so that you could properly and easily manage your daily tasks and activities.
@@ -13,9 +18,30 @@
   <hr>
   <h1>Help Section</h1>
   <p>
-    You start by pressing the "New Task"<img src="Icons/Στιγμιότυπο οθόνης(2).png"> button to create a new task. A modal will appear where you can enter the task name, due date, priority, group and a description. After filling in the details, click outside the modal or on the close icon to save and close it.
+    You start by pressing the "New Task"<img src="Icons/help-image1.png" class="help-image1"> button to create a new task. A modal will appear where you can enter the task name, due date, priority, group and a description. After filling in the details, click outside the modal or on the close icon to save and close it.
     <hr>
-    Ξεκινάτε πατώντας το κουμπί "New Task"<img src="Icons/Στιγμιότυπο οθόνης(2).png"> για να δημιουργήσετε μια νέα εργασία. Θα εμφανιστεί ένα παράθυρο διαλόγου όπου μπορείτε να εισαγάγετε το όνομα της εργασίας, την ημερομηνία λήξης, την προτεραιότητα, την ομάδα και μια περιγραφή. Αφού συμπληρώσετε τις λεπτομέρειες, κάντε κλικ έξω από το παράθυρο διαλόγου ή στο εικονίδιο κλεισίματος για να αποθηκεύσετε και να το κλείσετε.
+    Ξεκινάτε πατώντας το κουμπί "New Task"<img src="Icons/help-image1.png" class="help-image1"> για να δημιουργήσετε μια νέα εργασία. Θα εμφανιστεί ένα παράθυρο διαλόγου όπου μπορείτε να εισαγάγετε το όνομα της εργασίας, την ημερομηνία λήξης, την προτεραιότητα, την ομάδα και μια περιγραφή. Αφού συμπληρώσετε τις λεπτομέρειες, κάντε κλικ έξω από το παράθυρο διαλόγου ή στο εικονίδιο κλεισίματος για να αποθηκεύσετε και να το κλείσετε.
   </p>
+  <!-- Sidebar containing settings, information, and analytics -->
+    <div id="mySidebar" class="sidebar">
+        <!-- sidebar content -->
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+          <button class="close-button">
+            <img src="Icons/cross.png" class="close"></button>
+        </a>
+        <a href="App.html" class="not-x">
+          <img src="Icons/home.png" class="home">Information/Help
+        </a>
+        <hr>
+        <a href="#" class="not-x">
+          <img src="Icons/chart-histogram.png" class="chart">See Analytics
+        </a>
+        <hr>
+        <a href="#" class="not-x">
+          <img src="Icons/settings-icon.png" class="settings">Settings
+        </a>
+        <hr>
+    </div>
+    <script src="info-help.js"></script>
 </body>
 </html>
