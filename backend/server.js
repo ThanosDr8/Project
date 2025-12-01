@@ -1,23 +1,17 @@
-//server.js
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
-import connectDB from "./config/db.js";
-
-import authRoutes from "./routes/authRoutes.js";
-import taskRoutes from "./routes/taskRoutes.js";
-import projectRoutes from "./routes/projectRoutes.js";
-
-dotenv.config();
-connectDB();
+import tasksRouter from "./routes/tasks.js";
+import groupsRouter from "./routes/groups.js";
 
 const app = express();
+const PORT = 3000;
+
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
-app.use("/api/projects", projectRoutes);
+app.use("/api/tasks", tasksRouter);
+app.use("/api/groups", groupsRouter);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
