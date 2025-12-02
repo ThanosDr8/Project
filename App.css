@@ -388,11 +388,13 @@ label:hover {
   margin: 0px 10px 10px 10px;
   cursor: pointer;
   border: none;
-  padding: 13px 10px 0px 10px;
   display: block;
-
+  padding: 9px 10px 0px 10px;
 }
-
+.task-card:hover {
+  background-color: rgb(100, 100, 100);
+  transition: 0.1s;
+}
 .task-title {
   font-size: 14px;
   font-weight: bold;
@@ -404,6 +406,18 @@ label:hover {
   border-radius: 5px;
   margin-top: 10px; 
   margin-left: 6px;
+}
+
+.task-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, padding 0.25s ease;
+  padding: 0 10px;
+}
+
+.task-details.open {
+  max-height: 300px;
+  padding: 10px 10px;
 }
 /* Edit button — same look as submit button */
 .edit-button {
@@ -427,15 +441,4 @@ label:hover {
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-}
-.task-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.25s ease, padding 0.25s ease;
-  padding: 0 10px;
-}
-
-.task-details.open {
-  max-height: 300px;
-  padding: 10px 10px;
 }
