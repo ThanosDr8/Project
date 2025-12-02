@@ -77,22 +77,4 @@ function myFunction() {
 
   lightInputs.forEach(el => el.classList.toggle("light-input"));
 }
-//SUBMIT NEW TASK TO BACKEND
-document.querySelector(".submit-button").onclick = async function () {
-  const task = {
-    name: document.querySelector(".task-search-bar").value,
-    dueDate: document.querySelector(".task-due-date").value,
-    priority: document.querySelector(".task-priority").value,
-    category: document.querySelector(".category").value,
-    status: document.querySelector(".status").value,
-    description: document.querySelector(".description").value
-  };
 
-  await fetch("http://localhost:3000/api/tasks", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task)
-  });
-  
-  alert("Task created!");
-};
