@@ -104,6 +104,8 @@ function renderTask(task) {
 }
 
 
+
+// SUBMIT NEW TASK
 document.querySelector(".submit-button").onclick = async function () {
   const task = {
     name: document.querySelector(".task-search-bar").value,
@@ -124,8 +126,8 @@ document.querySelector(".submit-button").onclick = async function () {
   // Show new task on page immediately
   renderTask(task);
 
-  alert("Task created!");
-  closeModal(modal);
+  // Close modal after submitting
+  modal.style.display = "none";
 
   // Clear form
   document.querySelector(".task-search-bar").value = "";
@@ -139,19 +141,15 @@ document.querySelector(".submit-button").onclick = async function () {
 function renderTask(task) {
   const list = document.getElementById("task-list");
 
-  // Task wrapper
   const card = document.createElement("div");
   card.className = "task-card";
 
-  // Title (clickable)
   const title = document.createElement("div");
   title.className = "task-title";
   title.textContent = task.name || "Untitled Task";
 
-  // Details (hidden at first)
   const details = document.createElement("div");
   details.className = "task-details";
-  details.style.display = "none";
 
   details.innerHTML = `
     <p><strong>Due:</strong> ${task.dueDate || "No date"}</p>
@@ -159,12 +157,46 @@ function renderTask(task) {
     <p><strong>Category:</strong> ${task.category || "None"}</p>
     <p><strong>Status:</strong> ${task.status || "None"}</p>
     <p><strong>Description:</strong> ${task.description || ""}</p>
+
+    <button class="edit-button submit-button">Edit</button>
+    <button class="delete-button delete-style">Delete</button>
   `;
 
-  // Toggle dropdown on click
+  // 🔽 Smooth dropdown toggle
   title.onclick = () => {
-    details.style.display =
-      details.style.display === "none" ? "block" : "none";
+    details.classList.toggle("open");
+  };
+
+  // DELETE BUTTON with confirmation + backend delete
+  details.querySelector(".delete-button").onclick = async () => {
+    const confirmDelete = confirm(
+      `Are you sure you want to delete "${task.name}"?`
+    );
+
+    if (!confirmDelete) return;
+
+    // Send delete to backend
+    if (task.id) {
+      await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
+        method: "DELETE"
+      });
+    }
+
+    card.remove();
+  };
+
+  // EDIT BUTTON → open modal and pre-fill
+  details.querySelector(".edit-button").onclick = () => {
+    taskBeingEdited = { task, card };
+
+    document.querySelector(".task-search-bar").value = task.name;
+    document.querySelector(".task-due-date").value = task.dueDate;
+    document.querySelector(".task-priority").value = task.priority;
+    document.querySelector(".category").value = task.category;
+    document.querySelector(".status").value = task.status;
+    document.querySelector(".description").value = task.description;
+
+    modal.style.display = "block";
   };
 
   card.appendChild(title);
