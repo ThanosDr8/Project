@@ -385,3 +385,21 @@ label:hover {
 .light-input::placeholder {
   color: black !important;
 }
+.task-card {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.task-details {
+  margin-top: 8px;
+  padding-left: 10px;
+  border-left: 3px solid #555;
+}
