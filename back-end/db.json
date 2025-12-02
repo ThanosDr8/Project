@@ -17,6 +17,15 @@
       "category": "house-work",
       "status": "in-progress",
       "description": "gwergweg"
+    },
+    {
+      "id": "f5fa6ec9-c7c8-458f-8564-725c7dd6ea33",
+      "name": "grtghwr",
+      "dueDate": "2025-12-18",
+      "priority": "medium",
+      "category": "house-work",
+      "status": "in-progress",
+      "description": "gwergweg"
     }
   ],
   "groups": []
