@@ -1,4 +1,23 @@
 {
-  "tasks": [],
+  "tasks": [
+    {
+      "id": "931aaef6-d5d4-4f8e-8633-66ce233f3a30",
+      "name": "grtghwr",
+      "dueDate": "2025-12-18",
+      "priority": "medium",
+      "category": "house-work",
+      "status": "in-progress",
+      "description": "gwergweg"
+    },
+    {
+      "id": "950410e7-378b-410a-b7bc-8fed32a33f7b",
+      "name": "grtghwr",
+      "dueDate": "2025-12-18",
+      "priority": "medium",
+      "category": "house-work",
+      "status": "in-progress",
+      "description": "gwergweg"
+    }
+  ],
   "groups": []
 }
