@@ -46,6 +46,12 @@ hr {
   border: 0.5px solid rgb(200, 200, 200);
   margin: 9px;
 }
+label:hover {
+  cursor: pointer;
+}
+.filter-option:hover {
+  cursor: pointer;
+}
 .left-section {
   margin-left: 5px;
   display: flex;
