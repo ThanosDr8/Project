@@ -28,6 +28,8 @@ const filterModal = document.getElementById("filterModal");
 const filterOpenBtn = document.getElementById("filter-button");
 const filterCloseBtn = document.getElementById("close-filter");
 
+let taskBeingEdited = null;
+
 // SIDEBAR
 function openNav() {
   sidebar.style.width = "250px";
@@ -54,14 +56,14 @@ function closeModal(m) {
   m.style.display = "none";
 }
 
-// MODAL EVENTS
+// EVENTS
 modalOpenBtn.onclick = () => openModal(modal);
 modalClose.onclick = () => closeModal(modal);
 
 filterOpenBtn.onclick = () => openModal(filterModal);
 filterCloseBtn.onclick = () => closeModal(filterModal);
 
-// CLICK OUTSIDE TO CLOSE
+// CLICK OUTSIDE
 window.onclick = function (event) {
   if (event.target === modal) closeModal(modal);
   if (event.target === filterModal) closeModal(filterModal);
@@ -81,63 +83,12 @@ function myFunction() {
   safeToggle("#new-task-modal-content", "light-modal-content");
   safeToggle("#filter-modal-content", "light-filter-content");
   safeToggle(
-    ".task-due-date, .task-priority, .description, .task-search-bar, .category, .status, .asc-desc-select",
+    ".task-due-date, .task-priority, .description, .category, .status, .asc-desc-select, .task-name",
     "light-input"
   );
 }
-function renderTask(task) {
-  const list = document.getElementById("task-list");
 
-  const card = document.createElement("div");
-  card.className = "task-card";
-
-  card.innerHTML = `
-    <h3>${task.name || "Untitled Task"}</h3>
-    <p><strong>Due:</strong> ${task.dueDate || "No date"}</p>
-    <p><strong>Priority:</strong> ${task.priority || "None"}</p>
-    <p><strong>Category:</strong> ${task.category || "None"}</p>
-    <p><strong>Status:</strong> ${task.status || "None"}</p>
-    <p><strong>Description:</strong> ${task.description || ""}</p>
-  `;
-
-  list.appendChild(card);
-}
-
-
-
-// SUBMIT NEW TASK
-document.querySelector(".submit-button").onclick = async function () {
-  const task = {
-    name: document.querySelector(".task-search-bar").value,
-    dueDate: document.querySelector(".task-due-date").value,
-    priority: document.querySelector(".task-priority").value,
-    category: document.querySelector(".category").value,
-    status: document.querySelector(".status").value,
-    description: document.querySelector(".description").value
-  };
-
-  // Send to backend
-  await fetch("http://localhost:3000/api/tasks", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task)
-  });
-
-  // Show new task on page immediately
-  renderTask(task);
-
-  // Close modal after submitting
-  modal.style.display = "none";
-
-  // Clear form
-  document.querySelector(".task-search-bar").value = "";
-  document.querySelector(".task-due-date").value = "";
-  document.querySelector(".task-priority").value = "";
-  document.querySelector(".category").value = "";
-  document.querySelector(".status").value = "";
-  document.querySelector(".description").value = "";
-};
-
+// RENDER TASK
 function renderTask(task) {
   const list = document.getElementById("task-list");
 
@@ -158,38 +109,32 @@ function renderTask(task) {
     <p><strong>Status:</strong> ${task.status || "None"}</p>
     <p><strong>Description:</strong> ${task.description || ""}</p>
 
-    <button class="edit-button submit-button">Edit</button>
-    <button class="delete-button delete-style">Delete</button>
+    <button class="edit-button">Edit</button>
+    <button class="delete-button">Delete</button>
   `;
 
-  // 🔽 Smooth dropdown toggle
+  // EXPANDABLE DETAILS
   title.onclick = () => {
     details.classList.toggle("open");
   };
 
-  // DELETE BUTTON with confirmation + backend delete
+  // DELETE TASK
   details.querySelector(".delete-button").onclick = async () => {
-    const confirmDelete = confirm(
-      `Are you sure you want to delete "${task.name}"?`
-    );
-
-    if (!confirmDelete) return;
-
-    // Send delete to backend
-    if (task.id) {
-      await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
-        method: "DELETE"
-      });
+    if (confirm(`Delete "${task.name}"?`)) {
+      if (task.id) {
+        await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
+          method: "DELETE"
+        });
+      }
+      card.remove();
     }
-
-    card.remove();
   };
 
-  // EDIT BUTTON → open modal and pre-fill
+  // EDIT TASK
   details.querySelector(".edit-button").onclick = () => {
     taskBeingEdited = { task, card };
 
-    document.querySelector(".task-search-bar").value = task.name;
+    document.querySelector(".task-name").value = task.name;
     document.querySelector(".task-due-date").value = task.dueDate;
     document.querySelector(".task-priority").value = task.priority;
     document.querySelector(".category").value = task.category;
@@ -203,3 +148,57 @@ function renderTask(task) {
   card.appendChild(details);
   list.appendChild(card);
 }
+
+// SUBMIT BUTTON (new task or edit existing)
+document.querySelector(".submit-button").onclick = async function () {
+
+  const newData = {
+    name: document.querySelector(".task-name").value,
+    dueDate: document.querySelector(".task-due-date").value,
+    priority: document.querySelector(".task-priority").value,
+    category: document.querySelector(".category").value,
+    status: document.querySelector(".status").value,
+    description: document.querySelector(".description").value
+  };
+
+  // EDITING EXISTING TASK
+  if (taskBeingEdited) {
+    const { task, card } = taskBeingEdited;
+
+    Object.assign(task, newData);
+
+    // Update backend
+    await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task)
+    });
+
+    // Re-render card
+    card.querySelector(".task-title").textContent = task.name;
+    card.querySelector(".task-details").innerHTML = `
+      <p><strong>Due:</strong> ${task.dueDate}</p>
+      <p><strong>Priority:</strong> ${task.priority}</p>
+      <p><strong>Category:</strong> ${task.category}</p>
+      <p><strong>Status:</strong> ${task.status}</p>
+      <p><strong>Description:</strong> ${task.description}</p>
+      <button class="edit-button">Edit</button>
+      <button class="delete-button">Delete</button>
+    `;
+
+    taskBeingEdited = null;
+  } 
+  // NEW TASK
+  else {
+    const response = await fetch("http://localhost:3000/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newData)
+    });
+
+    const savedTask = await response.json();
+    renderTask(savedTask);
+  }
+
+  modal.style.display = "none";
+};

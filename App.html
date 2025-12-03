@@ -54,7 +54,7 @@
       <div class="modal-content" id="new-task-modal-content">
         Create a Task
         <span class="close"><img src="Icons/cross.png" class="close-task-module"></span>
-        <input type="text" class="task-search-bar" placeholder="Task Name">
+        <input type="text" class="task-name" placeholder="Task Name">
         <input type="date" class="task-due-date">Due Date<br>
         <select class="task-priority">
           <option value="" disabled selected>Set the Priority</option>
@@ -95,13 +95,13 @@
         <span class="filter-close" id="close-filter"><img src="Icons/cross.png" class="close"></span>
         <h3>Priority and Status</h3><br>
         <form>
-          <label><input type="checkbox" class="filter-option" value="high"> High Priority |</label>
-          <label><input type="checkbox" class="filter-option" value="medium"> Medium Priority |</label>
-          <label><input type="checkbox" class="filter-option" value="low"> Low Priority |</label>
-          <label><input type="checkbox" class="filter-option" value="pending"> Pending |</label>
-          <label><input type="checkbox" class="filter-option" value="open"> Open Status |</label>
-          <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status |</label>
-          <label><input type="checkbox" class="filter-option" value="done"> Done Status |</label>
+          <label><input type="checkbox" class="filter-option" value="high"> High Priority</label><br>
+          <label><input type="checkbox" class="filter-option" value="medium"> Medium Priority</label><br>
+          <label><input type="checkbox" class="filter-option" value="low"> Low Priority</label><br>
+          <label><input type="checkbox" class="filter-option" value="pending"> Pending</label><br>
+          <label><input type="checkbox" class="filter-option" value="open"> Open Status</label><br>
+          <label><input type="checkbox" class="filter-option" value="in-progress"> In Progress Status</label><br>
+          <label><input type="checkbox" class="filter-option" value="done"> Done Status</label><br>
           <h3>Sort by date</h3><br>
           <select class="asc-desc-select" id="sort-select">
             <option value="" disabled selected>Sort By</option>
@@ -111,12 +111,12 @@
             <option value="priority-desc">Priority (Descending)</option>
           </select>
           <h3>Category</h3><br>
-          <label><input type="checkbox" class="filter-option" value="work"> Work |</label>
-          <label><input type="checkbox" class="filter-option" value="house-work"> House Work |</label>
-          <label><input type="checkbox" class="filter-option" value="school-work"> School Work |</label>
-          <label><input type="checkbox" class="filter-option" value="shopping"> Shopping |</label>
-          <label><input type="checkbox" class="filter-option" value="hobbies"> Hobbies |</label>
-          <label><input type="checkbox" class="filter-option" value="other">Other |</label>
+          <label><input type="checkbox" class="filter-option" value="work"> Work</label><br>
+          <label><input type="checkbox" class="filter-option" value="house-work"> House Work</label><br>
+          <label><input type="checkbox" class="filter-option" value="school-work"> School Work</label><br>
+          <label><input type="checkbox" class="filter-option" value="shopping"> Shopping</label><br>
+          <label><input type="checkbox" class="filter-option" value="hobbies"> Hobbies</label><br>
+          <label><input type="checkbox" class="filter-option" value="other">Other</label><br>
           <!--<label><input type="checkbox" class="filter-option" value="other"></label>-->
           <br>
         </form> <button id="apply-filters-button" class="apply-filters-button">Apply</button>
