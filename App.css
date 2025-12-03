@@ -259,7 +259,7 @@ label:hover {
   margin: auto;
   z-index: 1001;
   padding: 20px 20px 37px 20px;
-  width: 60%;
+  width: 50%;
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
@@ -352,7 +352,7 @@ label:hover {
   z-index: 1001;
   margin: auto;
   padding: 20px 20px 55px 20px;
-  width: 50%;
+  width: 30%;
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
@@ -418,7 +418,7 @@ label:hover {
   padding: 9px 10px 0px 10px;
 }
 .task-card:hover {
-  background-color: rgb(100, 100, 100);
+  background-color: rgba(100, 100, 100, 0.27);
   transition: 0.1s;
 }
 .task-title {

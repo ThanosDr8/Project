@@ -1,3 +1,5 @@
+let allTasks = [];
+
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("menu-button").style.display = "none"
@@ -198,8 +200,59 @@ document.querySelector(".submit-button").onclick = async function () {
     });
 
     const savedTask = await response.json();
+    allTasks.push(savedTask);
     renderTask(savedTask);
   }
 
   modal.style.display = "none";
+};
+function applyFilters() {
+  const checkedFilters = [...document.querySelectorAll(".filter-option:checked")]
+    .map(cb => cb.value);
+
+  const sortBy = document.getElementById("sort-select").value;
+
+  // CREATE FILTER CATEGORIES
+  const priorityFilters = checkedFilters.filter(v => ["high", "medium", "low"].includes(v));
+  const statusFilters   = checkedFilters.filter(v => ["pending", "open", "in-progress", "done"].includes(v));
+  const categoryFilters = checkedFilters.filter(v =>
+    ["work", "house-work", "school-work", "shopping", "hobbies", "other"].includes(v)
+  );
+
+  // CLEAR THE LIST BEFORE RENDERING
+  const list = document.getElementById("task-list");
+  list.innerHTML = "";
+
+  // FILTER TASKS
+  let filtered = allTasks.filter(task => {
+    const matchPriority = priorityFilters.length === 0 || priorityFilters.includes(task.priority);
+    const matchStatus   = statusFilters.length === 0 || statusFilters.includes(task.status);
+    const matchCategory = categoryFilters.length === 0 || categoryFilters.includes(task.category);
+
+    return matchPriority && matchStatus && matchCategory;
+  });
+
+  // SORT LOGIC
+  if (sortBy === "due-date-asc") {
+    filtered.sort((a, b) => (a.dueDate || "").localeCompare(b.dueDate || ""));
+  }
+  if (sortBy === "due-date-desc") {
+    filtered.sort((a, b) => (b.dueDate || "").localeCompare(a.dueDate || ""));
+  }
+  if (sortBy === "priority-asc") {
+    const order = { low: 1, medium: 2, high: 3 };
+    filtered.sort((a, b) => order[a.priority] - order[b.priority]);
+  }
+  if (sortBy === "priority-desc") {
+    const order = { low: 1, medium: 2, high: 3 };
+    filtered.sort((a, b) => order[b.priority] - order[a.priority]);
+  }
+
+  // RE-RENDER FILTERED TASKS
+  filtered.forEach(task => renderTask(task));
+}
+
+document.getElementById("apply-filters-button").onclick = () => {
+  applyFilters();
+  closeModal(filterModal);
 };
