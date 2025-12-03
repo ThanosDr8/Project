@@ -57,11 +57,12 @@ function closeModal(m) {
 }
 
 // EVENTS
-modalOpenBtn.onclick = () => openModal(modal);
-modalClose.onclick = () => closeModal(modal);
-
-filterOpenBtn.onclick = () => openModal(filterModal);
-filterCloseBtn.onclick = () => closeModal(filterModal);
+window.addEventListener("DOMContentLoaded", () => {
+  modalOpenBtn.onclick = () => openModal(modal);
+  modalClose.onclick = () => closeModal(modal);
+  filterOpenBtn.onclick = () => openModal(filterModal);
+  filterCloseBtn.onclick = () => closeModal(filterModal);
+});
 
 // CLICK OUTSIDE
 window.onclick = function (event) {
