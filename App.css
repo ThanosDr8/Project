@@ -259,7 +259,7 @@ label:hover {
   margin: auto;
   z-index: 1001;
   padding: 20px 20px 37px 20px;
-  width: 50%;
+  width: 40%;
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
@@ -331,12 +331,13 @@ label:hover {
   resize: none;
   max-lines: 5;
   padding: 8px 0px 0px 5px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .filter-modal {
   display: flex;
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
-  padding-top: 65px; /* Location of the box */
+  padding-top: 20px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */

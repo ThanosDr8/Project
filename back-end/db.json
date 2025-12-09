@@ -17,6 +17,15 @@
       "category": "school-work",
       "status": "done",
       "description": "BBBBBBBBBBBBBBBBBBBBB"
+    },
+    {
+      "id": "e97863f1-4d6f-4962-b21a-8bb6c7420ea0",
+      "name": "Third task",
+      "dueDate": "2030-10-01",
+      "priority": "medium",
+      "category": "hobbies",
+      "status": "in-progress",
+      "description": "lllll111"
     }
   ],
   "groups": []
