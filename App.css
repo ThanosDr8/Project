@@ -77,14 +77,13 @@ label:hover {
   align-items: center;
   justify-content: flex-start;
   padding: 0 12px;
-  border-radius: 30px 0px 0px 30px;
+  border-radius: 30px;
   border: 1.5px rgb(166, 221, 239) solid;
   font-size: 18px;
   background-color: white;
   overflow: hidden;
-  margin-right: 0px;
+  margin: 3px;
 }
-
 .search-bar input {
   height: 100%;
   box-sizing: border-box;
@@ -95,21 +94,16 @@ label:hover {
   font-size: 18px;
   background: transparent;
 }
-
 .menu, 
 .filter,
 .tile,
 .close,
-.close-task-module { 
+.close-task-module,
+.settings { 
   padding: 2px;
   height: 13px;
 }
-.search {
-  padding: 2px 2px 2px 7px;
-  height: 13px;
-}
 .info,
-.settings,
 .chart {
   height: 20px;
   padding-right: 3px;
@@ -119,7 +113,8 @@ label:hover {
 .menu-button,
 .filter-button,
 .view-type-button,
-.close-button {
+.close-button,
+.settings-button {
   border: 1.5px rgb(166, 221, 239) solid;
   display: flex;
   height: 40px;
@@ -128,25 +123,11 @@ label:hover {
   background-color: white;
   margin: 3px;
 }
-.search-button {
-  border: 1.5px rgb(166, 221, 239) solid;
-  display: flex;
-  height: 40px;
-  width: 55px;
-  border-radius: 0px 30px 30px 0px;
-  background-color: white;
-  margin-left: 0px;
-  margin-right: 5px;
-  z-index: 5;
-  align-self: center;
-  box-sizing: border-box;
-  padding: 10px;
-}
 .menu-button:hover,
-.search-button:hover,
 .filter-button:hover,
 .view-type-button:hover,
-.close-button:hover {
+.close-button:hover,
+.settings-button {
   cursor: pointer;
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
@@ -470,4 +451,85 @@ label:hover {
   cursor: pointer;
   font-size: 14px;
   float: right;
+}
+
+/* Settings Modal is same style as other modals */
+.settings-modal .settings-modal-content {
+  background-color: rgb(90, 90, 90);
+  color: #c9c9c9;
+  width: 30%;
+  border: 1.7px rgb(166, 221, 239) solid;
+  border-radius: 13px;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+}
+
+/* Close button */
+.close-settings {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Slider switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.setting-item {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-slider {
+  border: 2px solid var(--slider-color, #888);
+}
+
+.settings-slider::-webkit-slider-thumb {
+  background: var(--slider-color, #888);
+  border: 2px solid var(--slider-color, #888);
+}
+
+.settings-slider::-webkit-slider-runnable-track {
+  border: 2px solid var(--slider-color, #888);
 }

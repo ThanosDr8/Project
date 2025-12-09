@@ -16,12 +16,12 @@
       <!-- Middle section with search bar, search button and filter of the header-->
       <div class="mid-section">
         <input id="search-bar" type="text" class="search-bar" placeholder="Search">
-        <button id="search-button" class="search-button"><img src="Icons/search.png" class="search"></button>
         <button id="filter-button" class="filter-button"><img src="Icons/filter-icon.png" class="filter"></button>
+        <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
       </div>
       <!-- Right section with view type button of the header-->
       <div class="right-section">
-        <button id="view-type-button" class="view-type-button"><img src="Icons/tile.png" class="notifications" class="tile"></button>
+        <button class="settings-button"><img src="Icons/settings-icon.png" class="settings-icon"></button>
       </div>
     </div>
     <!--Task creation and group sorting buttons-->
@@ -40,15 +40,14 @@
       </div>
       <hr>
     </div>
-    <button onclick="myFunction()">Temporary dark mode button</button>
-      <!-- Website information section on the homepage -->
-      <div class="website-info">
-        <h2>Organize your work!</h2>
-        <img src="Icons/Logo1.png" class="page-logo" ALT="Tasks Image">
-        <p>Instantly create and manage your tasks and groups.</p>
-      </div>
+    <!-- Website information section on the homepage -->
+    <div class="website-info">
+      <h2>Organize your work!</h2>
+      <img src="Icons/Logo1.png" class="page-logo" ALT="Tasks Image">
+      <p>Instantly create and manage your tasks and groups.</p>
+    </div>
     <!-- The Modal -->
-    <div id="myModal" class="modal">
+    <div class="modal" id="myModal">
       
       <!-- Modal content -->
       <div class="modal-content" id="new-task-modal-content">
@@ -122,7 +121,30 @@
         </form> <button id="apply-filters-button" class="apply-filters-button">Apply</button>
       </div>
     </div>
-    <!-- Sidebar containing settings, information, and analytics -->
+    <!-- Settings Modal -->
+    <div class="settings-modal modal" id="settingsModal">
+      <div class="settings-modal-content" id="settings-modal-content">
+        <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
+        <h3>Settings</h3>
+
+        <!-- Dark Mode Toggle -->
+        <div class="setting-item">
+          <label for="darkModeToggle">Light Mode:</label>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <!-- Border Color Picker -->
+        <div class="setting-item">
+          <label for="borderColorPicker">Border Color:</label>
+          <input type="color" id="borderColorPicker" value="#a6ddef">
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- Sidebar containing information, and analytics -->
     <div id="mySidebar" class="sidebar">
         <!-- sidebar content -->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
@@ -135,10 +157,6 @@
         <hr>
         <a href="information-help.html" class="not-x">
           <img src="Icons/info.png" class="info">Information/Help
-        </a>
-        <hr>
-        <a href="#" class="not-x">
-          <img src="Icons/settings-icon.png" class="settings">Settings
         </a>
         <hr>
     </div>
