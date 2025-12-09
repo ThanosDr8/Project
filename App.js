@@ -146,13 +146,6 @@ async function loadTasks() {
 }
 
 /* ==================================
-   SAVE LOCAL STORAGE FALLBACK
-   ================================== */
-function saveLocal() {
-  localStorage.setItem("tasks", JSON.stringify(allTasks));
-}
-
-/* ==================================
    CREATE / EDIT SUBMIT BUTTON
    ================================== */
 document.querySelector(".submit-button").onclick = async () => {
