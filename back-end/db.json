@@ -5,9 +5,18 @@
       "name": "First working task",
       "dueDate": "2025-12-10",
       "priority": "high",
-      "category": "work",
+      "category": "school-work",
       "status": "open",
       "description": "AAAAAAHHHHHHHHHHH!!!!!!\n"
+    },
+    {
+      "id": "4963f384-8517-48a4-a4b6-365c88d379eb",
+      "name": "Second task",
+      "dueDate": "2025-12-10",
+      "priority": "high",
+      "category": "school-work",
+      "status": "done",
+      "description": "BBBBBBBBBBBBBBBBBBBBB"
     }
   ],
   "groups": []
