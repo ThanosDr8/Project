@@ -1,7 +1,3 @@
-/* ===============================
-   TASK MANAGER — COMPLETE REBUILD
-   =============================== */
-
 let allTasks = [];
 let taskBeingEdited = null;
 
