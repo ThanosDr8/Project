@@ -8,12 +8,10 @@ body {
   margin: 0;
   padding: 0;
   position: sticky;
-  box-shadow: 0px 0px 100px rgb(45, 45, 45) inset;
 }
 .light-mode {
   background-color: white;
   color: black;
-  box-shadow: 0px 0px 100px gray inset;
 }
 .header {
   background-color: rgb(81, 81, 81);
@@ -26,17 +24,24 @@ body {
   position: sticky;
   box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
 }
+.header {
+  display: flex;
+  justify-content: space-between; /* already here */
+  align-items: center;
+}
 h1,
 p {
   margin: 5px;
 }
 .menu,
-.close { 
+.close,
+.settings { 
   padding: 2px;
   height: 13px;
 }
 .menu-button,
-.close-button {
+.close-button,
+.settings-button {
   border: 1.5px rgb(166, 221, 239) solid;
   display: flex;
   height: 40px;
@@ -47,8 +52,17 @@ p {
 .menu-button {
   margin-left: 5px;
 }
+.settings-button {
+  margin-right: 5px;
+  border: 1.5px rgb(166, 221, 239) solid;
+  display: flex;
+  height: 40px;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: white;
+  position: static;
+}
 .home,
-.settings,
 .chart {
   height: 20px;
   padding-right: 3px;
@@ -56,7 +70,8 @@ p {
   margin-right: 3px;
 }
 .menu-button:hover,
-.close-button:hover {
+.close-button:hover,
+.settings-button:hover {
   cursor: pointer;
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
@@ -119,4 +134,100 @@ hr {
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
+}
+
+/* FULLSCREEN MODAL OVERLAY */
+.settings-modal {
+  display: flex;
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  padding-top: 80px; /* Location of the box */
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.settings-modal-content {
+  z-index: 4;
+  background-color: rgb(90, 90, 90);
+  color: #c9c9c9;
+  z-index: 1001;
+  margin: auto;
+  padding: 20px 20px 55px 20px;
+  width: 30%;
+  border: 1.7px rgb(166, 221, 239) solid;
+  border-radius: 13px;
+  position: relative;
+}
+
+/* Close button */
+.close-settings {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Slider switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.setting-item {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-slider {
+  border: 2px solid var(--slider-color, #888);
+}
+
+.settings-slider::-webkit-slider-thumb {
+  background: var(--slider-color, #888);
+  border: 2px solid var(--slider-color, #888);
+}
+
+.settings-slider::-webkit-slider-runnable-track {
+  border: 2px solid var(--slider-color, #888);
 }

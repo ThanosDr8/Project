@@ -7,6 +7,7 @@
 <body id="main">
   <div class="header">
     <button id="menu-button" class="menu-button" id="Menu" class="openbtn" onclick="openNav()"><img src="Icons/menu-burger.png" class="menu"></button>
+    <button class="settings-button"><img src="Icons/settings-icon.png" class="settings-icon"></button>
   </div>
 
   <h1>Information about the website</h1>
@@ -26,26 +27,42 @@
     Ξεκινάτε πατώντας το κουμπί "New Task" για να δημιουργήσετε μια νέα εργασία. Θα εμφανιστεί ένα παράθυρο διαλόγου όπου μπορείτε να εισαγάγετε το όνομα της εργασίας, την ημερομηνία λήξης, την προτεραιότητα, την ομάδα και μια περιγραφή. Αφού συμπληρώσετε τις λεπτομέρειες, κάντε κλικ έξω από το παράθυρο διαλόγου ή στο εικονίδιο κλεισίματος για να αποθηκεύσετε και να το κλείσετε.
   </p>
   <!-- Sidebar containing settings, information, and analytics -->
-    <div id="mySidebar" class="sidebar">
-        <!-- sidebar content -->
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-          <button class="close-button">
-            <img src="Icons/cross.png" class="close"></button>
-        </a>
-        <a href="App.html" class="not-x">
-          <img src="Icons/home.png" class="home">Home
-        </a>
-        <hr>
-        <a href="#" class="not-x">
-          <img src="Icons/chart-histogram.png" class="chart">See Analytics
-        </a>
-        <hr>
-        <a href="#" class="not-x">
-          <img src="Icons/settings-icon.png" class="settings">Settings
-        </a>
-        <hr>
+  <div id="mySidebar" class="sidebar">
+      <!-- sidebar content -->
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+        <button class="close-button">
+          <img src="Icons/cross.png" class="close"></button>
+      </a>
+      <a href="App.html" class="not-x">
+        <img src="Icons/home.png" class="home">Home
+      </a>
+      <hr>
+      <a href="#" class="not-x">
+        <img src="Icons/chart-histogram.png" class="chart">See Analytics
+      </a>
+      <hr>
+  </div>
+  <div class="settings-modal modal" id="settingsModal">
+    <div class="settings-modal-content" id="settings-modal-content">
+      <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
+      <h3>Settings</h3>
+
+      <!-- Dark Mode Toggle -->
+      <div class="setting-item">
+        <label for="darkModeToggle">Light Mode:</label>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <!-- Border Color Picker -->
+      <div class="setting-item">
+        <label for="borderColorPicker">Border Color:</label>
+        <input type="color" id="borderColorPicker" value="#a6ddef">
+      </div>
     </div>
-    <button onclick="myFunction()">Temporary dark mode button</button>
-    <script src="info-help.js"></script>
+  </div>
+  <script src="info-help.js"></script>
 </body>
 </html>
