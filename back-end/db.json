@@ -35,6 +35,33 @@
       "category": "shopping",
       "status": "pending",
       "description": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+    },
+    {
+      "id": "2cae8efe-c774-4199-9c61-f8e32fe2f450",
+      "name": "Fifth task ",
+      "dueDate": "2025-12-19",
+      "priority": "medium",
+      "category": "work",
+      "status": "done",
+      "description": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    },
+    {
+      "id": "f9932cb3-e860-4476-99f1-7a083d77869f",
+      "name": "Sixth task",
+      "dueDate": "2025-12-20",
+      "priority": "medium",
+      "category": "school-work",
+      "status": "done",
+      "description": ""
+    },
+    {
+      "id": "34de3d13-21c3-4824-b67d-a9390165e8c5",
+      "name": "Seventh task",
+      "dueDate": "2025-12-18",
+      "priority": "high",
+      "category": "shopping",
+      "status": "in-progress",
+      "description": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     }
   ],
   "groups": []

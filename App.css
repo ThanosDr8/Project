@@ -25,6 +25,12 @@ body {
   position: sticky;
   box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
 }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 .website-info {
   text-align: center;
   margin-top: 60px;
@@ -463,6 +469,10 @@ label:hover {
   padding: 20px;
   position: relative;
   margin: auto;
+}
+
+.settings-modal-content{
+  top: 20%;
 }
 
 /* Close button */

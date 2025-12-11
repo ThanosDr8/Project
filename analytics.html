@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="App.css">
+  <link rel="stylesheet" href="analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body id="main">
+
+  <!-- ========= HEADER (same style as main page) ========= -->
+  <div class="header">
+    <div class="left-section">
+      <button id="menu-button" class="menu-button" onclick="openNav()">
+        <img src="Icons/menu-burger.png" class="menu">
+      </button>
+    </div>
+
+    <div class="mid-section">
+    </div>
+
+    <div class="right-section">
+      <button class="settings-button" id="openSettingsBtn">
+        <img src="Icons/settings-icon.png" class="settings-icon">
+      </button>
+    </div>
+  </div>
+
+  <!-- ========= SIDEBAR ========= -->
+  <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+          <button class="close-button"><img src="Icons/cross.png" class="close"></button>
+      </a>
+      <a href="App.html" class="not-x">
+        <img src="Icons/home.png" class="home">Home
+      </a>
+      <hr>
+      <a href="information-help.html" class="not-x">
+        <img src="Icons/info.png" class="info">See Analytics
+      </a>
+      <hr>
+  </div>
+
+  <!-- ========= SETTINGS (dark mode) ========= -->
+  <div class="settings-modal modal" id="settingsModal">
+    <div class="settings-modal-content" id="settings-modal-content">
+        <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
+        <h3>Settings</h3>
+
+        <!-- Light / Dark toggle -->
+        <div class="setting-item">
+          <label for="darkModeToggle">Light Mode:</label>
+          <label class="switch">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="slider round"></span>
+          </label>
+        </div>
+
+        <!-- Optional border color -->
+        <div class="setting-item">
+          <label for="borderColorPicker">Border Color:</label>
+          <input type="color" id="borderColorPicker" value="#a6ddef">
+        </div>
+    </div>
+  </div>
+
+  <!-- ========= ANALYTICS GRAPHS ========= -->
+  <div class="analytics-wrapper">
+    <div class="chart-container">
+      <h3>Tasks per Category</h3>
+      <canvas id="tasksByCategory"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h3>Tasks per Status</h3>
+      <canvas id="tasksByStatus"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h3>Weekly Productivity</h3>
+      <canvas id="weeklyProductivity"></canvas>
+    </div>
+  </div>
+
+  <script src="analytics.js"></script>
+  <script src="App.js"></script>
+
+</body>
+</html>

@@ -26,6 +26,22 @@ function toggleDarkMode() {
   });
 }
 
+// ======================
+// Header stays in place while scrolling
+// ======================
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+
 (() => {
   "use strict";
 
@@ -62,6 +78,21 @@ function toggleDarkMode() {
 
   const LOCAL_KEY = "tasks";
   const val = sel => document.querySelector(sel)?.value || "";
+
+  // ======================
+  // Sticky Header
+  // ======================
+  (function() {
+    const header = document.getElementById("myHeader");
+    if (!header) return;
+
+    const observer = new IntersectionObserver(
+      ([e]) => e.target.classList.toggle("sticky", e.intersectionRatio < 1),
+      { threshold: [1] }
+    );
+
+    observer.observe(header);
+  })();
 
   // ======================
   // Local Storage Helpers
