@@ -114,9 +114,9 @@ function myFunction() {
       id: task.id,
       name: task.name || "",
       dueDate: task.dueDate || "",
-      priority: task.priority || "low",
+      priority: task.priority || "",
       category: task.category || "",
-      status: task.status || "pending",
+      status: task.status || "",
       description: task.description || ""
     };
   };
@@ -217,7 +217,7 @@ function myFunction() {
   function populateForm(task) {
     document.querySelector(".task-name").value = task.name || "";
     document.querySelector(".task-due-date").value = task.dueDate || "";
-    document.querySelector(".task-priority").value = task.priority || "low";
+    document.querySelector(".task-priority").value = task.priority || "";
     document.querySelector(".category").value = task.category || "";
     document.querySelector(".status").value = task.status || "";
     document.querySelector(".description").value = task.description || "";
@@ -226,7 +226,7 @@ function myFunction() {
   function clearForm() {
     document.querySelector(".task-name").value = "";
     document.querySelector(".task-due-date").value = "";
-    document.querySelector(".task-priority").value = "low";
+    document.querySelector(".task-priority").value = "";
     document.querySelector(".category").value = "";
     document.querySelector(".status").value = "";
     document.querySelector(".description").value = "";
@@ -304,9 +304,9 @@ function myFunction() {
     const checked = [...document.querySelectorAll(".filter-option:checked")].map(cb => cb.value);
     const sortBy  = document.getElementById("sort-select")?.value || "";
 
-    const priority = ["high","medium","low"];
-    const status   = ["pending","open","in-progress","done"];
-    const category = ["work","house-work","school-work","shopping","hobbies","other"];
+    const priority = ["High","Medium","Low"];
+    const status   = ["Pending","Open","In progress","Done"];
+    const category = ["Work","House work","School work","Shopping","Hobbies","Other"];
 
     const pF = checked.filter(x => priority.includes(x));
     const sF = checked.filter(x => status.includes(x));
