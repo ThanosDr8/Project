@@ -1,17 +1,31 @@
-import fs from "fs-extra";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
 import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const DB_PATH = path.join(__dirname, "db.json");
+export const db = await open({
+  filename: path.join(__dirname, "database.sqlite"),
+  driver: sqlite3.Database
+});
 
-export async function readDB() {
-  return await fs.readJSON(DB_PATH);
-}
+// Δημιουργία πινάκων αν δεν υπάρχουν
+await db.exec(`
+  CREATE TABLE IF NOT EXISTS tasks (
+    id TEXT PRIMARY KEY,
+    name TEXT,
+    dueDate TEXT,
+    priority TEXT,
+    category TEXT,
+    status TEXT,
+    description TEXT
+  );
 
-export async function writeDB(data) {
-  return await fs.writeJSON(DB_PATH, data, { spaces: 2 });
-}
+  CREATE TABLE IF NOT EXISTS groups (
+    id TEXT PRIMARY KEY,
+    name TEXT
+  );
+`);

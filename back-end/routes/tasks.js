@@ -1,55 +1,80 @@
 import express from "express";
-import { readDB, writeDB } from "../db.js";
+import { db } from "../db.js";
 import { v4 as uuid } from "uuid";
 
 const router = express.Router();
 
 // GET all tasks
 router.get("/", async (req, res) => {
-  const db = await readDB();
-  res.json(db.tasks);
+  const tasks = await db.all("SELECT * FROM tasks");
+  res.json(tasks);
 });
 
 // GET one task
 router.get("/:id", async (req, res) => {
-  const db = await readDB();
-  const task = db.tasks.find(t => t.id === req.params.id);
-  task ? res.json(task) : res.status(404).json({ error: "Task not found" });
+  const task = await db.get(
+    "SELECT * FROM tasks WHERE id = ?",
+    req.params.id
+  );
+  task
+    ? res.json(task)
+    : res.status(404).json({ error: "Task not found" });
 });
 
 // CREATE task
 router.post("/", async (req, res) => {
-  const db = await readDB();
   const newTask = {
     id: uuid(),
-    name: req.body.name,
-    dueDate: req.body.dueDate,
-    priority: req.body.priority,
-    category: req.body.category,
-    status: req.body.status,
-    description: req.body.description
+    ...req.body
   };
-  db.tasks.push(newTask);
-  await writeDB(db);
+
+  await db.run(
+    `INSERT INTO tasks 
+     (id, name, dueDate, priority, category, status, description)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    newTask.id,
+    newTask.name,
+    newTask.dueDate,
+    newTask.priority,
+    newTask.category,
+    newTask.status,
+    newTask.description
+  );
+
   res.json(newTask);
 });
 
 // UPDATE task
 router.put("/:id", async (req, res) => {
-  const db = await readDB();
-  const index = db.tasks.findIndex(t => t.id === req.params.id);
-  if (index === -1) return res.status(404).json({ error: "Task not found" });
+  const existing = await db.get(
+    "SELECT * FROM tasks WHERE id = ?",
+    req.params.id
+  );
+  if (!existing)
+    return res.status(404).json({ error: "Task not found" });
 
-  db.tasks[index] = { ...db.tasks[index], ...req.body };
-  await writeDB(db);
-  res.json(db.tasks[index]);
+  const updated = { ...existing, ...req.body };
+
+  await db.run(
+    `UPDATE tasks SET
+      name = ?, dueDate = ?, priority = ?, category = ?,
+      status = ?, description = ?
+     WHERE id = ?`,
+    updated.name,
+    updated.dueDate,
+    updated.priority,
+    updated.category,
+    updated.status,
+    updated.description,
+    req.params.id
+  );
+
+  res.json(updated);
 });
 
 // DELETE task
 router.delete("/:id", async (req, res) => {
-  const db = await readDB();
-  db.tasks = db.tasks.filter(t => t.id !== req.params.id);
-  await writeDB(db);
+  await db.run("DELETE FROM tasks WHERE id = ?", req.params.id);
   res.json({ message: "Task deleted" });
 });
 
