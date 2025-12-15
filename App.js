@@ -399,5 +399,5 @@ function myFunction() {
     renderTasks();
   }
   init();
-
+  
 })();
