@@ -80,19 +80,21 @@ function myFunction() {
   const val = sel => document.querySelector(sel)?.value || "";
 
   // ======================
-  // Sticky Header
+  // Sticky Header (fixed)
   // ======================
-  (function() {
-    const header = document.getElementById("myHeader");
-    if (!header) return;
+  window.onscroll = function() {
+      const header = document.getElementById("myHeader");
+      if (!header) return; // ← avoid null error
+      const sticky = header.offsetTop;
+      if (!header.classList) return; // ← avoid null error
 
-    const observer = new IntersectionObserver(
-      ([e]) => e.target.classList.toggle("sticky", e.intersectionRatio < 1),
-      { threshold: [1] }
-    );
+      if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+      } else {
+          header.classList.remove("sticky");
+      }
+  };
 
-    observer.observe(header);
-  })();
 
   // ======================
   // Local Storage Helpers
