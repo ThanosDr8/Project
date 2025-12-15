@@ -103,8 +103,7 @@ label:hover {
 .filter,
 .tile,
 .close,
-.close-task-module,
-.settings { 
+.close-task-module { 
   padding: 2px;
   height: 13px;
 }
@@ -132,7 +131,7 @@ label:hover {
 .filter-button:hover,
 .view-type-button:hover,
 .close-button:hover,
-.settings-button {
+.settings-button:hover {
   cursor: pointer;
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
