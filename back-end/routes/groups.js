@@ -1,24 +1,28 @@
 import express from "express";
-import { readDB, writeDB } from "../db.js";
+import { db } from "../db.js";
 import { v4 as uuid } from "uuid";
 
 const router = express.Router();
 
-// Get all groups
+// GET all groups
 router.get("/", async (req, res) => {
-  const db = await readDB();
-  res.json(db.groups);
+  const groups = await db.all("SELECT * FROM groups");
+  res.json(groups);
 });
 
-// Create new group
+// CREATE group
 router.post("/", async (req, res) => {
-  const db = await readDB();
   const group = {
     id: uuid(),
     name: req.body.name
   };
-  db.groups.push(group);
-  await writeDB(db);
+
+  await db.run(
+    "INSERT INTO groups (id, name) VALUES (?, ?)",
+    group.id,
+    group.name
+  );
+
   res.json(group);
 });
 
