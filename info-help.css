@@ -167,7 +167,7 @@ hr {
   display: flex;
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
-  padding-top: 80px; /* Location of the box */
+  padding-top: 200px; /* Location of the box */
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
