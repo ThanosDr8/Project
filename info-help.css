@@ -81,7 +81,7 @@ p {
 .menu-button,
 .close-button,
 .settings-button {
-  border: 1.5px rgb(166, 221, 239) solid;
+  border: 1.7px rgb(166, 221, 239) solid;
   display: flex;
   height: 40px;
   padding: 10px;

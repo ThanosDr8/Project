@@ -83,7 +83,7 @@ label:hover {
   justify-content: flex-start;
   padding: 0 12px;
   border-radius: 30px;
-  border: 1.5px rgb(166, 221, 239) solid;
+  border: 1.7px rgb(166, 221, 239) solid;
   font-size: 18px;
   background-color: white;
   overflow: hidden;
@@ -120,7 +120,7 @@ label:hover {
 .view-type-button,
 .close-button,
 .settings-button {
-  border: 1.5px rgb(166, 221, 239) solid;
+  border: 1.7px rgb(166, 221, 239) solid;
   display: flex;
   height: 40px;
   padding: 10px;
