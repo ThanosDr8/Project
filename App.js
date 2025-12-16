@@ -307,7 +307,7 @@ function myFunction() {
     const sortBy  = document.getElementById("sort-select")?.value || "";
 
     const priority = ["High","Medium","Low"];
-    const status   = ["Pending","Open","In progress","Done"];
+    const status   = ["Open","In progress","Done"];
     const category = ["Work","House work","School work","Shopping","Hobbies","Other"];
 
     const pF = checked.filter(x => priority.includes(x));
@@ -323,7 +323,7 @@ function myFunction() {
     if (sortBy === "due-date-asc") filtered.sort((a,b)=> (a.dueDate||"").localeCompare(b.dueDate||""));
     if (sortBy === "due-date-desc") filtered.sort((a,b)=> (b.dueDate||"").localeCompare(a.dueDate||""));
     if (sortBy.includes("priority")) {
-      const order = { low:1, medium:2, high:3 };
+      const order = { Low:1, Medium:2, High:3 };
       filtered.sort((a,b)=> sortBy==="priority-asc" ? order[a.priority]-order[b.priority] : order[b.priority]-order[a.priority]);
     }
 
