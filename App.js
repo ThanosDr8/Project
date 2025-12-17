@@ -113,6 +113,7 @@ function toggleDarkMode() {
       </div>
     `;
     return card;
+
   };
 
   const renderTasks = tasks => {
@@ -321,28 +322,41 @@ function toggleDarkMode() {
     document.body.classList.toggle("light-mode", darkModeToggle.checked);
   });
 
-  // Border color picker with persistent storage
+  // ======================
+  // Apply Border Color (including HRs)
+  // ======================
   function applyBorderColor(color) {
+    // Apply to task cards, inputs, buttons, etc.
     document.querySelectorAll(
-      "button, input, select, textarea, .task-card, .modal-content, .filter-modal-content, .settings-modal-content, .sidebar, .switch .slider"
+      "button, input, select, textarea, .task-card, .modal-content, .filter-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
     ).forEach(el => {
       el.style.borderColor = color;
     });
 
+    // Apply to switch sliders specifically
     document.querySelectorAll(".switch .slider").forEach(slider => {
       slider.style.backgroundColor = color;
     });
 
+    // Update picker
     if (borderColorPicker) borderColorPicker.value = color;
+
+    // Save to localStorage
+    localStorage.setItem("borderColor", color);
   }
 
+  // ======================
+  // Initialize color on load
+  // ======================
   const savedColor = localStorage.getItem("borderColor");
   if (savedColor) applyBorderColor(savedColor);
 
+  // ======================
+  // Update color dynamically
+  // ======================
   borderColorPicker?.addEventListener("input", e => {
     const color = e.target.value;
     applyBorderColor(color);
-    localStorage.setItem("borderColor", color);
   });
 
   // Search

@@ -39,7 +39,7 @@ h3 {
 }
 hr {
   border: 0.5px solid rgb(200, 200, 200);
-  margin: 9px;
+  margin: 0px 9px
 }
 label:hover {
   cursor: pointer;
@@ -190,7 +190,8 @@ label:hover {
   align-items: center;
 }
 .sidebar .not-x {
-  margin-top: 5px;
+  margin: 9px;
+  margin-left: 3px
 }
 .sidebar a:hover {
   color: #f1f1f1;
