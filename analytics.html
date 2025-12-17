@@ -12,7 +12,7 @@
 
 <body id="main">
 
-  <!-- ========= HEADER (same style as main page) ========= -->
+  <!-- The Header of the website-->
   <div class="header">
     <div class="left-section">
       <button id="menu-button" class="menu-button" onclick="openNav()">
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <!-- ========= SIDEBAR ========= -->
+  <!-- Sidebar containing home and information/help -->
   <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
           <button class="close-button"><img src="Icons/cross.png" class="close"></button>
@@ -45,30 +45,30 @@
       <hr>
   </div>
 
-  <!-- ========= SETTINGS (dark mode) ========= -->
-  <div class="settings-modal modal" id="settingsModal">
+  <!-- Settings Modal -->
+  <div class="settings-modal modal" id="settingsModal" style="display: none;">
     <div class="settings-modal-content" id="settings-modal-content">
-        <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
-        <h3>Settings</h3>
+      <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
+      <h3>Settings</h3>
 
-        <!-- Light / Dark toggle -->
-        <div class="setting-item">
-          <label for="darkModeToggle">Light Mode:</label>
-          <label class="switch">
-              <input type="checkbox" id="darkModeToggle">
-              <span class="slider round"></span>
-          </label>
-        </div>
+      <!-- Dark Mode Toggle -->
+      <div class="setting-item">
+        <label for="darkModeToggle">Light Mode:</label>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider round"></span>
+        </label>
+      </div>
 
-        <!-- Optional border color -->
-        <div class="setting-item">
-          <label for="borderColorPicker">Border Color:</label>
-          <input type="color" id="borderColorPicker" value="#a6ddef">
-        </div>
+      <!-- Border Color Picker -->
+      <div class="setting-item">
+        <label for="borderColorPicker">Border Color:</label>
+        <input type="color" id="borderColorPicker" value="#a6ddef">
+      </div>
     </div>
   </div>
 
-  <!-- ========= ANALYTICS GRAPHS ========= -->
+  <!-- ANALYTICS GRAPHS -->
   <div class="analytics-wrapper">
     <div class="chart-container">
       <h3>Tasks per Category</h3>
