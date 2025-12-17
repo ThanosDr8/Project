@@ -11,6 +11,7 @@ body {
   background-color: rgb(112, 112, 112);
   color: var(--text-dark); /* default dark-mode text color */
   font-family: Arial, Helvetica, sans-serif;
+  overflow-y:auto;
 }
 
 /* Light mode overrides */

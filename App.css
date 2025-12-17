@@ -4,10 +4,8 @@ html {
 body {
   background-color: rgb(112, 112, 112);
   color: white;
-  height: 100vh;
   margin: 0;
   padding: 0;
-  position: sticky;
 }
 .light-mode {
   background-color: white;
@@ -23,12 +21,7 @@ body {
   align-items: center;
   position: sticky;
   box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
-}
-.sticky {
-  position: fixed;
   top: 0;
-  width: 100%;
-  z-index: 1000;
 }
 .website-info {
   text-align: center;

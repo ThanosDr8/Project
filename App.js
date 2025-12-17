@@ -26,22 +26,6 @@ function toggleDarkMode() {
   });
 }
 
-// ======================
-// Header stays in place while scrolling
-// ======================
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
-}
-
 (() => {
   "use strict";
 
@@ -78,23 +62,6 @@ function myFunction() {
 
   const LOCAL_KEY = "tasks";
   const val = sel => document.querySelector(sel)?.value || "";
-
-  // ======================
-  // Sticky Header (fixed)
-  // ======================
-  window.onscroll = function() {
-      const header = document.getElementById("myHeader");
-      if (!header) return; // ← avoid null error
-      const sticky = header.offsetTop;
-      if (!header.classList) return; // ← avoid null error
-
-      if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-      } else {
-          header.classList.remove("sticky");
-      }
-  };
-
 
   // ======================
   // Local Storage Helpers

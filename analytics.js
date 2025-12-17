@@ -178,17 +178,3 @@ function drawWeeklyProductivity() {
     borderColorPicker?.addEventListener("input", e => { applyBorderColor(e.target.value); localStorage.setItem("borderColor", e.target.value); });
 
 })();
-
-// ======================
-// Sticky header fix
-// ======================
-(function() {
-    const header = document.getElementById("myHeader");
-    if (!header) return;
-    const sticky = header.offsetTop;
-    window.addEventListener("scroll", () => {
-        if (!header.classList) return;
-        if (window.pageYOffset > sticky) header.classList.add("sticky");
-        else header.classList.remove("sticky");
-    });
-})();

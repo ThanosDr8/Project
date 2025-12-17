@@ -51,9 +51,9 @@ function applyBorderColor(color) {
   const borderColorPicker = document.getElementById("borderColorPicker");
   const darkModeToggle = document.getElementById("darkModeToggle");
 
-  // ---------------------
+  // ========================
   // Modal open/close
-  // ---------------------
+  // ========================
   const openModal = m => m && (m.style.display = "block");
   const closeModal = m => m && (m.style.display = "none");
 
@@ -65,9 +65,9 @@ function applyBorderColor(color) {
     if (e.target === settingsModal) closeModal(settingsModal);
   });
 
-  // ---------------------
+  // =============================
   // Border Color Persistence
-  // ---------------------
+  // =============================
   const savedColor = localStorage.getItem("borderColor");
   if (savedColor) applyBorderColor(savedColor);
 
@@ -77,9 +77,9 @@ function applyBorderColor(color) {
     localStorage.setItem("borderColor", color);
   });
 
-  // ---------------------
+  // ========================
   // Dark Mode
-  // ---------------------
+  // ========================
   darkModeToggle?.addEventListener("change", () => {
     document.body.classList.toggle("light-mode", darkModeToggle.checked);
   });
