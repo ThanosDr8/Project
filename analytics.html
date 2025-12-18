@@ -24,6 +24,7 @@
     </div>
 
     <div class="right-section">
+      <button class="sign-in-button" id="signInButton"><img src="Icons/user.png" class="user-icon">Sign In</button>
       <button class="settings-button" id="openSettingsBtn">
         <img src="Icons/settings-icon.png" class="settings-icon">
       </button>
@@ -68,6 +69,22 @@
     </div>
   </div>
 
+  <div class="acc-modal" id="accModal" style="display: none;">
+    <div class="acc-modal-content" id="accModalContent">
+      <span class="close-acc-modal" id="closeAccModal"><img src="Icons/cross.png" class="close"></span>
+      <h3 style="margin: 10px 0px">Username:</h3>
+      <label>
+        <input type="text" class="username" placeholder="Enter Username" maxlength="12">
+      </label>
+      <h3 style="margin: 10px 0px">Password:</h3>
+      <label>
+        <input type="text" class="password" placeholder="Enter Password">
+      </label>
+      <button class="cancel" id="cancel">Cancel</button>
+      <button class="sign-in" id="signIn">Sign In</button>
+    </div>
+  </div>
+
   <!-- ANALYTICS GRAPHS -->
   <div class="analytics-wrapper">
     <div class="chart-container">
@@ -87,7 +104,6 @@
   </div>
 
   <script src="analytics.js"></script>
-  <!-- <script src="App.js"></script> -->
 
 </body>
 </html>

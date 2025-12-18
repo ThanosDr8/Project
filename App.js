@@ -9,12 +9,15 @@ function toggleDarkMode() {
   const modals = [
     document.getElementById("myModal"),
     document.getElementById("filterModal"),
-    document.getElementById("settingsModal")
+    document.getElementById("settingsModal"),
+    document.getElementById("accModal")
+    
   ];
   const modalContents = [
     document.getElementById("new-task-modal-content"),
     document.getElementById("filter-modal-content"),
-    document.getElementById("settings-modal-content")
+    document.getElementById("settings-modal-content"),
+    document.getElementById("accModalContent")
   ];
 
   modals.forEach(m => m?.classList.toggle("light-modal-bg"));
@@ -56,6 +59,14 @@ function toggleDarkMode() {
   const settingsButton    = document.querySelector(".settings-button");
   const closeSettings     = settingsModal.querySelector(".close-settings");
 
+  const accModal          = document.getElementById("accModal");
+  const signInOpenBtn     = document.getElementById("signInButton");
+  const signInCloseBtn    = document.getElementById("closeAccModal");
+  const signInBtn         = document.getElementById("signIn");
+  const cancelBtn         = document.getElementById("cancel");
+
+  const USER_KEY = "user";
+    
   const darkModeToggle    = document.getElementById("darkModeToggle");
   const borderColorPicker = document.getElementById("borderColorPicker");
   const searchBar         = document.getElementById("search-bar");
@@ -304,17 +315,30 @@ function toggleDarkMode() {
   modalOpenBtn.onclick = () => { taskBeingEdited=null; clearForm(); openModal(modal); };
   modalCloseBtn.onclick = () => { taskBeingEdited=null; closeModal(modal); };
 
+  // =======================
+  // Filter modal
+  // =======================
   filterOpenBtn.onclick  = () => openModal(filterModal);
   filterCloseBtn.onclick = () => closeModal(filterModal);
   applyFiltersBtn.onclick = () => { applyFilters(); closeModal(filterModal); };
 
+  // =======================
   // Settings modal
+  // =======================
   settingsButton.onclick = () => openModal(settingsModal);
   closeSettings.onclick = () => closeModal(settingsModal);
 
+  // ======================
+  // Account modal
+  // ======================
+  signInOpenBtn.onclick = () => openModal(accModal);
+  signInCloseBtn.onclick = () => closeModal(accModal);
+  cancelBtn.onclick = () => closeModal(accModal);
+
+
   // Close modals by clicking outside
   window.addEventListener("click", e => {
-    [modal, filterModal, settingsModal].forEach(m => { if (e.target === m) closeModal(m); });
+    [modal, filterModal, settingsModal, accModal].forEach(m => { if (e.target === m) closeModal(m); });
   });
 
   // Dark mode
@@ -328,7 +352,7 @@ function toggleDarkMode() {
   function applyBorderColor(color) {
     // Apply to task cards, inputs, buttons, etc.
     document.querySelectorAll(
-      "button, input, select, textarea, .task-card, .modal-content, .filter-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
+      "button, input, select, textarea, .task-card, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
     ).forEach(el => {
       el.style.borderColor = color;
     });
@@ -379,6 +403,54 @@ function toggleDarkMode() {
     saveLocal();
     renderTasks();
   }
+
+  // ======================
+  // Account Sign In Logic
+  // ======================
+  signInBtn.onclick = async () => {
+    const username = document.querySelector(".username").value.trim();
+    const password = document.querySelector(".password").value.trim();
+
+    if (!username || !password) {
+      alert("Please enter both username and password");
+      return;
+    }
+
+    const payload = { username, password };
+
+    try {
+      await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch {
+      console.warn("Backend not available, saving locally");
+    }
+
+    localStorage.setItem(USER_KEY, JSON.stringify(payload));
+
+    // Update header button text
+    signInOpenBtn.innerHTML = `
+      <img src="Icons/user.png" class="user-icon">
+      ${username}
+    `;
+
+    closeModal(accModal);
+  };
+
+  // ======================
+  // Restore Signed-in User
+  // ======================
+  const savedUser = localStorage.getItem(USER_KEY);
+  if (savedUser) {
+    const { username } = JSON.parse(savedUser);
+    signInOpenBtn.innerHTML = `
+      <img src="Icons/user.png" class="user-icon">
+      ${username}
+    `;
+  }
+
   init();
 
 })();
