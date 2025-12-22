@@ -25,20 +25,28 @@ function closeNav() {
   main.style.marginLeft = "0";
 }
 
-// ==========================================
-// Styling Helpers
-// ==========================================
-function applyBorderColor(color) {
-  document.querySelectorAll(
-    "button, input, select, textarea, .sidebar, .settings-modal-content, .switch .slider, .acc-modal-content"
-  ).forEach(el => el.style.borderColor = color);
+  // ======================
+  // Apply Border Color (including HRs)
+  // ======================
+  function applyBorderColor(color) {
+    // Apply to task cards, inputs, buttons, etc.
+    document.querySelectorAll(
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
+    ).forEach(el => {
+      el.style.borderColor = color;
+    });
 
-  document.querySelectorAll(".switch .slider")
-    .forEach(sl => sl.style.backgroundColor = color);
+    // Apply to switch sliders specifically
+    document.querySelectorAll(".switch .slider").forEach(slider => {
+      slider.style.backgroundColor = color;
+    });
 
-  const picker = document.getElementById("borderColorPicker");
-  if (picker) picker.value = color;
-}
+    // Update picker
+    if (borderColorPicker) borderColorPicker.value = color;
+
+    // Save to localStorage
+    localStorage.setItem("borderColor", color);
+  }
 
 // ==========================================
 // Settings Modal
