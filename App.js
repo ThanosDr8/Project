@@ -238,9 +238,17 @@ function toggleDarkMode() {
       return;
     }
 
+    if (e.target.closest(".task-card") && document.body.classList.contains("grid-mode")) {
+      taskBeingEdited = { ...allTasks[idx] };
+      populateForm(taskBeingEdited);
+      openModal(modal);
+      return;
+    }
+
     if (e.target.matches(".task-title")) {
       card.querySelector(".task-details")?.classList.toggle("open");
     }
+
   });
 
   // Task Submission
@@ -315,6 +323,25 @@ function toggleDarkMode() {
   modalOpenBtn.onclick = () => { taskBeingEdited=null; clearForm(); openModal(modal); };
   modalCloseBtn.onclick = () => { taskBeingEdited=null; closeModal(modal); };
 
+  const viewTypeBtn = document.getElementById("view-type-button");
+  const tasksContainer = document.querySelector(".tasks");
+
+  let isGridView = false;
+
+  viewTypeBtn.onclick = () => {
+    isGridView = !isGridView;
+
+    tasksContainer.classList.toggle("grid-view", isGridView);
+    document.body.classList.toggle("grid-mode", isGridView);
+
+    // Ensure descriptions are visible in grid view
+    if (isGridView) {
+      document.querySelectorAll(".task-details").forEach(d => d.classList.add("open"));
+    } else {
+      document.querySelectorAll(".task-details").forEach(d => d.classList.remove("open"));
+    }
+  };
+
   // =======================
   // Filter modal
   // =======================
@@ -352,7 +379,7 @@ function toggleDarkMode() {
   function applyBorderColor(color) {
     // Apply to task cards, inputs, buttons, etc.
     document.querySelectorAll(
-      "button, input, select, textarea, .task-card, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
     ).forEach(el => {
       el.style.borderColor = color;
     });

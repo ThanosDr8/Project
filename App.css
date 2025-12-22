@@ -631,3 +631,58 @@ input:checked + .slider:before {
 .close-acc-modal:hover {
   cursor: pointer;
 }
+
+/* =========================
+   GRID VIEW MODE
+========================= */
+
+.tasks.grid-view #task-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 4 cards per row */
+.tasks.grid-view .task-card {
+  flex: 1 1 calc(23%);
+  height: 150px;
+  border: 1.7px solid rgb(0, 0, 0);
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 10px
+}
+
+/* Always show details in grid view */
+.tasks.grid-view .task-details {
+  max-height: none;
+  padding: 10px;
+  border-left: none;
+  margin-left: 0;
+}
+
+/* Hide expand animation logic in grid view */
+.tasks.grid-view .task-details.open {
+  max-height: none;
+}
+
+/* Buttons layout */
+.tasks.grid-view .edit-button,
+.tasks.grid-view .delete-button {
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+/* Responsive fallback */
+@media (max-width: 1000px) {
+  .tasks.grid-view .task-card {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .tasks.grid-view .task-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
