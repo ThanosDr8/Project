@@ -102,7 +102,9 @@ label:hover {
   height: 13px;
 }
 .info,
-.chart {
+.chart,
+.manual,
+.home {
   height: 20px;
   padding-right: 3px;
   padding-left: 13.3px;
