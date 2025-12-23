@@ -28,4 +28,10 @@ await db.exec(`
     id TEXT PRIMARY KEY,
     name TEXT
   );
+
+  CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT
+  );
 `);
