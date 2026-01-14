@@ -1,16 +1,19 @@
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
+
 body {
   background-color: rgb(112, 112, 112);
   color: white;
   margin: 0;
   padding: 0;
 }
+
 .light-mode {
   background-color: white;
   color: black;
 }
+
 .header {
   background-color: rgb(81, 81, 81);
   height: 60px;
@@ -23,35 +26,44 @@ body {
   box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
   top: 0;
 }
+
 .website-info {
   text-align: center;
   margin-top: 60px;
 }
+
 .page-logo {
   height: 100px;
 }
+
 ::placeholder {
   color: #c9c9c9;
 }
+
 h3 {
   margin-bottom: 0px;
   margin-top: 10px;
 }
+
 hr {
   border: 0.5px solid rgb(200, 200, 200);
   margin: 0px 9px
 }
+
 label:hover {
   cursor: pointer;
 }
+
 .filter-option:hover {
   cursor: pointer;
 }
+
 .left-section {
   margin-left: 5px;
   display: flex;
   align-items: center;
 } 
+
 .mid-section {
   flex: 1;
   z-index: 4;
@@ -60,11 +72,13 @@ label:hover {
   align-items: center;
   justify-content: center;
 }
+
 .right-section {
   margin-right: 5px;
   display: flex;
   align-items: center;
 }
+
 .search-bar {
   box-sizing: border-box;
   height: 40px;
@@ -82,6 +96,7 @@ label:hover {
   overflow: hidden;
   margin: 3px;
 }
+
 .search-bar input {
   height: 100%;
   box-sizing: border-box;
@@ -92,6 +107,7 @@ label:hover {
   font-size: 18px;
   background: transparent;
 }
+
 .menu, 
 .filter,
 .tile,
@@ -101,6 +117,7 @@ label:hover {
   padding: 2px;
   height: 13px;
 }
+
 .info,
 .chart,
 .manual,
@@ -110,6 +127,7 @@ label:hover {
   padding-left: 13.3px;
   margin-right: 3px;
 }
+
 .menu-button,
 .filter-button,
 .view-type-button,
@@ -123,6 +141,7 @@ label:hover {
   background-color: white;
   margin: 3px;
 }
+
 .menu-button:hover,
 .filter-button:hover,
 .view-type-button:hover,
@@ -132,18 +151,18 @@ label:hover {
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
 }
+
 .add-icon{
   border: none;
   height: 16px;
   margin-right: 5px;
   vertical-align: middle;
 }
-.newtask,
-.taskgroups {
+
+.newtask {
   border: none;
   border-radius: 13px;
-  margin-top: 5px;
-  margin-left: 5px;
+  margin: 5px 0px 6px 5px;
   padding: 8px 10px;
   font-size: 14px;
   cursor: pointer;
@@ -152,14 +171,16 @@ label:hover {
   width: 99%;
   align-self: center;
 }
+
 .newtask {
   margin-top: 9px;
 }
-.newtask:hover,
-.taskgroups:hover {
+
+.newtask:hover {
   background-color: rgb(234, 234, 234);
   transition: 0.1s;
 }
+
 .tasks {
   display: block;
   float: left;
@@ -168,6 +189,7 @@ label:hover {
   width: 100%;
   z-index: 1;
 }
+
 .sidebar {
   display: block;
   height: 100%;
@@ -182,6 +204,7 @@ label:hover {
   padding-top: 60px;
   box-shadow: 10px 20px 30px -1px rgb(52, 51, 51) inset;
 }
+
 .sidebar a {
   display: block;
   padding-left: 5px;
@@ -191,19 +214,23 @@ label:hover {
   transition: 0.1s;
   align-items: center;
 }
+
 .sidebar .not-x {
   margin: 9px;
   margin-left: 3px
 }
+
 .sidebar a:hover {
   color: #f1f1f1;
 }
+
 .sidebar .closebtn {
   display: flex;
   position: absolute;
   top: 7px;
   font-size: 36px;
 }
+
 .openbtn {
   display: flex;
   font-size: 20px;
@@ -213,14 +240,17 @@ label:hover {
   padding: 10px 15px;
   border: none;
 }
+
 #main {
   transition: margin-left 0.1s;
 }
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+
 /* The Modal (background) */
 .modal {
   display: flex;
@@ -235,6 +265,7 @@ label:hover {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+
 /* Modal Content */
 .modal-content {
   background-color: rgb(90, 90, 90);
@@ -245,10 +276,12 @@ label:hover {
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
+
 /* The Close Button */
 .close-task-module {
   float: right;
 }
+
 .close-task-module:hover,
 .close-task-module:focus {
   color: #000;
@@ -256,6 +289,7 @@ label:hover {
   cursor: pointer;
   transition: 0.1s;
 }
+
 .submit-button {
   background-color: rgb(35, 201, 26);
   color: white;
@@ -267,10 +301,12 @@ label:hover {
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
   margin-top: 5px;
 }
+
 .submit-button:hover {
   background-color: rgb(15, 191, 15);
   transition: 0.1s;
 }
+
 .task-name {
   display: flex;
   flex: 1;
@@ -282,6 +318,7 @@ label:hover {
   background-color: rgb(90, 90, 90);
   height: 21px;
 }
+
 .task-due-date,
 .task-priority,
 .description,
@@ -293,10 +330,12 @@ label:hover {
   background-color: rgb(90, 90, 90);
   margin: 0px 5px 5px 0px;
 }
+
 .task-search-bar {
   display: flex;
   width: 65%;
 }
+
 .task-due-date,
 .task-priority,
 .category,
@@ -305,6 +344,7 @@ label:hover {
   border-radius: 13px;
   padding: 5px;
 }
+
 .description {
   width: 60%;
   border: 1.7px rgb(166, 221, 239) solid;
@@ -315,6 +355,7 @@ label:hover {
   padding: 8px 0px 0px 5px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .filter-modal {
   display: flex;
   position: fixed; /* Stay in place */
@@ -328,6 +369,7 @@ label:hover {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+
 .filter-modal-content {
   z-index: 4;
   background-color: rgb(90, 90, 90);
@@ -339,9 +381,11 @@ label:hover {
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
 }
+
 .filter-close {
   float: right;
 }
+
 .filter-close:hover,
 .filter-close:focus {
   color: #000;
@@ -349,6 +393,7 @@ label:hover {
   cursor: pointer;
   transition: 0.1s;
 }
+
 .apply-filters-button {
   background-color: rgb(35, 201, 26);
   color: white;
@@ -360,10 +405,12 @@ label:hover {
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
   margin-top: 5px;
 }
+
 .apply-filters-button:hover {
   background-color: rgb(15, 191, 15);
   transition: 0.1s;
 }
+
 .asc-desc-select {
   border: 1.7px rgb(166, 221, 239) solid;
   border-radius: 13px;
@@ -371,27 +418,34 @@ label:hover {
   color: #c9c9c9;
   background-color: rgb(90, 90, 90);
 }
+
 .light-modal-bg {
   background-color: rgba(255,255,255,0.4) !important;
 }
+
 .light-filter-bg {
   background-color: rgba(255,255,255,0.4) !important;
 }
+
 .light-modal-content {
   background-color: white !important;
   color: black !important;
 }
+
 .light-filter-content {
   background-color: white !important;
   color: black !important;
 }
+
 .light-input {
   background-color: white !important;
   color: black !important;
 }
+
 .light-input::placeholder {
   color: black !important;
 }
+
 .task-card {
   border-radius: 13px;
   margin: 0px 10px 10px 10px;
@@ -400,10 +454,12 @@ label:hover {
   display: block;
   padding: 9px 10px 0px 10px;
 }
+
 .task-card:hover {
   background-color: rgba(100, 100, 100, 0.27);
   transition: 0.1s;
 }
+
 .task-title {
   font-size: 14px;
   font-weight: bold;
@@ -537,7 +593,6 @@ input:checked + .slider:before {
 .settings-slider::-webkit-slider-runnable-track {
   border: 2px solid var(--slider-color, #888);
 }
-
 
 .sign-in-button {
   height: 30px;
