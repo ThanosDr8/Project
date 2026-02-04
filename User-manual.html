@@ -1,216 +1,373 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Task Manager</title>
-    <link rel="stylesheet" href="App.css">
-    <link rel="stylesheet" href="User-manual.css">
-    <link rel="icon" type="image/x-icon" href="Icons/logo1.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <title>Task Manager — User Manual</title>
+
+    <link rel="stylesheet" href="App.css" />
+    <link rel="stylesheet" href="User-manual.css" />
+    <link rel="icon" type="image/x-icon" href="Icons/logo1.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
+
   <body id="main">
-    <!-- The Header of the website-->
-    <div class="header">
+    <!-- Header -->
+    <header class="header" role="banner">
       <div class="left-section">
-        <button id="menu-button" class="menu-button" onclick="openNav()">
-          <img src="Icons/menu-burger.png" class="menu">
+        <button
+          id="menu-button"
+          class="menu-button"
+          type="button"
+          onclick="openNav()"
+          aria-label="Open sidebar"
+        >
+          <img src="Icons/menu-burger.png" class="menu" alt="Menu" />
         </button>
       </div>
 
-      <div class="mid-section">
-      </div>
+      <div class="mid-section"></div>
 
       <div class="right-section">
-        <button class="sign-in-button" id="signInButton"><img src="Icons/user.png" class="user-icon">Sign In</button>
-        <button class="settings-button" id="openSettingsBtn">
-          <img src="Icons/settings-icon.png" class="settings-icon">
+        <button class="sign-in-button" id="signInButton" type="button">
+          <img src="Icons/user.png" class="user-icon" alt="" />
+          Sign In
+        </button>
+
+        <button class="settings-button" id="openSettingsBtn" type="button" aria-label="Open settings">
+          <img src="Icons/settings-icon.png" class="settings-icon" alt="Settings" />
         </button>
       </div>
-    </div>
-    <div class="words">
-      <h1>Task Manager User Manual</h1><br>
+    </header>
 
-      <h2>1. Overview</h2><br>
-      The Task Manager is a web application designed to help you create, manage, and organize tasks efficiently. With features like task creation, filtering, sorting, priority management, and analytics, you can keep track of personal or professional work in one place.<br>
-      <hr>
+    <!-- Main content -->
+    <main class="words" role="main">
+      <header class="page-title">
+        <h1>Task Manager User Manual</h1>
+        <p class="subtitle">
+          A guide to creating, organizing, filtering, and tracking your tasks.
+        </p>
+      </header>
 
-      <h2>2. Layout</h2><br>
-      The interface consists of three main sections:<br>
-      <br>
+      <!-- Table of contents (optional but nice) -->
+      <nav class="toc" aria-label="Table of contents">
+        <h2 class="toc-title">Contents</h2>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#layout">Layout</a></li>
+          <li><a href="#modals">Modals</a></li>
+          <li><a href="#task-actions">Task List Actions</a></li>
+          <li><a href="#sidebar-nav">Sidebar Navigation</a></li>
+          <li><a href="#icons-reference">Icons &amp; Buttons Reference</a></li>
+          <li><a href="#tips">Tips &amp; Best Practices</a></li>
+        </ol>
+      </nav>
 
-      <h3>2.1 Header</h3><br>
-      The header provides navigation and quick access tools:<br>
-      <br>
-      Left Section:<br>
-      Menu Button: Opens the sidebar containing analytics and information/help.<br>
-      <br>
-      Middle Section:<br>
-      Search Bar: Search tasks by name.<br>
-      Filter Button: Opens a modal to filter tasks by priority, status, or category.<br>
-      View Type Button: Toggle between list and tile views of tasks (icon-based).<br>
-      <br>
-      Right Section:<br>
-      Sign In Button: Opens the login modal.<br>
-      Settings Button: Access settings for themes and interface customization.<br>
-      <br>
+      <hr />
 
-      <h3>2.2 Task Section</h3><br>
-      This is the main workspace for task management:<br>
-      <br>
-      New Task Button: Opens a modal to create a new task.<br>
-      Task List: Displays all tasks added by the user. Tasks can be filtered or sorted.<br>
-      <br>
+      <!-- 1. Overview -->
+      <section id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title">1. Overview</h2>
+        <p>
+          The Task Manager is a web application designed to help you create, manage, and organize
+          tasks efficiently. With features like task creation, filtering, sorting, priority management,
+          and analytics, you can keep track of personal or professional work in one place.
+        </p>
+      </section>
 
-      <h3>2.3 Website Information</h3><br>
-      Displays a welcoming message and general information about the app.<br>
-      Contains the app logo and a brief description.<br>
-      <br>
+      <hr />
 
-      <h3>2.4 Sidebar</h3><br>
-      Accessible via the menu button:<br>
-      <br>
-      Analytics: Redirects to the analytics page to view task statistics.<br>
-      Information/Help: Redirects to a help page with instructions and FAQs.<br>
-      <hr>
+      <!-- 2. Layout -->
+      <section id="layout" aria-labelledby="layout-title">
+        <h2 id="layout-title">2. Layout</h2>
+        <p>The interface consists of four main sections:</p>
 
-      <h2>3. Modals</h2><br>
+        <section aria-labelledby="header-title">
+          <h3 id="header-title">2.1 Header</h3>
+          <p>The header provides navigation and quick access tools:</p>
 
-      <h3>3.1 New Task Modal</h3><br>
-      Use this to create new tasks:<br>
-      <br>
-      1. Task Name: Enter the name of the task.<br>
-      2. Due Date: Set a due date for completion.<br>
-      3. Priority: Choose High, Medium, or Low.<br>
-      4. Category: Assign a category (Work, House Work, School Work, Shopping, Hobbies, Other).<br>
-      5. Status: Choose Open, In Progress, or Done.<br>
-      6. Description: Optional detailed description (Max 300 characters).<br>
-      7. Submit: Adds the task to your task list.<br>
-      <br>
+          <h4>Left section</h4>
+          <ul>
+            <li><strong>Menu Button</strong>: Opens the sidebar containing analytics and information/help.</li>
+          </ul>
 
-      <h3>3.2 Filter Modal</h3><br>
-      Use this modal to filter and sort tasks:<br>
-      <br>
-      1. Priority Filters: High, Medium, Low.<br>
-      2. Status Filters: Open, In Progress, Done.<br>
-      3. Category Filters: Work, House Work, School Work, Shopping, Hobbies, Other.<br>
-      4. Sort By:<br>
-      Due Date (Ascending/Descending)<br>
-      Priority (Ascending/Descending)<br>
-      5. Apply Button: Applies selected filters and sorting to the task list.<br>
-      <br>
+          <h4>Middle section</h4>
+          <ul>
+            <li><strong>Search Bar</strong>: Search tasks by name.</li>
+            <li><strong>Filter Button</strong>: Opens a modal to filter tasks by priority, status, or category.</li>
+            <li><strong>View Type Button</strong>: Toggle between list and tile views of tasks.</li>
+          </ul>
 
-      <h3>3.3 Settings Modal</h3><br>
-      Customize your Task Manager interface:<br>
-      <br>
-      1. Dark/Light Mode Toggle: Switch between dark and light themes.<br>
-      2. Border Color Picker: Select a color for task borders.<br>
-      <br>
+          <h4>Right section</h4>
+          <ul>
+            <li><strong>Sign In Button</strong>: Opens the login modal.</li>
+            <li><strong>Settings Button</strong>: Access settings for themes and interface customization.</li>
+          </ul>
+        </section>
 
-      <h3>3.4 Sign In / Account Modal</h3><br>
-      Sign in to personalize your task management:<br>
-      <br>
-      1. Username: Enter your username (max 12 characters).<br>
-      2. Password: Enter your password.<br>
-      3. Sign In Button: Logs you into the system.<br>
-      4. Cancel Button: Closes the modal without logging in.<br>
-      <hr>
+        <section aria-labelledby="task-section-title">
+          <h3 id="task-section-title">2.2 Task Section</h3>
+          <p>This is the main workspace for task management:</p>
+          <ul>
+            <li><strong>New Task Button</strong>: Opens a modal to create a new task.</li>
+            <li><strong>Task List</strong>: Displays all tasks added by the user. Tasks can be filtered or sorted.</li>
+          </ul>
+        </section>
 
-      <h2>4. Task List Actions</h2><br>
-      Once tasks are created:<br>
-      <br>
-      Tasks appear under the Task List section.<br>
-      Tasks can be filtered, sorted, and viewed in tile or list mode.<br>
-      Each task displays its name, due date, priority, category, and status.<br>
-      <hr>
+        <section aria-labelledby="info-title">
+          <h3 id="info-title">2.3 Website Information</h3>
+          <ul>
+            <li>Displays a welcoming message and general information about the app.</li>
+            <li>Contains the app logo and a brief description.</li>
+          </ul>
+        </section>
 
-      <h2>5. Sidebar Navigation</h2><br>
-      Click the menu button to open the sidebar.<br>
-      Close Sidebar: Click the X button or anywhere outside the sidebar.<br>
-      Options in the sidebar:<br>
-      Analytics: Visual overview of tasks.<br>
-      Information/Help: Guides and FAQs.<br>
-      <hr>
+        <section aria-labelledby="sidebar-title">
+          <h3 id="sidebar-title">2.4 Sidebar</h3>
+          <p>Accessible via the menu button:</p>
+          <ul>
+            <li><strong>Analytics</strong>: Redirects to the analytics page to view task statistics.</li>
+            <li><strong>Information/Help</strong>: Redirects to a help page with instructions and FAQs.</li>
+          </ul>
+        </section>
+      </section>
 
-      <h2>6. Icons & Buttons Reference</h2><br>
-      Icon/Button | Function<br>
-      ---------------- | -----------------------------<br>
-      Menu (hamburger) | Opens sidebar<br>
-      Filter (funnel) | Opens filter modal<br>
-      View Type (tile) | Switch between list/tile view<br>
-      Sign In (user) | Opens login modal<br>
-      Settings (gear) | Opens settings modal<br>
-      New Task (plus) | Opens new task modal<br>
-      Close (cross) | Closes modals or sidebar<br>
-      Apply Filters | Applies filters to task list<br>
-      <hr>
+      <hr />
 
-      <h2>7. Tips & Best Practices</h2><br>
-      1. Use categories to organize tasks by type.<br>
-      2. Set priority and due dates to stay on top of deadlines.<br>
-      3. Regularly apply filters to focus on important tasks.<br>
-      4. Use analytics to track progress and task completion trends.<br>
-      5. Customize colors and theme in settings to match your workflow preference.<br>
-      <hr>
+      <!-- 3. Modals -->
+      <section id="modals" aria-labelledby="modals-title">
+        <h2 id="modals-title">3. Modals</h2>
 
-    </div>
-    <!-- Sidebar containing home and analytics -->
-    <div id="mySidebar" class="sidebar">
-        <!-- sidebar content -->
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-          <button class="close-button">
-            <img src="Icons/cross.png" class="close"></button>
-        </a>
-        <a href="App.html" class="not-x">
-          <img src="Icons/home.png" class="home">Home
-        </a>
-        <hr>
-        <a href="analytics.html" class="not-x">
-          <img src="Icons/chart-histogram.png" class="chart">See Analytics
-        </a>
-        <hr>
-        <a href="information-help.html" class="not-x">
-          <img src="Icons/info.png" class="info">Information/Help
-        </a>
-        <hr>
-    </div>
+        <section aria-labelledby="new-task-modal-title">
+          <h3 id="new-task-modal-title">3.1 New Task Modal</h3>
+          <p>Use this to create new tasks:</p>
+          <ol>
+            <li><strong>Task Name</strong>: Enter the name of the task.</li>
+            <li><strong>Due Date</strong>: Set a due date for completion.</li>
+            <li><strong>Priority</strong>: Choose High, Medium, or Low.</li>
+            <li>
+              <strong>Category</strong>: Assign a category (Work, House Work, School Work, Shopping, Hobbies, Other).
+            </li>
+            <li><strong>Status</strong>: Choose Open, In Progress, or Done.</li>
+            <li><strong>Description</strong>: Optional detailed description (Max 300 characters).</li>
+            <li><strong>Submit</strong>: Adds the task to your task list.</li>
+          </ol>
+        </section>
+
+        <section aria-labelledby="filter-modal-title">
+          <h3 id="filter-modal-title">3.2 Filter Modal</h3>
+          <p>Use this modal to filter and sort tasks:</p>
+          <ul>
+            <li><strong>Priority Filters</strong>: High, Medium, Low.</li>
+            <li><strong>Status Filters</strong>: Open, In Progress, Done.</li>
+            <li><strong>Category Filters</strong>: Work, House Work, School Work, Shopping, Hobbies, Other.</li>
+            <li>
+              <strong>Sort By</strong>:
+              <ul>
+                <li>Due Date (Ascending/Descending)</li>
+                <li>Priority (Ascending/Descending)</li>
+              </ul>
+            </li>
+            <li><strong>Apply Button</strong>: Applies selected filters and sorting to the task list.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="settings-modal-title">
+          <h3 id="settings-modal-title">3.3 Settings Modal</h3>
+          <p>Customize your Task Manager interface:</p>
+          <ul>
+            <li><strong>Dark/Light Mode Toggle</strong>: Switch between dark and light themes.</li>
+            <li><strong>Border Color Picker</strong>: Select a color for task borders.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="signin-modal-title">
+          <h3 id="signin-modal-title">3.4 Sign In / Account Modal</h3>
+          <p>Sign in to personalize your task management:</p>
+          <ol>
+            <li><strong>Username</strong>: Enter your username (max 12 characters).</li>
+            <li><strong>Password</strong>: Enter your password.</li>
+            <li><strong>Sign In Button</strong>: Logs you into the system.</li>
+            <li><strong>Cancel Button</strong>: Closes the modal without logging in.</li>
+          </ol>
+        </section>
+      </section>
+
+      <hr />
+
+      <!-- 4. Task List Actions -->
+      <section id="task-actions" aria-labelledby="task-actions-title">
+        <h2 id="task-actions-title">4. Task List Actions</h2>
+        <p>Once tasks are created:</p>
+        <ul>
+          <li>Tasks appear under the Task List section.</li>
+          <li>Tasks can be filtered, sorted, and viewed in tile or list mode.</li>
+          <li>Each task displays its name, due date, priority, category, and status.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <!-- 5. Sidebar Navigation -->
+      <section id="sidebar-nav" aria-labelledby="sidebar-nav-title">
+        <h2 id="sidebar-nav-title">5. Sidebar Navigation</h2>
+        <ul>
+          <li>Click the menu button to open the sidebar.</li>
+          <li>Close Sidebar: Click the X button or anywhere outside the sidebar.</li>
+          <li>
+            Options in the sidebar:
+            <ul>
+              <li><strong>Analytics</strong>: Visual overview of tasks.</li>
+              <li><strong>Information/Help</strong>: Guides and FAQs.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <!-- 6. Icons & Buttons Reference -->
+      <section id="icons-reference" aria-labelledby="icons-reference-title">
+        <h2 id="icons-reference-title">6. Icons &amp; Buttons Reference</h2>
+
+        <div class="table-wrap" role="region" aria-label="Icons reference table">
+          <table class="reference-table">
+            <thead>
+              <tr>
+                <th scope="col">Icon / Button</th>
+                <th scope="col">Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Menu (hamburger)</td>
+                <td>Opens sidebar</td>
+              </tr>
+              <tr>
+                <td>Filter (funnel)</td>
+                <td>Opens filter modal</td>
+              </tr>
+              <tr>
+                <td>View Type (tile)</td>
+                <td>Switch between list / tile view</td>
+              </tr>
+              <tr>
+                <td>Sign In (user)</td>
+                <td>Opens login modal</td>
+              </tr>
+              <tr>
+                <td>Settings (gear)</td>
+                <td>Opens settings modal</td>
+              </tr>
+              <tr>
+                <td>New Task (plus)</td>
+                <td>Opens new task modal</td>
+              </tr>
+              <tr>
+                <td>Close (cross)</td>
+                <td>Closes modals or sidebar</td>
+              </tr>
+              <tr>
+                <td>Apply Filters</td>
+                <td>Applies filters to task list</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- 7. Tips -->
+      <section id="tips" aria-labelledby="tips-title">
+        <h2 id="tips-title">7. Tips &amp; Best Practices</h2>
+        <ol>
+          <li>Use categories to organize tasks by type.</li>
+          <li>Set priority and due dates to stay on top of deadlines.</li>
+          <li>Regularly apply filters to focus on important tasks.</li>
+          <li>Use analytics to track progress and task completion trends.</li>
+          <li>Customize colors and theme in settings to match your workflow preference.</li>
+        </ol>
+      </section>
+    </main>
+
+    <!-- Sidebar -->
+    <aside id="mySidebar" class="sidebar" aria-label="Sidebar navigation">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+        <button class="close-button" type="button" aria-label="Close sidebar">
+          <img src="Icons/cross.png" class="close" alt="Close" />
+        </button>
+      </a>
+
+      <a href="App.html" class="not-x">
+        <img src="Icons/home.png" class="home" alt="" />
+        Home
+      </a>
+      <hr />
+
+      <a href="analytics.html" class="not-x">
+        <img src="Icons/chart-histogram.png" class="chart" alt="" />
+        See Analytics
+      </a>
+      <hr />
+
+      <a href="information-help.html" class="not-x">
+        <img src="Icons/info.png" class="info" alt="" />
+        Information/Help
+      </a>
+      <hr />
+    </aside>
+
     <!-- Settings Modal -->
-    <div class="settings-modal modal" id="settingsModal" style="display: none;">
+    <div class="settings-modal modal" id="settingsModal" style="display: none" role="dialog" aria-modal="true" aria-label="Settings">
       <div class="settings-modal-content" id="settings-modal-content">
-        <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
+        <button class="close-settings" type="button" aria-label="Close settings">
+          <img src="Icons/cross.png" class="close" alt="Close" />
+        </button>
+
         <h3>Settings</h3>
 
-        <!-- Dark Mode Toggle -->
         <div class="setting-item">
           <label for="darkModeToggle">Light Mode:</label>
           <label class="switch">
-            <input type="checkbox" id="darkModeToggle">
+            <input type="checkbox" id="darkModeToggle" />
             <span class="slider round"></span>
           </label>
         </div>
 
-        <!-- Border Color Picker -->
         <div class="setting-item">
           <label for="borderColorPicker">Border Color:</label>
-          <input type="color" id="borderColorPicker" value="#a6ddef">
+          <input type="color" id="borderColorPicker" value="#a6ddef" />
         </div>
       </div>
     </div>
 
-    <div class="acc-modal" id="accModal" style="display: none;">
+    <!-- Account Modal -->
+    <div class="acc-modal" id="accModal" style="display: none" role="dialog" aria-modal="true" aria-label="Sign in">
       <div class="acc-modal-content" id="accModalContent">
-        <span class="close-acc-modal" id="closeAccModal"><img src="Icons/cross.png" class="close"></span>
+        <button class="close-acc-modal" id="closeAccModal" type="button" aria-label="Close sign in">
+          <img src="Icons/cross.png" class="close" alt="Close" />
+        </button>
+
         <h3 style="margin: 10px 0px">Username:</h3>
         <label>
-          <input type="text" class="username" placeholder="Enter Username" maxlength="12">
+          <span class="sr-only">Username</span>
+          <input type="text" class="username" placeholder="Enter Username" maxlength="12" />
         </label>
+
         <h3 style="margin: 10px 0px">Password:</h3>
         <label>
-          <input type="text" class="password" placeholder="Enter Password">
+          <span class="sr-only">Password</span>
+          <input type="password" class="password" placeholder="Enter Password" />
         </label>
-        <button class="cancel" id="cancel">Cancel</button>
-        <button class="sign-in" id="signIn">Sign In</button>
+
+        <div class="modal-actions">
+          <button class="cancel" id="cancel" type="button">Cancel</button>
+          <button class="sign-in" id="signIn" type="button">Sign In</button>
+        </div>
       </div>
     </div>
-    
+
     <script src="analytics.js"></script>
     <script src="App.js"></script>
     <script src="info-help.js"></script>

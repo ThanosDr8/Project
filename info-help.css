@@ -1,290 +1,77 @@
-html {
-  font-family: Arial, Helvetica, sans-serif;
+/* Page wrapper */
+.info-page {
+  max-width: 920px;
+  margin: 24px auto 60px;
+  padding: 0 14px;
 }
 
-body {
-  background-color: rgb(112, 112, 112);
-  color: white;
-  height: 100vh;
+/* Hero */
+.page-hero {
+  padding: 18px 6px 8px;
+}
+
+.page-hero h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+}
+
+.subtitle {
   margin: 0;
-  padding: 0;
-  position: sticky;
+  opacity: 0.85;
 }
 
-.light-mode {
-  background-color: white;
-  color: black;
+/* Cards */
+.card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 
-.header {
-  background-color: rgb(81, 81, 81);
-  height: 60px;
-  z-index: 10;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
+.light-mode .card {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.10);
 }
 
-.website-info {
-  text-align: center;
-  margin-top: 60px;
+.card h2 {
+  margin: 0 0 12px;
 }
 
-.page-logo {
-  height: 100px;
+/* Two-language grid */
+.lang-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
-::placeholder {
-  color: #c9c9c9;
+.lang-block {
+  padding: 12px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
-h3 {
-  margin-bottom: 0px;
-  margin-top: 10px;
+.light-mode .lang-block {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.10);
 }
 
-hr {
-  border: 0.5px solid rgb(200, 200, 200);
-  margin: 9px;
+.lang-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  opacity: 0.9;
 }
 
-label:hover {
-  cursor: pointer;
-}
+/* Small screens: stack EN/GR */
+@media (max-width: 700px) {
+  .lang-grid {
+    grid-template-columns: 1fr;
+  }
 
-.filter-option:hover {
-  cursor: pointer;
-}
-
-.left-section {
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-} 
-
-.mid-section {
-  flex: 1;
-  z-index: 4;
-  max-width: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.right-section {
-  margin-right: 5px;
-  display: flex;
-  align-items: center;
-}
-
-h1,
-p {
-  margin: 7px 5px;
-}
-
-p {
-  font-size: 20px;
-}
-
-.menu,
-.close,
-.settings { 
-  padding: 2px;
-  height: 13px;
-}
-
-.menu-button,
-.close-button,
-.settings-button {
-  border: 1.7px rgb(166, 221, 239) solid;
-  display: flex;
-  height: 40px;
-  padding: 10px;
-  border-radius: 30px;
-  background-color: white;
-}
-
-.home,
-.chart {
-  height: 20px;
-  padding-right: 3px;
-  padding-left: 13.3px;
-  margin-right: 3px;
-}
-
-.menu-button:hover,
-.close-button:hover,
-.settings-button:hover {
-  cursor: pointer;
-  background-color: rgb(234, 234, 234);
-  transition: 0.1s;
-}
-
-.help-image1 {
-  height: 60px;
-  border: red solid 2px;
-}
-
-hr {
-  margin: 9px;
-}
-
-.sidebar {
-  display: block;
-  height: 100%;
-  width: 0px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: rgb(81, 81, 81);
-  overflow-x: hidden;
-  transition: 0.1s;
-  padding-top: 60px;
-  box-shadow: 10px 20px 30px -1px rgb(52, 51, 51) inset;
-}
-
-.sidebar a {
-  display: block;
-  padding-left: 5px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #c9c9c9;
-  transition: 0.1s;
-  align-items: center;
-}
-
-.sidebar .not-x {
-  margin-top: 5px;
-}
-
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar .closebtn {
-  display: flex;
-  position: absolute;
-  top: 7px;
-  font-size: 36px;
-}
-
-.openbtn {
-  display: flex;
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-#main {
-  transition: margin-left 0.1s;
-}
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
-
-/* FULLSCREEN MODAL OVERLAY */
-.settings-modal {
-  display: flex;
-  position: fixed; 
-  z-index: 1000; 
-  padding-top: 200px; 
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4); 
-}
-
-.settings-modal-content {
-  z-index: 4;
-  background-color: rgb(90, 90, 90);
-  color: #c9c9c9;
-  z-index: 1001;
-  margin: auto;
-  padding: 20px;
-  width: 30%;
-  border: 1.7px rgb(166, 221, 239) solid;
-  border-radius: 13px;
-  position: relative;
-}
-
-/* Close button */
-.close-settings {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Slider switch */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.switch input {
-  display:none;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: 0.3s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #4CAF50;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.setting-item {
-  margin: 15px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.settings-slider {
-  border: 2px solid var(--slider-color, #888);
-}
-
-.settings-slider::-webkit-slider-thumb {
-  background: var(--slider-color, #888);
-  border: 2px solid var(--slider-color, #888);
-}
-
-.settings-slider::-webkit-slider-runnable-track {
-  border: 2px solid var(--slider-color, #888);
+  .page-hero h1 {
+    font-size: 24px;
+  }
 }
