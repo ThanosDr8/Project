@@ -459,7 +459,7 @@ label:hover {
 }
 
 .light-input {
-  background-color: white !important;
+  background-color: rgb(112, 112, 112) !important;
   color: black !important;
 }
 
@@ -767,4 +767,55 @@ input:checked + .slider:before {
     flex: 1 1 100%;
     max-width: 100%;
   }
+}
+
+/* 1. Modal Inputs: White background, Black text, Dark Grey Border */
+.light-input {
+  background-color: white !important;
+  color: black !important;
+  border: 1.7px solid #555 !important; /* Forced border color change */
+}
+
+/* 2. Modal Box Borders: Change from blue to Dark Grey */
+.light-mode .modal-content,
+.light-mode .filter-modal-content,
+.light-mode .settings-modal-content,
+.light-mode .acc-modal-content {
+  border-color: #555 !important;
+}
+
+/* 3. Specific Buttons: Menu, Close, Settings, Filter, View Type -> rgb(112, 112, 112) */
+.light-mode .menu-button,
+.light-mode .close-button,
+.light-mode .settings-button,
+.light-mode .filter-button,
+.light-mode .view-type-button {
+  background-color: rgb(112, 112, 112) !important;
+}
+
+/* 4. New Task Button: Black text, Hover effect, and Transition */
+.light-mode .newtask {
+  color: black !important;
+  transition: background-color 0.1s ease;
+  background: none;
+}
+
+.light-mode .newtask:hover {
+  background-color: rgb(200, 200, 200) !important;
+}
+
+/* 5. Search Bar and placeholder fixes */
+.light-mode .search-bar input {
+  color: black !important;
+}
+
+.light-input::placeholder {
+  color: #666 !important;
+}
+
+/* 6. Ensure Sign-In and Submit buttons keep white text for contrast */
+.light-mode .sign-in-button,
+.light-mode .submit-button,
+.light-mode .sign-in {
+  color: white !important;
 }

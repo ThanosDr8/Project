@@ -1,27 +1,38 @@
 // ======================
 // Dark mode helper
 // ======================
-function toggleDarkMode() {
+function toggleDarkMode(isLight) {
   const body = document.body;
-  body.classList.toggle("light-mode");
+  body.classList.toggle("light-mode", isLight);
 
-  const modals = [
-    document.getElementById("myModal"),
-    document.getElementById("filterModal"),
-    document.getElementById("settingsModal"),
-    document.getElementById("accModal")
-  ];
-  
-  const modalContents = [
-    document.getElementById("new-task-modal-content"),
-    document.getElementById("filter-modal-content"),
-    document.getElementById("settings-modal-content"),
-    document.getElementById("accModalContent")
-  ];
+  // Toggle Modal Backgrounds
+  const modals = ["myModal", "filterModal", "settingsModal", "accModal"];
+  const modalContents = ["new-task-modal-content", "filter-modal-content", "settings-modal-content", "accModalContent"];
 
-  modals.forEach(m => m?.classList.toggle("light-modal-bg"));
-  modalContents.forEach(c => c?.classList.toggle("light-modal-content"));
-  document.querySelectorAll("input, textarea, select, button").forEach(el => el.classList.toggle("light-input"));
+  modals.forEach(id => document.getElementById(id)?.classList.toggle("light-modal-bg", isLight));
+  modalContents.forEach(id => document.getElementById(id)?.classList.toggle("light-modal-content", isLight));
+
+  // Loop through all interactive elements to apply specific light-mode styles
+  document.querySelectorAll("input, textarea, select, button").forEach(el => {
+    const isSearchBar = el.id === "search-bar";
+    const isNewTaskBtn = el.classList.contains("newtask");
+    
+    // Check for the specific buttons that should NOT be forced to white bg
+    const isSpecificControlBtn = 
+      el.classList.contains("menu-button") || 
+      el.classList.contains("close-button") || 
+      el.classList.contains("settings-button") || 
+      el.classList.contains("filter-button") || 
+      el.classList.contains("view-type-button") ||
+      el.classList.contains("sign-in-button") ||
+      el.classList.contains("submit-button") ||
+      el.classList.contains("sign-in");
+
+    // Only apply the white-bg/dark-border class if it's a standard modal input
+    if (!isSearchBar && !isNewTaskBtn && !isSpecificControlBtn) {
+      el.classList.toggle("light-input", isLight);
+    }
+  });
 }
 
 (() => {
@@ -32,45 +43,32 @@ function toggleDarkMode() {
   // ======================
   let allTasks = [];
   let taskBeingEdited = null;
-  let currentUser = null;
+  let currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
   // ======================
   // Elements
   // ======================
-  const sidebar       = document.getElementById("mySidebar");
-  const main          = document.getElementById("main");
-  const menuBtn       = document.getElementById("menu-button");
-  const taskList      = document.getElementById("task-list");
+  const sidebar = document.getElementById("mySidebar");
+  const main = document.getElementById("main");
+  const menuBtn = document.getElementById("menu-button");
+  const taskList = document.getElementById("task-list");
+  const tasksContainer = document.querySelector(".tasks");
 
-  const modal         = document.getElementById("myModal");
-  const modalOpenBtn  = document.getElementById("myBtn");
-  const modalCloseBtn = modal.querySelector(".close-task-module");
+  const modal = document.getElementById("myModal");
+  const filterModal = document.getElementById("filterModal");
+  const settingsModal = document.getElementById("settingsModal");
+  const accModal = document.getElementById("accModal");
 
-  const filterModal       = document.getElementById("filterModal");
-  const filterOpenBtn     = document.getElementById("filter-button");
-  const filterCloseBtn    = filterModal.querySelector(".filter-close");
-  const applyFiltersBtn   = document.getElementById("apply-filters-button");
-
-  const settingsModal     = document.getElementById("settingsModal");
-  const settingsButton    = document.querySelector(".settings-button");
-  const closeSettings     = settingsModal.querySelector(".close-settings");
-
-  const accModal          = document.getElementById("accModal");
-  const signInOpenBtn     = document.getElementById("signInButton");
-  const signInCloseBtn    = document.getElementById("closeAccModal");
-  const signInBtn         = document.getElementById("signIn");
-  const cancelBtn         = document.getElementById("cancel");
-
-  const darkModeToggle    = document.getElementById("darkModeToggle");
+  const darkModeToggle = document.getElementById("darkModeToggle");
   const borderColorPicker = document.getElementById("borderColorPicker");
-  const searchBar         = document.getElementById("search-bar");
+  const searchBar = document.getElementById("search-bar");
+  const signInOpenBtn = document.getElementById("signInButton");
 
-  const USER_KEY = "user";
   const LOCAL_KEY = "tasks";
   const val = sel => document.querySelector(sel)?.value || "";
 
   // ======================
-  // Local Storage Helpers
+  // Helpers
   // ======================
   const saveLocal = () => localStorage.setItem(LOCAL_KEY, JSON.stringify(allTasks));
   const loadLocal = () => {
@@ -78,184 +76,89 @@ function toggleDarkMode() {
     catch { return []; }
   };
 
-  // ======================
-  // Task Helpers
-  // ======================
   const makeLocalId = () => `local-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-  const normalizeTask = task => {
-    if (!task) return null;
-    if (!task.id) task.id = makeLocalId();
-    return {
-      id: task.id,
-      userId: task.userId || "",
-      name: task.name || "",
-      dueDate: task.dueDate || "",
-      priority: task.priority || "",
-      category: task.category || "",
-      status: task.status || "",
-      description: task.description || ""
-    };
-  };
 
-  const escapeHtml = str => String(str || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  const normalizeTask = task => ({
+    id: task.id || makeLocalId(),
+    userId: task.userId || (currentUser ? currentUser.id : ""),
+    name: task.name || "",
+    dueDate: task.dueDate || "",
+    priority: task.priority || "",
+    category: task.category || "",
+    status: task.status || "",
+    description: task.description || ""
+  });
 
+  const escapeHtml = str => String(str || "").replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[m]);
+
+  // ======================
+  // UI Rendering
+  // ======================
   const createTaskCard = task => {
     const card = document.createElement("div");
     card.className = "task-card";
     card.dataset.id = task.id;
     card.innerHTML = `
       <div class="task-title">${escapeHtml(task.name) || "Untitled Task"}</div>
-      <div class="task-details">
+      <div class="task-details ${document.body.classList.contains("grid-mode") ? "open" : ""}">
         <p><strong>Due:</strong> ${escapeHtml(task.dueDate) || "No date"}</p>
         <p><strong>Priority:</strong> ${escapeHtml(task.priority) || "None"}</p>
         <p><strong>Category:</strong> ${escapeHtml(task.category) || "None"}</p>
         <p><strong>Status:</strong> ${escapeHtml(task.status) || "None"}</p>
         <p><strong>Description:</strong> ${escapeHtml(task.description) || ""}</p>
-        <button class="edit-button">Edit</button>
-        <button class="delete-button">Delete</button>
+        <div class="card-actions">
+          <button class="edit-button">Edit</button>
+          <button class="delete-button">Delete</button>
+        </div>
       </div>
     `;
-
     return card;
-
   };
 
-  const renderTasks = tasks => {
+  const renderTasks = (tasks = allTasks) => {
     taskList.innerHTML = "";
-    (tasks || allTasks).forEach(t => taskList.appendChild(createTaskCard(t)));
+    tasks.forEach(t => taskList.appendChild(createTaskCard(t)));
+    applyBorderColor(localStorage.getItem("borderColor") || "#ccc"); // Re-apply color to new cards
   };
 
-  // ======================
-  // Modal Helpers
-  // ======================
   const openModal = m => m && (m.style.display = "block");
   const closeModal = m => m && (m.style.display = "none");
 
-  // ======================
-  // API Wrappers
-  // ======================
-  async function apiGetAll(userId) {
-    try {
-      const res = await fetch(`http://localhost:3000/api/tasks?userId=${userId}`);
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      return Array.isArray(data) ? data.map(normalizeTask) : [];
-    } catch {
-      return loadLocal().filter(t => t.userId === userId).map(normalizeTask);
-    }
-  }
-
-  async function apiCreate(task) {
-    try {
-      const res = await fetch("http://localhost:3000/api/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task)
-      });
-      if (!res.ok) throw new Error();
-      return normalizeTask(await res.json());
-    } catch {
-      return normalizeTask({ ...task, id: makeLocalId() });
-    }
-  }
-
-  async function apiUpdate(task) {
-    try {
-      if (!task.id) throw new Error();
-      const res = await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task)
-      });
-      if (!res.ok) throw new Error();
-      return normalizeTask(await res.json());
-    } catch {
-      return normalizeTask(task);
-    }
-  }
-
-  async function apiDelete(id) {
-    try {
-      if (!id) throw new Error();
-      const res = await fetch(`http://localhost:3000/api/tasks/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error();
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  // ======================
-  // Form Helpers
-  // ======================
-  function populateForm(task) {
+  const populateForm = (task = {}) => {
     document.querySelector(".task-name").value = task.name || "";
     document.querySelector(".task-due-date").value = task.dueDate || "";
     document.querySelector(".task-priority").value = task.priority || "";
     document.querySelector(".category").value = task.category || "";
     document.querySelector(".status").value = task.status || "";
     document.querySelector(".description").value = task.description || "";
+  };
+
+  // ======================
+  // API Wrappers
+  // ======================
+  async function apiGetAll(userId) {
+    if (!userId) return loadLocal();
+    try {
+      const res = await fetch(`http://localhost:3000/api/tasks?userId=${userId}`);
+      return res.ok ? (await res.json()).map(normalizeTask) : loadLocal();
+    } catch { return loadLocal(); }
   }
 
-  function clearForm() {
-    document.querySelector(".task-name").value = "";
-    document.querySelector(".task-due-date").value = "";
-    document.querySelector(".task-priority").value = "";
-    document.querySelector(".category").value = "";
-    document.querySelector(".status").value = "";
-    document.querySelector(".description").value = "";
+  async function apiDelete(id) {
+    try {
+      await fetch(`http://localhost:3000/api/tasks/${id}`, { method: "DELETE" });
+    } catch (e) { console.warn("Offline: Delete saved locally"); }
   }
 
   // ======================
-  // Event Handling for Task List
+  // Core Logic
   // ======================
-  taskList.addEventListener("click", async e => {
-    const card = e.target.closest(".task-card");
-    if (!card) return;
-    const id = card.dataset.id;
-    const idx = allTasks.findIndex(t => String(t.id) === id);
-
-    if (e.target.matches(".edit-button")) {
-      taskBeingEdited = { ...allTasks[idx] };
-      populateForm(taskBeingEdited);
-      openModal(modal);
-      return;
-    }
-
-    if (e.target.matches(".delete-button")) {
-      if (!confirm(`Delete "${allTasks[idx].name}"?`)) return;
-      const removed = allTasks.splice(idx, 1)[0];
-      renderTasks();
-      saveLocal();
-      await apiDelete(removed.id);
-      return;
-    }
-
-    if (e.target.closest(".task-card") && document.body.classList.contains("grid-mode")) {
-      taskBeingEdited = { ...allTasks[idx] };
-      populateForm(taskBeingEdited);
-      openModal(modal);
-      return;
-    }
-
-    if (e.target.matches(".task-title")) {
-      card.querySelector(".task-details")?.classList.toggle("open");
-    }
-
-  });
-
-  // ======================
-  // Task Submission
-  // ======================
-  document.querySelector(".submit-button").onclick = async () => {
+  async function handleTaskSubmit() {
     if (!currentUser) return alert("Please sign in first!");
 
     const payload = {
-      userId: currentUser.id,
       name: val(".task-name"),
       dueDate: val(".task-due-date"),
       priority: val(".task-priority"),
@@ -266,45 +169,90 @@ function toggleDarkMode() {
 
     if (taskBeingEdited) {
       const merged = normalizeTask({ ...taskBeingEdited, ...payload });
-      const idx = allTasks.findIndex(t => String(t.id) === merged.id);
-      if (idx !== -1) allTasks[idx] = merged;
-      renderTasks();
-      saveLocal();
-      await apiUpdate(merged);
-      taskBeingEdited = null;
-      closeModal(modal);
-      return;
+      allTasks = allTasks.map(t => String(t.id) === String(merged.id) ? merged : t);
+      await fetch(`http://localhost:3000/api/tasks/${merged.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(merged)
+      }).catch(() => {});
+    } else {
+      const newTask = normalizeTask(payload);
+      allTasks.push(newTask);
+      await fetch("http://localhost:3000/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTask)
+      }).catch(() => {});
     }
 
-    const optimistic = normalizeTask({ ...payload, id: makeLocalId() });
-    allTasks.push(optimistic);
-    renderTasks();
     saveLocal();
+    renderTasks();
     closeModal(modal);
-    clearForm();
+    taskBeingEdited = null;
+  }
 
-    const created = await apiCreate(payload);
-    const idx = allTasks.findIndex(t => t.id === optimistic.id);
-    if (idx !== -1) allTasks[idx] = created;
-    saveLocal();
-    renderTasks();
-  };
+  function applyBorderColor(color) {
+    if (!color) return;
+    document.querySelectorAll(
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card"
+    ).forEach(el => el.style.borderColor = color);
+    document.querySelectorAll(".switch .slider").forEach(s => s.style.backgroundColor = color);
+    localStorage.setItem("borderColor", color);
+  }
 
-  // ======================
-  // Fetch tasks for user
-  // ======================
-  async function fetchTasksForUser(userId) {
-    const tasks = await apiGetAll(userId);
-    return tasks.map(normalizeTask);
+  function applyFilters() {
+    const checked = [...document.querySelectorAll(".filter-option:checked")].map(cb => cb.value);
+    const sortBy = document.getElementById("sort-select")?.value;
+
+    const priorities = ["High", "Medium", "Low"];
+    const statuses = ["Open", "In progress", "Done"];
+    
+    let filtered = allTasks.filter(t => {
+      const pMatch = checked.some(c => priorities.includes(c)) ? checked.includes(t.priority) : true;
+      const sMatch = checked.some(c => statuses.includes(c)) ? checked.includes(t.status) : true;
+      return pMatch && sMatch;
+    });
+
+    if (sortBy === "due-date-asc") filtered.sort((a,b) => (a.dueDate||"").localeCompare(b.dueDate||""));
+    if (sortBy === "priority-desc") {
+      const weight = { High: 3, Medium: 2, Low: 1 };
+      filtered.sort((a,b) => weight[b.priority] - weight[a.priority]);
+    }
+
+    renderTasks(filtered);
   }
 
   // ======================
-  // Sign-in logic
+  // Event Listeners
   // ======================
-  signInBtn.onclick = async () => {
-    const username = document.querySelector(".username").value.trim();
-    const password = document.querySelector(".password").value.trim();
-    if (!username || !password) return alert("Enter username and password");
+  taskList.onclick = async e => {
+    const card = e.target.closest(".task-card");
+    if (!card) return;
+    const id = card.dataset.id;
+    const task = allTasks.find(t => String(t.id) === id);
+
+    if (e.target.matches(".edit-button")) {
+      taskBeingEdited = task;
+      populateForm(task);
+      openModal(modal);
+    } else if (e.target.matches(".delete-button")) {
+      if (confirm(`Delete "${task.name}"?`)) {
+        allTasks = allTasks.filter(t => String(t.id) !== id);
+        renderTasks();
+        saveLocal();
+        apiDelete(id);
+      }
+    } else if (e.target.matches(".task-title")) {
+      card.querySelector(".task-details").classList.toggle("open");
+    }
+  };
+
+  document.querySelector(".submit-button").onclick = handleTaskSubmit;
+  
+  document.getElementById("signIn").onclick = async () => {
+    const username = val(".username").trim();
+    const password = val(".password").trim();
+    if (!username || !password) return alert("Missing credentials");
 
     try {
       const res = await fetch("http://localhost:3000/api/users", {
@@ -312,213 +260,75 @@ function toggleDarkMode() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
-      const data = await res.json();
-      currentUser = data;
-      localStorage.setItem(USER_KEY, JSON.stringify(data));
-
-      signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${data.username}`;
+      currentUser = await res.json();
+      localStorage.setItem("user", JSON.stringify(currentUser));
+      initUserUI();
       closeModal(accModal);
-
-      allTasks = await fetchTasksForUser(currentUser.id);
-      renderTasks(allTasks);
-    } catch (err) {
-      console.error(err);
-      alert("Login failed");
-    }
+    } catch { alert("Login failed"); }
   };
 
-  // ======================
-  // Restore user on load
-  // ======================
-  (async () => {
-    const savedUser = localStorage.getItem(USER_KEY);
-    if (savedUser) {
-      currentUser = JSON.parse(savedUser);
-      signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${currentUser.username}`;
-      allTasks = await fetchTasksForUser(currentUser.id);
-      renderTasks(allTasks);
-    }
-  })();
+  darkModeToggle?.addEventListener("change", () => toggleDarkMode(darkModeToggle.checked));
+  borderColorPicker?.addEventListener("input", e => applyBorderColor(e.target.value));
+  
+  searchBar?.addEventListener("input", () => {
+    const term = searchBar.value.toLowerCase();
+    renderTasks(allTasks.filter(t => 
+      Object.values(t).some(v => String(v).toLowerCase().includes(term))
+    ));
+  });
 
-  // ======================
-  // Remaining UI bindings (modals, filters, dark mode, sidebar, etc.)
-  // ======================
-  modalOpenBtn.onclick = () => { taskBeingEdited=null; clearForm(); openModal(modal); };
-  modalCloseBtn.onclick = () => { taskBeingEdited=null; closeModal(modal); };
-  filterOpenBtn.onclick = () => openModal(filterModal);
-  filterCloseBtn.onclick = () => closeModal(filterModal);
-  applyFiltersBtn.onclick = () => { applyFilters(); closeModal(filterModal); };
-  settingsButton.onclick = () => openModal(settingsModal);
-  closeSettings.onclick = () => closeModal(settingsModal);
+  document.getElementById("view-type-button").onclick = () => {
+    const isGrid = tasksContainer.classList.toggle("grid-view");
+    document.body.classList.toggle("grid-mode", isGrid);
+    document.querySelectorAll(".task-details").forEach(d => d.classList.toggle("open", isGrid));
+  };
+
+  // Nav Handlers
+  window.openNav = () => { 
+    sidebar.style.width = "250px"; 
+    menuBtn.style.display = "none"; 
+    main.style.marginLeft = window.innerWidth < 750 ? "0" : "250px"; 
+  };
+  window.closeNav = () => { 
+    sidebar.style.width = "0"; 
+    menuBtn.style.display = "initial"; 
+    main.style.marginLeft = "0"; 
+  };
+
+  // Generic Closers
+  document.getElementById("myBtn").onclick = () => { taskBeingEdited = null; populateForm(); openModal(modal); };
+  document.querySelector(".close-task-module").onclick = () => closeModal(modal);
+  document.getElementById("filter-button").onclick = () => openModal(filterModal);
+  document.querySelector(".filter-close").onclick = () => closeModal(filterModal);
+  document.getElementById("apply-filters-button").onclick = () => { applyFilters(); closeModal(filterModal); };
+  document.querySelector(".settings-button").onclick = () => openModal(settingsModal);
+  document.querySelector(".close-settings").onclick = () => closeModal(settingsModal);
   signInOpenBtn.onclick = () => openModal(accModal);
-  signInCloseBtn.onclick = () => closeModal(accModal);
-  cancelBtn.onclick = () => closeModal(accModal);
-  window.addEventListener("click", e => [modal, filterModal, settingsModal, accModal].forEach(m => { if(e.target===m) closeModal(m); }));
-  darkModeToggle?.addEventListener("change", () => document.body.classList.toggle("light-mode", darkModeToggle.checked));
+  document.getElementById("closeAccModal").onclick = () => closeModal(accModal);
+  document.getElementById("cancel").onclick = () => closeModal(accModal);
 
-  // Sidebar
-  window.openNav = () => { sidebar.style.width="250px"; menuBtn.style.display="none"; main.style.marginLeft=window.innerWidth<750?"0px":"250px"; };
-  window.closeNav = () => { sidebar.style.width="0"; menuBtn.style.display="initial"; main.style.marginLeft="0"; };
-
-  // Initialize color, search, grid view
-  const savedColor = localStorage.getItem("borderColor");
-  if (savedColor) applyBorderColor(savedColor);
-  borderColorPicker?.addEventListener("input", e => { applyBorderColor(e.target.value); });
-  searchBar?.addEventListener("input", () => {
-    const term = searchBar.value.trim().toLowerCase();
-    renderTasks(term ? allTasks.filter(t =>
-      [t.name, t.description, t.priority, t.status, t.category].some(f => (f||"").toLowerCase().includes(term))
-    ) : allTasks);
-  });
-  const viewTypeBtn = document.getElementById("view-type-button");
-  const tasksContainer = document.querySelector(".tasks");
-  let isGridView = false;
-  viewTypeBtn.onclick = () => {
-    isGridView = !isGridView;
-    tasksContainer.classList.toggle("grid-view", isGridView);
-    document.body.classList.toggle("grid-mode", isGridView);
-    document.querySelectorAll(".task-details").forEach(d => d.classList.toggle("open", isGridView));
-  };
+  window.onclick = e => [modal, filterModal, settingsModal, accModal].forEach(m => { if(e.target === m) closeModal(m); });
 
   // ======================
-  // Filters and Border color
+  // Init
   // ======================
-  function applyFilters() {
-    const checked = [...document.querySelectorAll(".filter-option:checked")].map(cb => cb.value);
-    const sortBy = document.getElementById("sort-select")?.value || "";
-
-    const priority = ["High","Medium","Low"];
-    const status   = ["Open","In progress","Done"];
-    const category = ["Work","House work","School work","Shopping","Hobbies","Other"];
-
-    const pF = checked.filter(x => priority.includes(x));
-    const sF = checked.filter(x => status.includes(x));
-    const cF = checked.filter(x => category.includes(x));
-
-    let filtered = allTasks.filter(t =>
-      (pF.length===0 || pF.includes(t.priority)) &&
-      (sF.length===0 || sF.includes(t.status)) &&
-      (cF.length===0 || cF.includes(t.category))
-    );
-
-    if (sortBy === "due-date-asc") filtered.sort((a,b)=> (a.dueDate||"").localeCompare(b.dueDate||""));
-    if (sortBy === "due-date-desc") filtered.sort((a,b)=> (b.dueDate||"").localeCompare(a.dueDate||""));
-    if (sortBy.includes("priority")) {
-      const order = { Low:1, Medium:2, High:3 };
-      filtered.sort((a,b)=> sortBy==="priority-asc" ? order[a.priority]-order[b.priority] : order[b.priority]-order[a.priority]);
+  function initUserUI() {
+    if (currentUser) {
+      signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${currentUser.username}`;
     }
-
-    renderTasks(filtered);
   }
 
-  function applyBorderColor(color) {
-    document.querySelectorAll(
-<<<<<<< Updated upstream
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
-    ).forEach(el => el.style.borderColor = color);
-    document.querySelectorAll(".switch .slider").forEach(slider => slider.style.backgroundColor = color);
-=======
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card"
-    ).forEach(el => {
-      el.style.borderColor = color;
-    });
-
-    // Apply to switch sliders specifically
-    document.querySelectorAll(".switch .slider").forEach(slider => {
-      slider.style.backgroundColor = color;
-    });
-
-    // Update picker
->>>>>>> Stashed changes
-    if (borderColorPicker) borderColorPicker.value = color;
-    localStorage.setItem("borderColor", color);
-  }
-
-<<<<<<< Updated upstream
-=======
-  // ======================
-  // Initialize color on load
-  // ======================
-  const savedColor = localStorage.getItem("borderColor");
-  if (savedColor) applyBorderColor(savedColor);
-
-  // ======================
-  // Update color dynamically
-  // ======================
-  borderColorPicker?.addEventListener("input", e => {
-    const color = e.target.value;
-    applyBorderColor(color);
-  });
-
-  // Search
-  searchBar?.addEventListener("input", () => {
-    const term = searchBar.value.trim().toLowerCase();
-    renderTasks(term ? allTasks.filter(t =>
-      [t.name, t.description, t.priority, t.status, t.category].some(f => (f||"").toLowerCase().includes(term))
-    ) : allTasks);
-  });
-
-  // Sidebar
-  window.openNav = () => { sidebar.style.width="250px"; menuBtn.style.display="none"; main.style.marginLeft=window.innerWidth<750?"0px":"250px"; };
-  window.closeNav = () => { sidebar.style.width="0"; menuBtn.style.display="initial"; main.style.marginLeft="0"; };
-
-  // ======================
-  // Initialization
-  // ======================
   async function init() {
-    allTasks = (await apiGetAll()).map(normalizeTask);
-    saveLocal();
+    initUserUI();
+    const savedColor = localStorage.getItem("borderColor");
+    if (savedColor) {
+      applyBorderColor(savedColor);
+      if (borderColorPicker) borderColorPicker.value = savedColor;
+    }
+    
+    allTasks = await apiGetAll(currentUser?.id);
     renderTasks();
   }
 
-  // ======================
-  // Account Sign In Logic
-  // ======================
-  signInBtn.onclick = async () => {
-    const username = document.querySelector(".username").value.trim();
-    const password = document.querySelector(".password").value.trim();
-
-    if (!username || !password) {
-      alert("Please enter both username and password");
-      return;
-    }
-
-    const payload = { username, password };
-
-    try {
-      await fetch("http://localhost:3000/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-    } catch {
-      console.warn("Backend not available, saving locally");
-    }
-
-    localStorage.setItem(USER_KEY, JSON.stringify(payload));
-
-    // Update header button text
-    signInOpenBtn.innerHTML = `
-      <img src="Icons/user.png" class="user-icon">
-      ${username}
-    `;
-
-    closeModal(accModal);
-  };
-
-  // ======================
-  // Restore Signed-in User
-  // ======================
-  const savedUser = localStorage.getItem(USER_KEY);
-  if (savedUser) {
-    const { username } = JSON.parse(savedUser);
-    signInOpenBtn.innerHTML = `
-      <img src="Icons/user.png" class="user-icon">
-      ${username}
-    `;
-  }
-
   init();
-
->>>>>>> Stashed changes
 })();
