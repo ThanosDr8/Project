@@ -14,24 +14,26 @@ export const db = await open({
 
 // Δημιουργία πινάκων αν δεν υπάρχουν
 await db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT
+  );
+
   CREATE TABLE IF NOT EXISTS tasks (
     id TEXT PRIMARY KEY,
+    userId TEXT,
     name TEXT,
     dueDate TEXT,
     priority TEXT,
     category TEXT,
     status TEXT,
-    description TEXT
+    description TEXT,
+    FOREIGN KEY(userId) REFERENCES users(id)
   );
 
   CREATE TABLE IF NOT EXISTS groups (
     id TEXT PRIMARY KEY,
     name TEXT
-  );
-
-  CREATE TABLE IF NOT EXISTS users (
-    id TEXT PRIMARY KEY,
-    username TEXT UNIQUE,
-    password TEXT
   );
 `);
