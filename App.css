@@ -92,7 +92,7 @@ label:hover {
   border-radius: 30px;
   border: 1.7px rgb(166, 221, 239) solid;
   font-size: 18px;
-  background-color: white;
+  background: none;
   overflow: hidden;
   margin: 3px;
 }
@@ -108,10 +108,13 @@ label:hover {
   background: transparent;
 }
 
-.menu, 
+.menu,
+.close {
+  height: 20px;
+}
+
 .filter,
 .tile,
-.close,
 .close-task-module,
 .close-view { 
   padding: 2px;
@@ -129,17 +132,35 @@ label:hover {
 }
 
 .menu-button,
-.filter-button,
-.view-type-button,
 .close-button,
 .settings-button {
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: none;
   display: flex;
   height: 40px;
   padding: 10px;
   border-radius: 30px;
-  background-color: white;
+  background-color: rgb(92, 92, 92);
   margin: 3px;
+}
+
+.filter-button {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 30px 0px 0px 30px;
+  background-color: rgb(92, 92, 92);
+  margin: 3px -3px 3px 3px;
+}
+
+.view-type-button {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 0px 30px 30px 0px;
+  background-color: rgb(92, 92, 92);
+  margin: 3px -3px 3px 0px;
 }
 
 .menu-button:hover,
@@ -148,8 +169,8 @@ label:hover {
 .close-button:hover,
 .settings-button:hover {
   cursor: pointer;
-  background-color: rgb(234, 234, 234);
-  transition: 0.1s;
+  background-color: rgb(121, 121, 121);
+  transition: 0.2s;
 }
 
 .add-icon{
@@ -177,7 +198,7 @@ label:hover {
 }
 
 .newtask:hover {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(92, 92, 92);
   transition: 0.1s;
 }
 
@@ -594,6 +615,10 @@ input:checked + .slider:before {
   border: 2px solid var(--slider-color, #888);
 }
 
+/* ===========================
+   ACCOUNT MODAL
+=========================== */
+
 .sign-in-button {
   height: 30px;
   display: flex;
@@ -603,7 +628,7 @@ input:checked + .slider:before {
   color: white;
   font-weight: bold;
   border: 1.7px rgb(166, 221, 239) solid;
-  margin: 3px;
+  margin: 7px 3px 3px 0px;
 }
 
 .sign-in-button:hover {

@@ -16,6 +16,17 @@ body {
   color: black;
 }
 
+.close-settings,
+.close-acc-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
 /* Typography & spacing (better defaults) */
 .words {
   max-width: 920px;
@@ -85,10 +96,8 @@ a:hover {
 
 /* Nice separators */
 hr {
-  border: none;
-  height: 1px;
-  background: rgba(255,255,255,0.22);
-  margin: 18px 0;
+  border: 0.5px solid rgb(200, 200, 200);
+  margin: 0px 9px
 }
 
 .light-mode hr {
@@ -190,11 +199,34 @@ hr {
   border-bottom: 1px solid rgba(0,0,0,0.16);
 }
 
-/* Modal actions row (Sign in modal) */
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
+.acc-modal-content .sign-in,
+.acc-modal-content .cancel {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1.7px rgb(166, 221, 239) solid;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.acc-modal-content .sign-in {
+  background-color: rgb(35, 201, 26);
+  color: white;
+  float: right;
+}
+
+.acc-modal-content .sign-in:hover {
+  background-color: rgb(15, 191, 15);
+  transition: 0.1s;
+}
+
+.acc-modal-content .cancel {
+  background-color: #d9534f;
+  color: white;
+}
+
+.acc-modal-content .cancel:hover {
+  background-color: #d9544fdf;
+  transition: 0.1s;
 }
 
 /* Small screens */

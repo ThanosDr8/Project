@@ -79,7 +79,7 @@ function drawTasksByCategory() {
 }
 
 // ======================
-// Chart 2: Tasks per Status (Pie)
+// Chart 2: Tasks per Status (Pie) - Updated for Responsiveness
 // ======================
 function drawTasksByStatus() {
     const statuses = {};
@@ -88,10 +88,30 @@ function drawTasksByStatus() {
     const ctx = document.getElementById("tasksByStatus").getContext("2d");
     if (tasksByStatusChart) tasksByStatusChart.destroy();
 
+    // Determine initial aspect ratio based on width
+    const isMobile = window.innerWidth < 735;
+
     tasksByStatusChart = new Chart(ctx, {
         type: "pie",
-        data: { labels: Object.keys(statuses), datasets: [{ data: Object.values(statuses), backgroundColor: ["#36A2EB","#FF6384","#FFCE56","#4BC0C0"] }] },
-        options: { responsive: true, plugins: { legend: { labels: { color: getChartTextColor() } } } }
+        data: { 
+            labels: Object.keys(statuses), 
+            datasets: [{ 
+                data: Object.values(statuses), 
+                backgroundColor: ["#36A2EB","#FF6384","#FFCE56","#4BC0C0"] 
+            }] 
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: true,
+            // If window is small, we can make the aspect ratio larger (flattens the pie)
+            aspectRatio: isMobile ? 2 : 1, 
+            plugins: { 
+                legend: { 
+                    position: isMobile ? 'bottom' : 'top',
+                    labels: { color: getChartTextColor() } 
+                } 
+            } 
+        }
     });
 }
 
@@ -131,6 +151,7 @@ function drawWeeklyProductivity() {
         }
     });
 }
+
 
 // ======================
 // Settings + Dark Mode + Border Color

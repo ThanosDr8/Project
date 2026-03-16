@@ -413,11 +413,112 @@ function toggleDarkMode() {
 
   function applyBorderColor(color) {
     document.querySelectorAll(
+<<<<<<< Updated upstream
       "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
     ).forEach(el => el.style.borderColor = color);
     document.querySelectorAll(".switch .slider").forEach(slider => slider.style.backgroundColor = color);
+=======
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card"
+    ).forEach(el => {
+      el.style.borderColor = color;
+    });
+
+    // Apply to switch sliders specifically
+    document.querySelectorAll(".switch .slider").forEach(slider => {
+      slider.style.backgroundColor = color;
+    });
+
+    // Update picker
+>>>>>>> Stashed changes
     if (borderColorPicker) borderColorPicker.value = color;
     localStorage.setItem("borderColor", color);
   }
 
+<<<<<<< Updated upstream
+=======
+  // ======================
+  // Initialize color on load
+  // ======================
+  const savedColor = localStorage.getItem("borderColor");
+  if (savedColor) applyBorderColor(savedColor);
+
+  // ======================
+  // Update color dynamically
+  // ======================
+  borderColorPicker?.addEventListener("input", e => {
+    const color = e.target.value;
+    applyBorderColor(color);
+  });
+
+  // Search
+  searchBar?.addEventListener("input", () => {
+    const term = searchBar.value.trim().toLowerCase();
+    renderTasks(term ? allTasks.filter(t =>
+      [t.name, t.description, t.priority, t.status, t.category].some(f => (f||"").toLowerCase().includes(term))
+    ) : allTasks);
+  });
+
+  // Sidebar
+  window.openNav = () => { sidebar.style.width="250px"; menuBtn.style.display="none"; main.style.marginLeft=window.innerWidth<750?"0px":"250px"; };
+  window.closeNav = () => { sidebar.style.width="0"; menuBtn.style.display="initial"; main.style.marginLeft="0"; };
+
+  // ======================
+  // Initialization
+  // ======================
+  async function init() {
+    allTasks = (await apiGetAll()).map(normalizeTask);
+    saveLocal();
+    renderTasks();
+  }
+
+  // ======================
+  // Account Sign In Logic
+  // ======================
+  signInBtn.onclick = async () => {
+    const username = document.querySelector(".username").value.trim();
+    const password = document.querySelector(".password").value.trim();
+
+    if (!username || !password) {
+      alert("Please enter both username and password");
+      return;
+    }
+
+    const payload = { username, password };
+
+    try {
+      await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch {
+      console.warn("Backend not available, saving locally");
+    }
+
+    localStorage.setItem(USER_KEY, JSON.stringify(payload));
+
+    // Update header button text
+    signInOpenBtn.innerHTML = `
+      <img src="Icons/user.png" class="user-icon">
+      ${username}
+    `;
+
+    closeModal(accModal);
+  };
+
+  // ======================
+  // Restore Signed-in User
+  // ======================
+  const savedUser = localStorage.getItem(USER_KEY);
+  if (savedUser) {
+    const { username } = JSON.parse(savedUser);
+    signInOpenBtn.innerHTML = `
+      <img src="Icons/user.png" class="user-icon">
+      ${username}
+    `;
+  }
+
+  init();
+
+>>>>>>> Stashed changes
 })();
