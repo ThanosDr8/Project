@@ -113,12 +113,16 @@ label:hover {
   height: 20px;
 }
 
-.filter,
 .tile,
 .close-task-module,
 .close-view { 
   padding: 2px;
   height: 13px;
+}
+
+.filter {
+  height: 18px;
+  padding: 2px;
 }
 
 .info,
@@ -133,34 +137,16 @@ label:hover {
 
 .menu-button,
 .close-button,
-.settings-button {
+.settings-button,
+.filter-button,
+.view-type-button {
   border: none;
   display: flex;
   height: 40px;
   padding: 10px;
   border-radius: 30px;
-  background-color: rgb(92, 92, 92);
+  background: none;
   margin: 3px;
-}
-
-.filter-button {
-  border: none;
-  display: flex;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 30px 0px 0px 30px;
-  background-color: rgb(92, 92, 92);
-  margin: 3px -3px 3px 3px;
-}
-
-.view-type-button {
-  border: none;
-  display: flex;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 0px 30px 30px 0px;
-  background-color: rgb(92, 92, 92);
-  margin: 3px -3px 3px 0px;
 }
 
 .menu-button:hover,
@@ -769,42 +755,38 @@ input:checked + .slider:before {
   }
 }
 
-/* 1. Modal Inputs: White background, Black text, Dark Grey Border */
 .light-input {
   background-color: white !important;
   color: black !important;
-  border: 1.7px solid #555 !important; /* Forced border color change */
+  border: 1.7px solid !important;
 }
 
-/* 2. Modal Box Borders: Change from blue to Dark Grey */
-.light-mode .modal-content,
-.light-mode .filter-modal-content,
-.light-mode .settings-modal-content,
-.light-mode .acc-modal-content {
-  border-color: #555 !important;
-}
-
-/* 3. Specific Buttons: Menu, Close, Settings, Filter, View Type -> rgb(112, 112, 112) */
 .light-mode .menu-button,
 .light-mode .close-button,
 .light-mode .settings-button,
 .light-mode .filter-button,
 .light-mode .view-type-button {
-  background-color: rgb(112, 112, 112) !important;
+  background: none !important;
 }
 
-/* 4. New Task Button: Black text, Hover effect, and Transition */
 .light-mode .newtask {
   color: black !important;
-  transition: background-color 0.1s ease;
+  transition: 0.1s ease;
   background: none;
 }
 
-.light-mode .newtask:hover {
-  background-color: rgb(200, 200, 200) !important;
+.light-mode .menu-button:hover,
+.light-mode .close-button:hover,
+.light-mode .settings-button:hover,
+.light-mode .filter-button:hover,
+.light-mode .view-type-button:hover {
+  background-color: rgb(121, 121, 121) !important;
 }
 
-/* 5. Search Bar and placeholder fixes */
+.light-mode .newtask:hover {
+  background-color: rgb(121, 121, 121) !important;
+}
+
 .light-mode .search-bar input {
   color: black !important;
 }
@@ -813,7 +795,6 @@ input:checked + .slider:before {
   color: #666 !important;
 }
 
-/* 6. Ensure Sign-In and Submit buttons keep white text for contrast */
 .light-mode .sign-in-button,
 .light-mode .submit-button,
 .light-mode .sign-in {
