@@ -1,14 +1,13 @@
 import express from "express";
 import { db } from "../db.js";
 import { v4 as uuid } from "uuid";
+import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// GET all tasks for a specific user
-router.get("/", async (req, res) => {
-  const userId = req.query.userId;
-  if (!userId) return res.status(400).json({ error: "Missing userId" });
-
+// GET all tasks for a specific user (requires auth)
+router.get("/", authMiddleware, async (req, res) => {
+  const userId = req.userId;
   try {
     const tasks = await db.all("SELECT * FROM tasks WHERE userId = ?", userId);
     res.json(tasks);
@@ -19,33 +18,15 @@ router.get("/", async (req, res) => {
 });
 
 // CREATE task
-router.post("/", async (req, res) => {
-  const { userId, name, dueDate, priority, category, status, description } = req.body;
-  if (!userId) return res.status(400).json({ error: "Missing userId" });
-
-  const newTask = {
-    id: uuid(),
-    userId,
-    name: name || "",
-    dueDate: dueDate || "",
-    priority: priority || "",
-    category: category || "",
-    status: status || "",
-    description: description || ""
-  };
+router.post("/", authMiddleware, async (req, res) => {
+  const { name, dueDate, priority, category, status, description } = req.body;
+  const newTask = { id: uuid(), userId: req.userId, name, dueDate, priority, category, status, description };
 
   try {
     await db.run(
       `INSERT INTO tasks (id, userId, name, dueDate, priority, category, status, description)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      newTask.id,
-      newTask.userId,
-      newTask.name,
-      newTask.dueDate,
-      newTask.priority,
-      newTask.category,
-      newTask.status,
-      newTask.description
+      newTask.id, newTask.userId, newTask.name, newTask.dueDate, newTask.priority, newTask.category, newTask.status, newTask.description
     );
     res.json(newTask);
   } catch (err) {
@@ -55,7 +36,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE task
-router.put("/:id", async (req, res) => {
+router.put("/:id", authMiddleware, async (req, res) => {
   const id = req.params.id;
   const { name, dueDate, priority, category, status, description } = req.body;
 
@@ -63,15 +44,9 @@ router.put("/:id", async (req, res) => {
     const existing = await db.get("SELECT * FROM tasks WHERE id = ?", id);
     if (!existing) return res.status(404).json({ error: "Task not found" });
 
-    const updated = {
-      ...existing,
-      name: name || existing.name,
-      dueDate: dueDate || existing.dueDate,
-      priority: priority || existing.priority,
-      category: category || existing.category,
-      status: status || existing.status,
-      description: description || existing.description
-    };
+    if (existing.userId !== req.userId) return res.status(403).json({ error: "Forbidden" });
+
+    const updated = { ...existing, name, dueDate, priority, category, status, description };
 
     await db.run(
       `UPDATE tasks SET name=?, dueDate=?, priority=?, category=?, status=?, description=? WHERE id=?`,
@@ -86,10 +61,13 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE task
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   const id = req.params.id;
-
   try {
+    const task = await db.get("SELECT * FROM tasks WHERE id = ?", id);
+    if (!task) return res.status(404).json({ error: "Task not found" });
+    if (task.userId !== req.userId) return res.status(403).json({ error: "Forbidden" });
+
     await db.run("DELETE FROM tasks WHERE id=?", id);
     res.json({ message: "Task deleted" });
   } catch (err) {

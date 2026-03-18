@@ -5,19 +5,16 @@ function toggleDarkMode(isLight) {
   const body = document.body;
   body.classList.toggle("light-mode", isLight);
 
-  // Toggle Modal Backgrounds
   const modals = ["myModal", "filterModal", "settingsModal", "accModal"];
   const modalContents = ["new-task-modal-content", "filter-modal-content", "settings-modal-content", "accModalContent"];
 
   modals.forEach(id => document.getElementById(id)?.classList.toggle("light-modal-bg", isLight));
   modalContents.forEach(id => document.getElementById(id)?.classList.toggle("light-modal-content", isLight));
 
-  // Loop through all interactive elements to apply specific light-mode styles
   document.querySelectorAll("input, textarea, select, button").forEach(el => {
     const isSearchBar = el.id === "search-bar";
     const isNewTaskBtn = el.classList.contains("newtask");
     
-    // Check for the specific buttons that should NOT be forced to white bg
     const isSpecificControlBtn = 
       el.classList.contains("menu-button") || 
       el.classList.contains("close-button") || 
@@ -28,13 +25,15 @@ function toggleDarkMode(isLight) {
       el.classList.contains("submit-button") ||
       el.classList.contains("sign-in");
 
-    // Only apply the white-bg/dark-border class if it's a standard modal input
     if (!isSearchBar && !isNewTaskBtn && !isSpecificControlBtn) {
       el.classList.toggle("light-input", isLight);
     }
   });
 }
 
+// ======================
+// Main IIFE
+// ======================
 (() => {
   "use strict";
 
@@ -71,10 +70,6 @@ function toggleDarkMode(isLight) {
   // Helpers
   // ======================
   const saveLocal = () => localStorage.setItem(LOCAL_KEY, JSON.stringify(allTasks));
-  const loadLocal = () => {
-    try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || []; }
-    catch { return []; }
-  };
 
   const makeLocalId = () => `local-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
@@ -120,7 +115,7 @@ function toggleDarkMode(isLight) {
   const renderTasks = (tasks = allTasks) => {
     taskList.innerHTML = "";
     tasks.forEach(t => taskList.appendChild(createTaskCard(t)));
-    applyBorderColor(localStorage.getItem("borderColor") || "#ccc"); // Re-apply color to new cards
+    applyBorderColor(localStorage.getItem("borderColor") || "#ccc");
   };
 
   const openModal = m => m && (m.style.display = "block");
@@ -136,20 +131,39 @@ function toggleDarkMode(isLight) {
   };
 
   // ======================
-  // API Wrappers
+  // API Wrappers with JWT
   // ======================
-  async function apiGetAll(userId) {
-    if (!userId) return loadLocal();
+  async function apiGetAll() {
+    if (!currentUser) return [];
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks?userId=${userId}`);
-      return res.ok ? (await res.json()).map(normalizeTask) : loadLocal();
-    } catch { return loadLocal(); }
+      const res = await fetch("http://localhost:3000/api/tasks", {
+        headers: { Authorization: `Bearer ${currentUser.token}` }
+      });
+      return res.ok ? (await res.json()).map(normalizeTask) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  async function apiSubmitTask(task, isEdit = false) {
+    const url = isEdit ? `http://localhost:3000/api/tasks/${task.id}` : "http://localhost:3000/api/tasks";
+    const method = isEdit ? "PUT" : "POST";
+    try {
+      await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${currentUser.token}` },
+        body: JSON.stringify(task)
+      });
+    } catch {}
   }
 
   async function apiDelete(id) {
     try {
-      await fetch(`http://localhost:3000/api/tasks/${id}`, { method: "DELETE" });
-    } catch (e) { console.warn("Offline: Delete saved locally"); }
+      await fetch(`http://localhost:3000/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${currentUser.token}` }
+      });
+    } catch {}
   }
 
   // ======================
@@ -167,22 +181,14 @@ function toggleDarkMode(isLight) {
       description: val(".description")
     };
 
+    const taskData = normalizeTask(taskBeingEdited ? { ...taskBeingEdited, ...payload } : payload);
+
     if (taskBeingEdited) {
-      const merged = normalizeTask({ ...taskBeingEdited, ...payload });
-      allTasks = allTasks.map(t => String(t.id) === String(merged.id) ? merged : t);
-      await fetch(`http://localhost:3000/api/tasks/${merged.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(merged)
-      }).catch(() => {});
+      allTasks = allTasks.map(t => t.id === taskData.id ? taskData : t);
+      await apiSubmitTask(taskData, true);
     } else {
-      const newTask = normalizeTask(payload);
-      allTasks.push(newTask);
-      await fetch("http://localhost:3000/api/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newTask)
-      }).catch(() => {});
+      allTasks.push(taskData);
+      await apiSubmitTask(taskData);
     }
 
     saveLocal();
@@ -229,7 +235,7 @@ function toggleDarkMode(isLight) {
     const card = e.target.closest(".task-card");
     if (!card) return;
     const id = card.dataset.id;
-    const task = allTasks.find(t => String(t.id) === id);
+    const task = allTasks.find(t => t.id === id);
 
     if (e.target.matches(".edit-button")) {
       taskBeingEdited = task;
@@ -237,10 +243,10 @@ function toggleDarkMode(isLight) {
       openModal(modal);
     } else if (e.target.matches(".delete-button")) {
       if (confirm(`Delete "${task.name}"?`)) {
-        allTasks = allTasks.filter(t => String(t.id) !== id);
+        allTasks = allTasks.filter(t => t.id !== id);
         renderTasks();
         saveLocal();
-        apiDelete(id);
+        await apiDelete(id);
       }
     } else if (e.target.matches(".task-title")) {
       card.querySelector(".task-details").classList.toggle("open");
@@ -248,7 +254,12 @@ function toggleDarkMode(isLight) {
   };
 
   document.querySelector(".submit-button").onclick = handleTaskSubmit;
-  
+
+  // ======================
+  // Sign in / JWT handling
+  // ======================
+  signInOpenBtn.onclick = () => openModal(accModal);
+
   document.getElementById("signIn").onclick = async () => {
     const username = val(".username").trim();
     const password = val(".password").trim();
@@ -260,21 +271,28 @@ function toggleDarkMode(isLight) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
-      currentUser = await res.json();
+      const data = await res.json();
+      if (data.error) return alert(data.error);
+
+      currentUser = { id: data.id, username: data.username, token: data.token };
       localStorage.setItem("user", JSON.stringify(currentUser));
-      initUserUI();
+
+      signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${data.username}`;
       closeModal(accModal);
+
+      allTasks = await apiGetAll();
+      renderTasks();
     } catch { alert("Login failed"); }
   };
 
+  // ======================
+  // Other UI
+  // ======================
   darkModeToggle?.addEventListener("change", () => toggleDarkMode(darkModeToggle.checked));
   borderColorPicker?.addEventListener("input", e => applyBorderColor(e.target.value));
-  
   searchBar?.addEventListener("input", () => {
     const term = searchBar.value.toLowerCase();
-    renderTasks(allTasks.filter(t => 
-      Object.values(t).some(v => String(v).toLowerCase().includes(term))
-    ));
+    renderTasks(allTasks.filter(t => Object.values(t).some(v => String(v).toLowerCase().includes(term))));
   });
 
   document.getElementById("view-type-button").onclick = () => {
@@ -283,7 +301,9 @@ function toggleDarkMode(isLight) {
     document.querySelectorAll(".task-details").forEach(d => d.classList.toggle("open", isGrid));
   };
 
+  // ======================
   // Nav Handlers
+  // ======================
   window.openNav = () => { 
     sidebar.style.width = "250px"; 
     menuBtn.style.display = "none"; 
@@ -295,7 +315,9 @@ function toggleDarkMode(isLight) {
     main.style.marginLeft = "0"; 
   };
 
+  // ======================
   // Generic Closers
+  // ======================
   document.getElementById("myBtn").onclick = () => { taskBeingEdited = null; populateForm(); openModal(modal); };
   document.querySelector(".close-task-module").onclick = () => closeModal(modal);
   document.getElementById("filter-button").onclick = () => openModal(filterModal);
@@ -303,10 +325,8 @@ function toggleDarkMode(isLight) {
   document.getElementById("apply-filters-button").onclick = () => { applyFilters(); closeModal(filterModal); };
   document.querySelector(".settings-button").onclick = () => openModal(settingsModal);
   document.querySelector(".close-settings").onclick = () => closeModal(settingsModal);
-  signInOpenBtn.onclick = () => openModal(accModal);
   document.getElementById("closeAccModal").onclick = () => closeModal(accModal);
   document.getElementById("cancel").onclick = () => closeModal(accModal);
-
   window.onclick = e => [modal, filterModal, settingsModal, accModal].forEach(m => { if(e.target === m) closeModal(m); });
 
   // ======================
@@ -326,7 +346,7 @@ function toggleDarkMode(isLight) {
       if (borderColorPicker) borderColorPicker.value = savedColor;
     }
     
-    allTasks = await apiGetAll(currentUser?.id);
+    allTasks = await apiGetAll();
     renderTasks();
   }
 
