@@ -194,7 +194,7 @@ function toggleDarkMode(isLight) {
   function applyBorderColor(color) {
     if (!color) return;
     document.querySelectorAll(
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card"
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card, .light-mode .modal-content, .light-mode .filter-modal-content, .light-mode .settings-modal-content, .light-mode .acc-modal-content, .task-name .light-input, light-input"
     ).forEach(el => el.style.borderColor = color);
     document.querySelectorAll(".switch .slider").forEach(s => s.style.backgroundColor = color);
     localStorage.setItem("borderColor", color);
