@@ -12,17 +12,35 @@ function getChartTextColor() {
 }
 
 // ======================
-// Load tasks from db.json or fallback to localStorage
+// Load tasks (FIXED - uses API + JWT)
 // ======================
 async function loadTasks() {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.token) {
+        console.warn("No user logged in");
+        tasks = [];
+        drawTasksByCategory();
+        drawTasksByStatus();
+        drawWeeklyProductivity();
+        return;
+    }
+
     try {
-        const res = await fetch("http://localhost:3000/tasks");
-        if (!res.ok) throw new Error("Network error");
+        const res = await fetch("http://localhost:3000/api/tasks", {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch tasks");
+
         const data = await res.json();
         tasks = Array.isArray(data) ? data : [];
+
     } catch (err) {
-        console.error("Failed to load tasks from db.json, falling back to localStorage", err);
-        tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        console.error("Failed to load tasks from API", err);
+        tasks = [];
     }
 
     drawTasksByCategory();
@@ -55,7 +73,7 @@ function closeNav() {
 }
 
 // ======================
-// Chart 1: Tasks per Category (Bar)
+// Chart 1: Tasks per Category
 // ======================
 function drawTasksByCategory() {
     const categories = {};
@@ -68,18 +86,25 @@ function drawTasksByCategory() {
         type: "bar",
         data: {
             labels: Object.keys(categories),
-            datasets: [{ label: "Tasks per Category", data: Object.values(categories), backgroundColor: "rgba(54, 162, 235, 0.6)" }]
+            datasets: [{
+                label: "Tasks per Category",
+                data: Object.values(categories),
+                backgroundColor: "rgba(54, 162, 235, 0.6)"
+            }]
         },
         options: {
             responsive: true,
             plugins: { legend: { labels: { color: getChartTextColor() } } },
-            scales: { x: { ticks: { color: getChartTextColor() } }, y: { ticks: { color: getChartTextColor() } } }
+            scales: {
+                x: { ticks: { color: getChartTextColor() } },
+                y: { ticks: { color: getChartTextColor() } }
+            }
         }
     });
 }
 
 // ======================
-// Chart 2: Tasks per Status (Pie) - Updated for Responsiveness
+// Chart 2: Tasks per Status
 // ======================
 function drawTasksByStatus() {
     const statuses = {};
@@ -88,35 +113,33 @@ function drawTasksByStatus() {
     const ctx = document.getElementById("tasksByStatus").getContext("2d");
     if (tasksByStatusChart) tasksByStatusChart.destroy();
 
-    // Determine initial aspect ratio based on width
     const isMobile = window.innerWidth < 735;
 
     tasksByStatusChart = new Chart(ctx, {
         type: "pie",
-        data: { 
-            labels: Object.keys(statuses), 
-            datasets: [{ 
-                data: Object.values(statuses), 
-                backgroundColor: ["#36A2EB","#FF6384","#FFCE56","#4BC0C0"] 
-            }] 
+        data: {
+            labels: Object.keys(statuses),
+            datasets: [{
+                data: Object.values(statuses),
+                backgroundColor: ["#36A2EB","#FF6384","#FFCE56","#4BC0C0"]
+            }]
         },
-        options: { 
-            responsive: true, 
+        options: {
+            responsive: true,
             maintainAspectRatio: true,
-            // If window is small, we can make the aspect ratio larger (flattens the pie)
-            aspectRatio: isMobile ? 2 : 1, 
-            plugins: { 
-                legend: { 
+            aspectRatio: isMobile ? 2 : 1,
+            plugins: {
+                legend: {
                     position: isMobile ? 'bottom' : 'top',
-                    labels: { color: getChartTextColor() } 
-                } 
-            } 
+                    labels: { color: getChartTextColor() }
+                }
+            }
         }
     });
 }
 
 // ======================
-// Chart 3: Weekly Productivity (Line)
+// Chart 3: Weekly Productivity
 // ======================
 function getWeekKey(date) {
     const d = new Date(date);
@@ -143,15 +166,25 @@ function drawWeeklyProductivity() {
 
     weeklyProductivityChart = new Chart(ctx, {
         type: "line",
-        data: { labels, datasets: [{ label: "Tasks Completed", data, borderColor: "#36A2EB", tension: 0.25 }] },
+        data: {
+            labels,
+            datasets: [{
+                label: "Tasks Completed",
+                data,
+                borderColor: "#36A2EB",
+                tension: 0.25
+            }]
+        },
         options: {
             responsive: true,
             plugins: { legend: { labels: { color: getChartTextColor() } } },
-            scales: { x: { ticks: { color: getChartTextColor() } }, y: { ticks: { color: getChartTextColor(), precision: 0 } } }
+            scales: {
+                x: { ticks: { color: getChartTextColor() } },
+                y: { ticks: { color: getChartTextColor(), precision: 0 } }
+            }
         }
     });
 }
-
 
 // ======================
 // Settings + Dark Mode + Border Color
@@ -170,11 +203,6 @@ function drawWeeklyProductivity() {
     closeSettings?.addEventListener("click", closeModal);
     window.addEventListener("click", e => { if (e.target === settingsModal) closeModal(); });
 
-    // Dark Mode
-    if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("dark-mode");
-        darkModeToggle.checked = true;
-    }
     darkModeToggle?.addEventListener("change", () => {
         const isLight = darkModeToggle.checked;
         document.body.classList.toggle("light-mode", isLight);
@@ -187,21 +215,25 @@ function drawWeeklyProductivity() {
         });
     });
 
-    // Border Color
     const applyBorderColor = color => {
         document.querySelectorAll("button, input, select, textarea, .sidebar, .settings-modal-content, .acc-modal-content, .switch .slider")
             .forEach(el => el.style.borderColor=color);
         document.querySelectorAll(".switch .slider").forEach(sl => sl.style.backgroundColor=color);
         if (borderColorPicker) borderColorPicker.value = color;
     };
+
     const savedColor = localStorage.getItem("borderColor");
     if (savedColor) applyBorderColor(savedColor);
-    borderColorPicker?.addEventListener("input", e => { applyBorderColor(e.target.value); localStorage.setItem("borderColor", e.target.value); });
+
+    borderColorPicker?.addEventListener("input", e => {
+        applyBorderColor(e.target.value);
+        localStorage.setItem("borderColor", e.target.value);
+    });
 
 })();
 
 // ======================
-// Account Modal + Sign In
+// Account Modal + Sign In (FIXED)
 // ======================
 (function() {
     const accModal = document.getElementById("accModal");
@@ -211,19 +243,15 @@ function drawWeeklyProductivity() {
     const cancelBtn = document.getElementById("cancel");
     const usernameInput = document.querySelector(".username");
     const passwordInput = document.querySelector(".password");
-    const USER_KEY = "user";
 
-    // Open / Close Modal
     signInOpenBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "block"; });
     signInCloseBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
     cancelBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
 
-    // Close modal by clicking outside
     window.addEventListener("click", e => {
         if (e.target === accModal) accModal.style.display = "none";
     });
 
-    // Sign In Button
     signInBtn?.addEventListener("click", async () => {
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
@@ -233,37 +261,41 @@ function drawWeeklyProductivity() {
             return;
         }
 
-        const payload = { username, password };
-
         try {
-            await fetch("http://localhost:3000/api/users", {
+            const res = await fetch("http://localhost:3000/api/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ username, password })
             });
+
+            const data = await res.json();
+
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+
+            localStorage.setItem("user", JSON.stringify(data));
+
+            signInOpenBtn.innerHTML = `
+                <img src="Icons/user.png" class="user-icon">
+                ${data.username}
+            `;
+
+            if(accModal) accModal.style.display = "none";
+
+            loadTasks(); // refresh analytics
+
         } catch {
-            console.warn("Backend not available, saving locally");
+            alert("Login failed");
         }
-
-        localStorage.setItem(USER_KEY, JSON.stringify(payload));
-
-        // Update header button text
-        signInOpenBtn.innerHTML = `
-            <img src="Icons/user.png" class="user-icon">
-            ${username}
-        `;
-
-        // Close modal
-        if(accModal) accModal.style.display = "none";
     });
 
-    // Restore user on load
-    const savedUser = localStorage.getItem(USER_KEY);
+    const savedUser = JSON.parse(localStorage.getItem("user"));
     if (savedUser) {
-        const { username } = JSON.parse(savedUser);
         signInOpenBtn.innerHTML = `
             <img src="Icons/user.png" class="user-icon">
-            ${username}
+            ${savedUser.username}
         `;
     }
 

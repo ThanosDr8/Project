@@ -286,6 +286,35 @@ function toggleDarkMode(isLight) {
   };
 
   // ======================
+  // Logout Button
+  // ======================
+  const logoutBtn = document.createElement("button");
+  logoutBtn.id = "logoutButton";
+  logoutBtn.textContent = "Logout";
+  logoutBtn.style.display = currentUser ? "inline-flex" : "none";
+  logoutBtn.style.marginLeft = "5px";
+
+  // Προσθήκη δίπλα στο sign in
+  signInOpenBtn.parentNode.appendChild(logoutBtn);
+
+  logoutBtn.onclick = () => {
+    // Remove user
+    localStorage.removeItem("user");
+    currentUser = null;
+
+    // Reset Sign In button
+    signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
+    logoutBtn.style.display = "none";
+
+    // Clear all tasks immediately
+    allTasks = [];
+    taskList.innerHTML = "";
+
+    // Optionally clear localStorage tasks
+    localStorage.removeItem("tasks");
+  };
+
+  // ======================
   // Other UI
   // ======================
   darkModeToggle?.addEventListener("change", () => toggleDarkMode(darkModeToggle.checked));
@@ -335,6 +364,7 @@ function toggleDarkMode(isLight) {
   function initUserUI() {
     if (currentUser) {
       signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${currentUser.username}`;
+      logoutBtn.style.display = "inline-flex";
     }
   }
 
