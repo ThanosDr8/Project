@@ -62,6 +62,7 @@ function toggleDarkMode(isLight) {
   const borderColorPicker = document.getElementById("borderColorPicker");
   const searchBar = document.getElementById("search-bar");
   const signInOpenBtn = document.getElementById("signInButton");
+  const newTaskBtn = document.getElementById("myBtn");
 
   const LOCAL_KEY = "tasks";
   const val = sel => document.querySelector(sel)?.value || "";
@@ -84,9 +85,7 @@ function toggleDarkMode(isLight) {
     description: task.description || ""
   });
 
-  const escapeHtml = str => String(str || "").replace(/[&<>"']/g, m => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  })[m]);
+  const escapeHtml = str => String(str || "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
   // ======================
   // UI Rendering
@@ -282,6 +281,7 @@ function toggleDarkMode(isLight) {
 
       allTasks = await apiGetAll();
       renderTasks();
+      initUserUI(); // ανανεώνει κουμπιά
     } catch { alert("Login failed"); }
   };
 
@@ -294,24 +294,19 @@ function toggleDarkMode(isLight) {
   logoutBtn.style.display = currentUser ? "inline-flex" : "none";
   logoutBtn.style.marginLeft = "5px";
 
-  // Προσθήκη δίπλα στο sign in
   signInOpenBtn.parentNode.appendChild(logoutBtn);
 
   logoutBtn.onclick = () => {
-    // Remove user
     localStorage.removeItem("user");
     currentUser = null;
 
-    // Reset Sign In button
     signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
     logoutBtn.style.display = "none";
 
-    // Clear all tasks immediately
     allTasks = [];
     taskList.innerHTML = "";
-
-    // Optionally clear localStorage tasks
     localStorage.removeItem("tasks");
+    initUserUI();
   };
 
   // ======================
@@ -347,7 +342,13 @@ function toggleDarkMode(isLight) {
   // ======================
   // Generic Closers
   // ======================
-  document.getElementById("myBtn").onclick = () => { taskBeingEdited = null; populateForm(); openModal(modal); };
+  newTaskBtn.onclick = () => { 
+    if (!currentUser) { alert("Please sign in first to create a task!"); return; }
+    taskBeingEdited = null; 
+    populateForm(); 
+    openModal(modal); 
+  };
+
   document.querySelector(".close-task-module").onclick = () => closeModal(modal);
   document.getElementById("filter-button").onclick = () => openModal(filterModal);
   document.querySelector(".filter-close").onclick = () => closeModal(filterModal);
@@ -365,6 +366,10 @@ function toggleDarkMode(isLight) {
     if (currentUser) {
       signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon">${currentUser.username}`;
       logoutBtn.style.display = "inline-flex";
+      if (newTaskBtn) { newTaskBtn.disabled = false; newTaskBtn.title = ""; }
+    } else {
+      logoutBtn.style.display = "none";
+      if (newTaskBtn) { newTaskBtn.disabled = true; newTaskBtn.title = "Sign in to create tasks"; }
     }
   }
 
