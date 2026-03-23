@@ -102,8 +102,8 @@ body.light-mode .chart-container {
 .close-button:hover,
 .settings-button:hover {
   cursor: pointer;
-  background-color: rgb(234, 234, 234);
-  transition: 0.1s;
+  background-color: rgb(121, 121, 121);
+  transition: 0.2s;
 }
 
 input[type="color" i] {
