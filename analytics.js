@@ -216,7 +216,7 @@ function drawWeeklyProductivity() {
     });
 
     const applyBorderColor = color => {
-        document.querySelectorAll("button, input, select, textarea, .sidebar, .settings-modal-content, .acc-modal-content, .switch .slider")
+        document.querySelectorAll("button, input, select, textarea, .sidebar, .settings-modal-content, .acc-modal-content, .switch .slider, hr")
             .forEach(el => el.style.borderColor=color);
         document.querySelectorAll(".switch .slider").forEach(sl => sl.style.backgroundColor=color);
         if (borderColorPicker) borderColorPicker.value = color;
