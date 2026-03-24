@@ -290,6 +290,7 @@ function toggleDarkMode(isLight) {
   // ======================
   const logoutBtn = document.createElement("button");
   logoutBtn.id = "logoutButton";
+  logoutBtn.className = "logout-button";
   logoutBtn.textContent = "Logout";
   logoutBtn.style.display = currentUser ? "inline-flex" : "none";
   logoutBtn.style.marginLeft = "5px";

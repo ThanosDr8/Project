@@ -800,3 +800,12 @@ input:checked + .slider:before {
 .light-mode .sign-in {
   color: white !important;
 }
+
+.logout-button {
+  background-color: rgb(209, 48, 48);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1.7px rgb(166, 221, 239) solid;
+  cursor: pointer;
+}

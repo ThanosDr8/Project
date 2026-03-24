@@ -9,18 +9,16 @@
 
 body {
   background-color: rgb(112, 112, 112);
-  color: var(--text-dark); /* default dark-mode text color */
+  color: var(--text-dark);
   font-family: Arial, Helvetica, sans-serif;
   overflow-y:auto;
 }
 
-/* Light mode overrides */
 body.light-mode {
   background-color: white;
   color: var(--text-light);
 }
 
-/* Ensure inputs, textareas, selects, and buttons inherit proper text color */
 input, textarea, select, button {
   color: var(--text-dark);
   background-color: var(--container-bg-dark);
@@ -28,7 +26,6 @@ input, textarea, select, button {
   border-radius: 13px;
 }
 
-/* Light mode inputs */
 body.light-mode input,
 body.light-mode textarea,
 body.light-mode select,
@@ -37,12 +34,10 @@ body.light-mode button {
   color: var(--text-light);
 }
 
-/* All text elements inherit color */
 h1, h2, h3, h4, h5, h6, p, span, label, .task-title, .task-details {
   color: var(--text-dark);
 }
 
-/* Light mode text override */
 body.light-mode h1, 
 body.light-mode h2, 
 body.light-mode h3, 
@@ -57,13 +52,11 @@ body.light-mode .task-details {
   color: var(--text-light);
 }
 
-/* Analytics page wrapper */
 .analytics-wrapper {
   padding: 20px;
   margin-top: 20px;
 }
 
-/* Chart container */
 .chart-container {
   background-color: var(--container-bg-dark);
   color: var(--text-dark);
@@ -75,7 +68,6 @@ body.light-mode .task-details {
   box-shadow: var(--shadow);
 }
 
-/* Light mode charts */
 body.light-mode .chart-container {
   background-color: var(--container-bg-light);
   color: var(--text-light);
@@ -88,7 +80,7 @@ body.light-mode .chart-container {
 
 #tasksByStatus {
   width: 400px;
-  margin: 0 auto; /* center it */
+  margin: 0 auto;
 }
 
 .home,

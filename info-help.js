@@ -31,7 +31,7 @@ function closeNav() {
   function applyBorderColor(color) {
     // Apply to task cards, inputs, buttons, etc.
     document.querySelectorAll(
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr"
+      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr, .logout-button"
     ).forEach(el => {
       el.style.borderColor = color;
     });
@@ -160,4 +160,40 @@ function closeNav() {
         `;
     }
 
+    // ======================
+    // Logout Button Logic
+    // ======================
+    const logoutBtn = document.createElement("button");
+    logoutBtn.id = "logoutButton";
+    logoutBtn.className = "logout-button";
+    logoutBtn.textContent = "Logout";
+
+    // Check if user is logged in to show/hide button on load
+    const userExists = localStorage.getItem("user");
+    logoutBtn.style.display = userExists ? "inline-flex" : "none";
+    logoutBtn.style.marginLeft = "5px";
+
+    // Append it next to the Sign In button
+    signInOpenBtn.parentNode.appendChild(logoutBtn);
+
+    logoutBtn.onclick = () => {
+        // 1. Clear credentials
+        localStorage.removeItem("user");
+        
+        // 2. Reset UI Header
+        signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
+        logoutBtn.style.display = "none";
+
+        // 3. Clear Data & Refresh Charts
+        tasks = [];
+        // Check if taskList exists before clearing (prevents errors on analytics-only pages)
+        const taskList = document.getElementById("taskList"); 
+        if (taskList) taskList.innerHTML = "";
+        
+        loadTasks(); // This clears the charts and handles the "No user" state
+        alert("Logged out successfully");
+    };
+
+    const currentSavedColor = localStorage.getItem("borderColor");
+    if (currentSavedColor) logoutBtn.style.borderColor = currentSavedColor;
 })();

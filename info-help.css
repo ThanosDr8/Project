@@ -1,11 +1,33 @@
-/* Page wrapper */
+.close-settings {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px;
+  border-radius: 30px;
+  background: none;
+  margin: 3px;
+  font-size: 24px;
+  top: 10px;
+}
+
+.close-acc-modal {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px;
+  border-radius: 30px;
+  background: none;
+  margin: 3px;
+  font-size: 24px;
+  top: 10px;
+}
+
 .info-page {
   max-width: 920px;
   margin: 24px auto 60px;
   padding: 0 14px;
 }
 
-/* Hero */
 .page-hero {
   padding: 18px 6px 8px;
 }
@@ -20,7 +42,6 @@
   opacity: 0.85;
 }
 
-/* Cards */
 .card {
   margin-top: 16px;
   padding: 18px 16px;
@@ -40,7 +61,6 @@
   margin: 0 0 12px;
 }
 
-/* Two-language grid */
 .lang-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -65,7 +85,6 @@
   opacity: 0.9;
 }
 
-/* Small screens: stack EN/GR */
 @media (max-width: 700px) {
   .lang-grid {
     grid-template-columns: 1fr;
