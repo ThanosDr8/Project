@@ -333,4 +333,6 @@ function drawWeeklyProductivity() {
         alert("Logged out successfully");
     };
 
+    const currentSavedColor = localStorage.getItem("borderColor");
+    if (currentSavedColor) logoutBtn.style.borderColor = currentSavedColor;
 })();
