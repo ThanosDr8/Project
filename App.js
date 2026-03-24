@@ -204,24 +204,31 @@ function toggleDarkMode(isLight) {
     document.querySelectorAll(".switch .slider").forEach(s => s.style.backgroundColor = color);
     localStorage.setItem("borderColor", color);
   }
-
+  // ======================
+  // 2. Filters
+  // ======================
   function applyFilters() {
     const checked = [...document.querySelectorAll(".filter-option:checked")].map(cb => cb.value);
     const sortBy = document.getElementById("sort-select")?.value;
 
     const priorities = ["High", "Medium", "Low"];
     const statuses = ["Open", "In progress", "Done"];
+    const categories = ["Work", "House work", "School work", "Shopping", "Hobbies", "Other"];
     
     let filtered = allTasks.filter(t => {
+
       const pMatch = checked.some(c => priorities.includes(c)) ? checked.includes(t.priority) : true;
       const sMatch = checked.some(c => statuses.includes(c)) ? checked.includes(t.status) : true;
-      return pMatch && sMatch;
+      const cMatch = checked.some(c => categories.includes(c)) ? checked.includes(t.category) : true;
+
+      return pMatch && sMatch && cMatch;
     });
 
     if (sortBy === "due-date-asc") filtered.sort((a,b) => (a.dueDate||"").localeCompare(b.dueDate||""));
+    if (sortBy === "due-date-desc") filtered.sort((a,b) => (b.dueDate||"").localeCompare(a.dueDate||""));
     if (sortBy === "priority-desc") {
       const weight = { High: 3, Medium: 2, Low: 1 };
-      filtered.sort((a,b) => weight[b.priority] - weight[a.priority]);
+      filtered.sort((a,b) => (weight[b.priority] || 0) - (weight[a.priority] || 0));
     }
 
     renderTasks(filtered);
