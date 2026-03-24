@@ -288,7 +288,7 @@ function toggleDarkMode(isLight) {
 
       allTasks = await apiGetAll();
       renderTasks();
-      initUserUI(); // ανανεώνει κουμπιά
+      initUserUI();
     } catch { alert("Login failed"); }
   };
 
