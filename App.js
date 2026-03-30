@@ -233,6 +233,22 @@ function toggleDarkMode(isLight) {
 
     renderTasks(filtered);
   }
+  
+  // ======================
+  // Reset Filters Logic
+  // ======================
+  function resetFilters() {
+    document.querySelectorAll(".filter-option").forEach(cb => cb.checked = false);
+
+    const sortSelect = document.getElementById("sort-select");
+    if (sortSelect) sortSelect.selectedIndex = 0;
+
+    if (searchBar) searchBar.value = "";
+
+    renderTasks(allTasks);
+
+    closeModal(filterModal);
+  }
 
   // ======================
   // Event Listeners
@@ -366,7 +382,7 @@ function toggleDarkMode(isLight) {
   document.getElementById("closeAccModal").onclick = () => closeModal(accModal);
   document.getElementById("cancel").onclick = () => closeModal(accModal);
   window.onclick = e => [modal, filterModal, settingsModal, accModal].forEach(m => { if(e.target === m) closeModal(m); });
-
+  document.getElementById("reset-filters").onclick = resetFilters;
   // ======================
   // Init
   // ======================
