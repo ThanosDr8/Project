@@ -25,28 +25,23 @@ function closeNav() {
   main.style.marginLeft = "0";
 }
 
-  // ======================
-  // Apply Border Color (including HRs)
-  // ======================
-  function applyBorderColor(color) {
-    // Apply to task cards, inputs, buttons, etc.
-    document.querySelectorAll(
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr, .logout-button"
-    ).forEach(el => {
-      el.style.borderColor = color;
-    });
+// ======================
+// Apply Border Color (including HRs)
+// ======================
+function applyBorderColor(color) {
+  document.querySelectorAll(
+    "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch .slider, hr, .logout-button"
+  ).forEach(el => {
+    el.style.borderColor = color;
+  });
 
-    // Apply to switch sliders specifically
-    document.querySelectorAll(".switch .slider").forEach(slider => {
-      slider.style.backgroundColor = color;
-    });
+  document.querySelectorAll(".switch .slider").forEach(slider => {
+    slider.style.backgroundColor = color;
+  });
 
-    // Update picker
-    if (borderColorPicker) borderColorPicker.value = color;
-
-    // Save to localStorage
-    localStorage.setItem("borderColor", color);
-  }
+  if (borderColorPicker) borderColorPicker.value = color;
+  localStorage.setItem("borderColor", color);
+}
 
 // ==========================================
 // Settings Modal
@@ -97,103 +92,102 @@ function closeNav() {
 // Account Modal + Sign In
 // ======================
 (function() {
-    const accModal = document.getElementById("accModal");
-    const signInOpenBtn = document.getElementById("signInButton");
-    const signInCloseBtn = document.getElementById("closeAccModal");
-    const signInBtn = document.getElementById("signIn");
-    const cancelBtn = document.getElementById("cancel");
-    const usernameInput = document.querySelector(".username");
-    const passwordInput = document.querySelector(".password");
-    const USER_KEY = "user";
+  const accModal = document.getElementById("accModal");
+  const signInOpenBtn = document.getElementById("signInButton");
+  const signInCloseBtn = document.getElementById("closeAccModal");
+  const signInBtn = document.getElementById("signIn");
+  const cancelBtn = document.getElementById("cancel");
+  const usernameInput = document.querySelector(".username");
+  const passwordInput = document.querySelector(".password");
+  const USER_KEY = "user";
 
-    // Open / Close Modal
-    signInOpenBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "block"; });
-    signInCloseBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
-    cancelBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
+  signInOpenBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "block"; });
+  signInCloseBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
+  cancelBtn?.addEventListener("click", () => { if(accModal) accModal.style.display = "none"; });
 
-    // Close modal by clicking outside
-    window.addEventListener("click", e => {
-        if (e.target === accModal) accModal.style.display = "none";
-    });
+  window.addEventListener("click", e => {
+    if (e.target === accModal) accModal.style.display = "none";
+  });
 
-    // Sign In Button
-    signInBtn?.addEventListener("click", async () => {
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
+  signInBtn?.addEventListener("click", async () => {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
 
-        if (!username || !password) {
-            alert("Please enter both username and password");
-            return;
-        }
-
-        const payload = { username, password };
-
-        try {
-            await fetch("http://localhost:3000/api/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-        } catch {
-            console.warn("Backend not available, saving locally");
-        }
-
-        localStorage.setItem(USER_KEY, JSON.stringify(payload));
-
-        // Update header button text
-        signInOpenBtn.innerHTML = `
-            <img src="Icons/user.png" class="user-icon">
-            ${username}
-        `;
-
-        // Close modal
-        if(accModal) accModal.style.display = "none";
-    });
-
-    // Restore user on load
-    const savedUser = localStorage.getItem(USER_KEY);
-    if (savedUser) {
-        const { username } = JSON.parse(savedUser);
-        signInOpenBtn.innerHTML = `
-            <img src="Icons/user.png" class="user-icon">
-            ${username}
-        `;
+    if (!username || !password) {
+      alert("Please enter both username and password");
+      return;
     }
 
-    // ======================
-    // Logout Button Logic
-    // ======================
-    const logoutBtn = document.createElement("button");
-    logoutBtn.id = "logoutButton";
-    logoutBtn.className = "logout-button";
-    logoutBtn.textContent = "Logout";
+    try {
+      const res = await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
 
-    // Check if user is logged in to show/hide button on load
-    const userExists = localStorage.getItem("user");
-    logoutBtn.style.display = userExists ? "inline-flex" : "none";
-    logoutBtn.style.marginLeft = "5px";
+      const data = await res.json();
 
-    // Append it next to the Sign In button
-    signInOpenBtn.parentNode.appendChild(logoutBtn);
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
 
-    logoutBtn.onclick = () => {
-        // 1. Clear credentials
-        localStorage.removeItem("user");
-        
-        // 2. Reset UI Header
-        signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
-        logoutBtn.style.display = "none";
+      // Αποθηκεύουμε το αντικείμενο με το token
+      localStorage.setItem(USER_KEY, JSON.stringify(data));
 
-        // 3. Clear Data & Refresh Charts
-        tasks = [];
-        // Check if taskList exists before clearing (prevents errors on analytics-only pages)
-        const taskList = document.getElementById("taskList"); 
-        if (taskList) taskList.innerHTML = "";
-        
-        loadTasks(); // This clears the charts and handles the "No user" state
-        alert("Logged out successfully");
-    };
+      // Ενημερώνουμε το header
+      signInOpenBtn.innerHTML = `
+        <img src="Icons/user.png" class="user-icon">
+        ${data.username}
+      `;
 
-    const currentSavedColor = localStorage.getItem("borderColor");
-    if (currentSavedColor) logoutBtn.style.borderColor = currentSavedColor;
+      if(accModal) accModal.style.display = "none";
+
+      // Φορτώνουμε τα tasks για analytics
+      if (typeof loadTasks === "function") loadTasks();
+
+    } catch (err) {
+      alert("Login failed: " + err.message);
+    }
+  });
+
+  // Restore user on load
+  const savedUser = localStorage.getItem(USER_KEY);
+  if (savedUser) {
+    const { username } = JSON.parse(savedUser);
+    signInOpenBtn.innerHTML = `
+      <img src="Icons/user.png" class="user-icon">
+      ${username}
+    `;
+  }
+
+  // ======================
+  // Logout Button Logic
+  // ======================
+  const logoutBtn = document.createElement("button");
+  logoutBtn.id = "logoutButton";
+  logoutBtn.className = "logout-button";
+  logoutBtn.textContent = "Logout";
+
+  const userExists = localStorage.getItem("user");
+  logoutBtn.style.display = userExists ? "inline-flex" : "none";
+  logoutBtn.style.marginLeft = "5px";
+
+  signInOpenBtn.parentNode.appendChild(logoutBtn);
+
+  logoutBtn.onclick = () => {
+    localStorage.removeItem("user");
+    signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
+    logoutBtn.style.display = "none";
+
+    tasks = [];
+    const taskList = document.getElementById("taskList"); 
+    if (taskList) taskList.innerHTML = "";
+    if (typeof loadTasks === "function") loadTasks();
+
+    alert("Logged out successfully");
+  };
+
+  const currentSavedColor = localStorage.getItem("borderColor");
+  if (currentSavedColor) logoutBtn.style.borderColor = currentSavedColor;
 })();
