@@ -307,29 +307,23 @@ function drawWeeklyProductivity() {
     logoutBtn.className = "logout-button";
     logoutBtn.textContent = "Logout";
 
-    // Check if user is logged in to show/hide button on load
     const userExists = localStorage.getItem("user");
     logoutBtn.style.display = userExists ? "inline-flex" : "none";
-    logoutBtn.style.marginLeft = "5px";
+    logoutBtn.style.marginLeft = "0px";
 
-    // Append it next to the Sign In button
     signInOpenBtn.parentNode.appendChild(logoutBtn);
 
     logoutBtn.onclick = () => {
-        // 1. Clear credentials
         localStorage.removeItem("user");
         
-        // 2. Reset UI Header
         signInOpenBtn.innerHTML = `<img src="Icons/user.png" class="user-icon"> Sign In`;
         logoutBtn.style.display = "none";
 
-        // 3. Clear Data & Refresh Charts
         tasks = [];
-        // Check if taskList exists before clearing (prevents errors on analytics-only pages)
         const taskList = document.getElementById("taskList"); 
         if (taskList) taskList.innerHTML = "";
         
-        loadTasks(); // This clears the charts and handles the "No user" state
+        loadTasks();
         alert("Logged out successfully");
     };
 

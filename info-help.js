@@ -171,7 +171,7 @@ function applyBorderColor(color) {
 
   const userExists = localStorage.getItem("user");
   logoutBtn.style.display = userExists ? "inline-flex" : "none";
-  logoutBtn.style.marginLeft = "5px";
+  logoutBtn.style.marginLeft = "0px";
 
   signInOpenBtn.parentNode.appendChild(logoutBtn);
 
