@@ -797,7 +797,6 @@ input:checked + .slider:before {
 
 .light-mode .newtask {
   color: black !important;
-  transition: 0.1s ease;
   background: none;
 }
 
@@ -810,7 +809,8 @@ input:checked + .slider:before {
 }
 
 .light-mode .newtask:hover {
-  background-color: rgb(121, 121, 121) !important;
+  background-color: rgb(192, 192, 192);
+  transition: 0.1s ease;
 }
 
 .light-mode .search-bar input {
