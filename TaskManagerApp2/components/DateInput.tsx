@@ -129,7 +129,7 @@ export function DateInput({ value, onChange, placeholder }: Props) {
     if (event.type === "set" && selected) {
       onChange(formatLocal(selected));
     } else if (event.type === "dismissed") {
-      // no-op
+
     }
   };
 
@@ -161,8 +161,6 @@ export function DateInput({ value, onChange, placeholder }: Props) {
     </Pressable>
   );
 
-  // On web, the "Custom date" choice swaps to a real <input type="date">
-  // briefly so users get the native HTML calendar.
   const [webCustom, setWebCustom] = useState(false);
 
   return (
