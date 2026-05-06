@@ -23,7 +23,6 @@ body {
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  box-shadow: -10px 20px 30px -1px rgb(52, 51, 51) inset;
   top: 0;
 }
 
@@ -209,7 +208,6 @@ label:hover {
   overflow-x: hidden;
   transition: 0.1s;
   padding-top: 60px;
-  box-shadow: 10px 20px 30px -1px rgb(52, 51, 51) inset;
 }
 
 .sidebar a {
