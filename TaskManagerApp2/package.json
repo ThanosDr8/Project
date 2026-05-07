@@ -59,6 +59,7 @@
     "@react-native-community/datetimepicker": "^8.4.4",
     "@react-navigation/drawer": "^7.9.9",
     "expo-notifications": "^55.0.21",
+    "expo-router": "~6.0.23",
     "react-native-chart-kit": "^6.12.2"
   }
 }
