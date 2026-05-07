@@ -23,7 +23,17 @@ function toggleDarkMode(isLight) {
       el.classList.contains("view-type-button") ||
       el.classList.contains("sign-in-button") ||
       el.classList.contains("submit-button") ||
-      el.classList.contains("sign-in");
+      el.classList.contains("sign-in") ||
+      el.classList.contains("logout-button") ||
+      el.classList.contains("close-task-module") ||
+      el.classList.contains("filter-close") ||
+      el.classList.contains("close-settings") ||
+      el.id === "closeAccModal" ||
+      el.id === "cancel" ||
+      el.id === "apply-filters-button" ||
+      el.id === "reset-filters" ||
+      el.classList.contains("delete-button") ||
+      el.classList.contains("edit-button");
 
     if (!isSearchBar && !isNewTaskBtn && !isSpecificControlBtn) {
       el.classList.toggle("light-input", isLight);
@@ -196,14 +206,6 @@ function toggleDarkMode(isLight) {
     taskBeingEdited = null;
   }
 
-  function applyBorderColor(color) {
-    if (!color) return;
-    document.querySelectorAll(
-      "button, input, select, textarea, .modal-content, .filter-modal-content, .acc-modal-content, .settings-modal-content, .sidebar, .switch, .slider, hr, .task-card, .light-mode .modal-content, .light-mode .filter-modal-content, .light-mode .settings-modal-content, .light-mode .acc-modal-content, .task-name .light-input, light-input"
-    ).forEach(el => el.style.borderColor = color);
-    document.querySelectorAll(".switch .slider").forEach(s => s.style.backgroundColor = color);
-    localStorage.setItem("borderColor", color);
-  }
   // ======================
   // 2. Filters
   // ======================

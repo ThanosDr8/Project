@@ -9,11 +9,6 @@ body {
   padding: 0;
 }
 
-.light-mode {
-  background-color: white;
-  color: black;
-}
-
 .header {
   background-color: rgb(81, 81, 81);
   height: 60px;
@@ -89,7 +84,7 @@ label:hover {
   justify-content: flex-start;
   padding: 0 12px;
   border-radius: 30px;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   font-size: 18px;
   background: none;
   overflow: hidden;
@@ -169,8 +164,8 @@ label:hover {
   border: none;
   border-radius: 13px;
   margin: 5px 0px 6px 5px;
-  padding: 8px 10px;
-  font-size: 14px;
+  padding: 10px 10px;
+  font-size: 15px;
   cursor: pointer;
   background: none;
   display: flex;
@@ -183,7 +178,7 @@ label:hover {
 }
 
 .newtask:hover {
-  background-color: rgb(92, 92, 92);
+  background-color: rgba(92, 92, 92, 0.415);
   transition: 0.1s;
 }
 
@@ -273,12 +268,12 @@ label:hover {
 
 /* Modal Content */
 .modal-content {
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(72, 72, 72);
   margin: auto;
   z-index: 1001;
   padding: 20px 20px 37px 20px;
   width: 40%;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
 }
 
@@ -299,7 +294,7 @@ label:hover {
   background-color: #4CAF50;
   color: white;
   padding: 8px 10px;
-  border: 1.7px rgb(166, 221, 239) solid;;
+  border: 1px rgb(176, 176, 176) solid;;
   border-radius: 13px;
   cursor: pointer;
   float: right;
@@ -319,7 +314,7 @@ label:hover {
   margin: 5px 0px;
   padding: 8px 12px;
   border-radius: 13px;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   font-size: 18px;
   background-color: rgb(90, 90, 90);
   height: 21px;
@@ -349,14 +344,14 @@ label:hover {
 .task-priority,
 .category,
 .status {
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   padding: 5px;
 }
 
 .description {
   width: 60%;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   height: 100px;
   resize: none;
@@ -381,13 +376,13 @@ label:hover {
 
 .filter-modal-content {
   z-index: 4;
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(72, 72, 72);
   color: #c9c9c9;
   z-index: 1001;
   margin: auto;
   padding: 20px 20px 55px 20px;
   width: 30%;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
 }
 
@@ -407,7 +402,7 @@ label:hover {
   background-color: #4CAF50;
   color: white;
   padding: 8px 10px;
-  border: 1.7px rgb(166, 221, 239) solid;;
+  border: 1px rgb(176, 176, 176) solid;;
   border-radius: 13px;
   cursor: pointer;
   float: right;
@@ -424,7 +419,7 @@ label:hover {
   background-color: #d9534f;
   color: white;
   padding: 8px 10px;
-  border: 1.7px rgb(166, 221, 239) solid;;
+  border: 1px rgb(176, 176, 176) solid;;
   border-radius: 13px;
   cursor: pointer;
   float: left;
@@ -438,38 +433,11 @@ label:hover {
 }
 
 .asc-desc-select {
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   padding: 5px;
   color: #c9c9c9;
   background-color: rgb(90, 90, 90);
-}
-
-.light-modal-bg {
-  background-color: rgba(255,255,255,0.4) !important;
-}
-
-.light-filter-bg {
-  background-color: rgba(255,255,255,0.4) !important;
-}
-
-.light-modal-content {
-  background-color: white !important;
-  color: black !important;
-}
-
-.light-filter-content {
-  background-color: white !important;
-  color: black !important;
-}
-
-.light-input {
-  background-color: rgb(112, 112, 112) !important;
-  color: black !important;
-}
-
-.light-input::placeholder {
-  color: black !important;
 }
 
 .task-card {
@@ -479,10 +447,11 @@ label:hover {
   border: none;
   display: block;
   padding: 9px 10px 0px 10px;
+  background-color: rgb(100, 100, 100);
 }
 
 .task-card:hover {
-  background-color: rgba(100, 100, 100, 0.27);
+  background-color: rgb(92, 92, 92);
   transition: 0.1s;
 }
 
@@ -548,10 +517,10 @@ label:hover {
 }
 
 .settings-modal .settings-modal-content {
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(72, 72, 72);
   color: #c9c9c9;
   width: 30%;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   padding: 20px;
   position: relative;
@@ -576,7 +545,7 @@ label:hover {
   color: white;
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   cursor: pointer;
 }
 
@@ -657,7 +626,7 @@ input:checked + .slider:before {
   background-color: rgb(69, 69, 255);
   color: white;
   font-weight: bold;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   margin: 7px 3px 3px 0px;
 }
 
@@ -685,13 +654,13 @@ input:checked + .slider:before {
 }
 
 .acc-modal-content {
-  background-color: rgb(90, 90, 90);
+  background-color: rgb(72, 72, 72);
   color: #c9c9c9;
   margin: auto;
   padding: 20px 20px 40px 20px;
   width: 35%;
   height: auto;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   position: relative;
 }
@@ -700,7 +669,7 @@ input:checked + .slider:before {
   width: 70%;
   padding: 8px 10px;
   border-radius: 13px;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   background-color: rgb(90, 90, 90);
   color: #c9c9c9;
   display: block;
@@ -710,7 +679,7 @@ input:checked + .slider:before {
 .acc-modal-content .cancel {
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1.7px rgb(166, 221, 239) solid;
+  border: 1px rgb(176, 176, 176) solid;
   cursor: pointer;
   margin-top: 15px;
 }
@@ -757,7 +726,7 @@ input:checked + .slider:before {
 .tasks.grid-view .task-card {
   flex: 1 1 calc(23%);
   height: 150px;
-  border: 1.7px solid rgb(0, 0, 0);
+  border: 1px solid rgb(176, 176, 176);
   cursor: pointer;
   overflow: hidden;
   margin-top: 10px
@@ -800,9 +769,18 @@ input:checked + .slider:before {
 }
 
 .light-input {
-  background-color: white !important;
+  background-color: rgb(255, 255, 255) !important;
   color: black !important;
-  border: 1.7px solid !important;
+  border: 1px solid !important;
+}
+
+.light-input::placeholder {
+  color: #d3d3d3 !important;
+}
+
+.light-mode {
+  background-color: rgba(213, 213, 213, 0.762);
+  color: black;
 }
 
 .light-mode .menu-button,
@@ -818,6 +796,11 @@ input:checked + .slider:before {
   background: none;
 }
 
+.light-mode .newtask:hover {
+  background-color: rgb(192, 192, 192);
+  transition: 0.1s ease;
+}
+
 .light-mode .menu-button:hover,
 .light-mode .close-button:hover,
 .light-mode .settings-button:hover,
@@ -826,21 +809,40 @@ input:checked + .slider:before {
   background-color: rgb(121, 121, 121) !important;
 }
 
-.light-mode .newtask:hover {
-  background-color: rgb(192, 192, 192);
-  transition: 0.1s ease;
-}
-
 .light-mode .search-bar input {
   color: black !important;
-}
-
-.light-input::placeholder {
-  color: #666 !important;
 }
 
 .light-mode .sign-in-button,
 .light-mode .submit-button,
 .light-mode .sign-in {
   color: white !important;
+}
+
+.light-modal-bg {
+  background-color: rgba(196, 196, 196, 0.434) !important;
+}
+
+.light-filter-bg {
+  background-color: rgba(196, 196, 196, 0.434) !important;
+}
+
+.light-modal-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-filter-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-input {
+  background-color: rgba(255, 255, 255, 0.627) !important;
+  color: black !important;
+  border-color: rgb(176, 176, 176) !important;
+}
+
+.light-input::placeholder {
+  color: black !important;
 }
