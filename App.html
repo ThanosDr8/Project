@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="App.css">
     <link rel="icon" type="image/x-icon" href="Icons/logo1.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body id="main">
     <!-- The Header of the website-->
@@ -27,8 +28,8 @@
     <!-- Task creation -->
     <div class="tasks">
       <div>
-        <button class="newtask" id="myBtn"><img src="Icons/add-icon.png" class="add-icon">
-          New Task
+        <button class="newtask" id="myBtn">
+          <i class="fa fa-plus" style="font-size:20px;margin-right:5px;"></i> <b>New Task</b>
         </button>
       <div id="task-list"></div>
       </div>
@@ -137,12 +138,6 @@
             <input type="checkbox" id="darkModeToggle">
             <span class="slider round"></span>
           </label>
-        </div>
-
-        <!-- Border Color Picker -->
-        <div class="setting-item">
-          <label for="borderColorPicker">Border Color:</label>
-          <input type="color" id="borderColorPicker" value="#a6ddef">
         </div>
       </div>
     </div>
