@@ -289,21 +289,8 @@ function toggleDarkMode(isLight) {
         saveLocal();
         await apiDelete(id);
       }
-      return;
-    }
-
-    // GRID MODE → OPEN MODAL
-    if (document.body.classList.contains("grid-mode")) {
-      taskBeingEdited = task;
-      populateForm(task);
-      openModal(modal);
-      return;
-    }
-
-    // NORMAL MODE → TOGGLE DETAILS
-    const details = card.querySelector(".task-details");
-    if (details) {
-      details.classList.toggle("open");
+    } else if (e.target.matches(".task-title")) {
+      card.querySelector(".task-details").classList.toggle("open");
     }
   };
   document.querySelector(".submit-button").onclick = handleTaskSubmit;
