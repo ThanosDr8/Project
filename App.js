@@ -33,8 +33,10 @@ function toggleDarkMode(isLight) {
       el.id === "apply-filters-button" ||
       el.id === "reset-filters" ||
       el.classList.contains("delete-button") ||
-      el.classList.contains("edit-button");
-
+      el.classList.contains("edit-button") ||
+      el.classList.contains("task-card")|| 
+      el.classList.contains("task-details");
+      
     if (!isSearchBar && !isNewTaskBtn && !isSpecificControlBtn) {
       el.classList.toggle("light-input", isLight);
     }
@@ -215,7 +217,7 @@ function toggleDarkMode(isLight) {
   }
 
   // ======================
-  // 2. Filters
+  // Filters
   // ======================
   function applyFilters() {
     const checked = [...document.querySelectorAll(".filter-option:checked")].map(cb => cb.value);
@@ -280,7 +282,7 @@ function toggleDarkMode(isLight) {
         saveLocal();
         await apiDelete(id);
       }
-    } else if (e.target.matches(".task-title")) {
+    } else if (e.target.matches(".task-card, .task-details, .task-title, p")) {
       card.querySelector(".task-details").classList.toggle("open");
     }
   };
@@ -357,6 +359,20 @@ function toggleDarkMode(isLight) {
     const isGrid = tasksContainer.classList.toggle("grid-view");
     document.body.classList.toggle("grid-mode", isGrid);
     document.querySelectorAll(".task-details").forEach(d => d.classList.toggle("open", isGrid));
+    
+    taskList.onclick = async e => {
+
+      const card = e.target.closest(".task-card");
+
+      if (!card) return;
+      const id = card.dataset.id;
+      const task = allTasks.find(t => t.id === id);
+
+      if (e.target.matches(".task-card, .task-details, .task-title, p")) {
+      taskBeingEdited = task;
+      populateForm(task);
+      openModal(modal)};
+    };
   };
 
   // ======================
