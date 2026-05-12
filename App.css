@@ -9,6 +9,15 @@ body {
   padding: 0;
 }
 
+.modal-content,
+.filter-modal-content,
+.settings-modal-content,
+.acc-modal-content {
+  width: min(550px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 .header {
   background-color: rgb(81, 81, 81);
   height: 60px;
@@ -103,12 +112,12 @@ label:hover {
 }
 
 .menu,
+.close-task-module,
 .close {
   height: 20px;
 }
 
 .tile,
-.close-task-module,
 .close-view { 
   padding: 2px;
   height: 13px;
@@ -272,7 +281,8 @@ label:hover {
   margin: auto;
   z-index: 1001;
   padding: 20px 20px 37px 20px;
-  width: 40%;
+  width: 600px;
+  max-width: 80vw;
   border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
 }
@@ -300,6 +310,7 @@ label:hover {
   float: right;
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
   margin-top: 5px;
+  margin-bottom: -20px;
 }
 
 .submit-button:hover {
@@ -367,7 +378,7 @@ label:hover {
   cursor: pointer;
   display: block;
   padding: 9px 10px 0px 10px;
-  background-color: rgb(120, 120, 120);
+  background-color: rgb(130, 130, 130);
   box-shadow: 0px 5px 5px rgba(30, 30, 30, 0.25);
 }
 
@@ -413,7 +424,7 @@ label:hover {
 }
 
 .tasks.grid-view .task-card {
-  flex: 1 1 calc(23%);
+  flex: 2 2 calc(28%);
   height: 150px;
   border: 1px solid rgb(176, 176, 176);
   cursor: pointer;
@@ -432,21 +443,14 @@ label:hover {
   max-height: none;
 }
 
-.tasks.grid-view .edit-button,
-.tasks.grid-view .delete-button {
-  margin-top: 6px;
-  font-size: 12px;
-  padding: 6px 10px;
-}
-
 @media (max-width: 1000px) {
   .tasks.grid-view .task-card {
-    flex: 1 1 calc(50% - 10px);
+  flex: 2 2 calc(30%);
     max-width: calc(50% - 10px);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .tasks.grid-view .task-card {
     flex: 1 1 100%;
     max-width: 100%;
@@ -474,7 +478,8 @@ label:hover {
   z-index: 1001;
   margin: auto;
   padding: 20px 20px 55px 20px;
-  width: 30%;
+  width: 600px;
+  max-width: 80vw;
   border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
 }
@@ -501,6 +506,7 @@ label:hover {
   float: right;
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
   margin-top: 5px;
+  margin-bottom: -30px;
 }
 
 .apply-filters-button:hover {
@@ -518,6 +524,7 @@ label:hover {
   float: left;
   box-shadow: 0px 2px 2px rgba(99, 99, 99, 0.25);
   margin-top: 5px;
+  margin-bottom: -30px;
 }
 
 .reset-filters:hover {
@@ -571,7 +578,8 @@ label:hover {
 .settings-modal .settings-modal-content {
   background-color: rgb(72, 72, 72);
   color: #c9c9c9;
-  width: 30%;
+  width: 600px;
+  max-width: 80vw;
   border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
   padding: 20px;
@@ -710,7 +718,8 @@ input:checked + .slider:before {
   color: #c9c9c9;
   margin: auto;
   padding: 20px 20px 40px 20px;
-  width: 35%;
+  width: 600px;
+  max-width: 80vw;
   height: auto;
   border: 1px rgb(176, 176, 176) solid;
   border-radius: 13px;
@@ -740,16 +749,18 @@ input:checked + .slider:before {
   background-color: #4CAF50;
   color: white;
   float: right;
-}
-
-.acc-modal-content .sign-in:hover {
-  background-color: #45c74a;
-  transition: 0.1s;
+  margin-bottom: -30px;
 }
 
 .acc-modal-content .cancel {
   background-color: #d9534f;
   color: white;
+  margin-bottom: -30px;
+}
+
+.acc-modal-content .sign-in:hover {
+  background-color: #45c74a;
+  transition: 0.1s;
 }
 
 .acc-modal-content .cancel:hover {

@@ -268,25 +268,44 @@ function toggleDarkMode(isLight) {
   taskList.onclick = async e => {
     const card = e.target.closest(".task-card");
     if (!card) return;
+
     const id = card.dataset.id;
     const task = allTasks.find(t => t.id === id);
+    if (!task) return;
 
+    // EDIT BUTTON
     if (e.target.matches(".edit-button")) {
       taskBeingEdited = task;
       populateForm(task);
       openModal(modal);
-    } else if (e.target.matches(".delete-button")) {
+      return;
+    }
+
+    // DELETE BUTTON
+    if (e.target.matches(".delete-button")) {
       if (confirm(`Delete "${task.name}"?`)) {
         allTasks = allTasks.filter(t => t.id !== id);
         renderTasks();
         saveLocal();
         await apiDelete(id);
       }
-    } else if (e.target.matches(".task-card, .task-details, .task-title, p")) {
-      card.querySelector(".task-details").classList.toggle("open");
+      return;
+    }
+
+    // ⭐ GRID MODE → OPEN MODAL
+    if (document.body.classList.contains("grid-mode")) {
+      taskBeingEdited = task;
+      populateForm(task);
+      openModal(modal);
+      return;
+    }
+
+    // ⭐ NORMAL MODE → TOGGLE DETAILS
+    const details = card.querySelector(".task-details");
+    if (details) {
+      details.classList.toggle("open");
     }
   };
-
   document.querySelector(".submit-button").onclick = handleTaskSubmit;
 
   // ======================
@@ -358,21 +377,10 @@ function toggleDarkMode(isLight) {
   document.getElementById("view-type-button").onclick = () => {
     const isGrid = tasksContainer.classList.toggle("grid-view");
     document.body.classList.toggle("grid-mode", isGrid);
-    document.querySelectorAll(".task-details").forEach(d => d.classList.toggle("open", isGrid));
-    
-    taskList.onclick = async e => {
 
-      const card = e.target.closest(".task-card");
-
-      if (!card) return;
-      const id = card.dataset.id;
-      const task = allTasks.find(t => t.id === id);
-
-      if (e.target.matches(".task-card, .task-details, .task-title, p")) {
-      taskBeingEdited = task;
-      populateForm(task);
-      openModal(modal)};
-    };
+    document.querySelectorAll(".task-details").forEach(el => {
+      el.classList.toggle("open", isGrid);
+    });
   };
 
   // ======================
@@ -409,6 +417,7 @@ function toggleDarkMode(isLight) {
   document.getElementById("cancel").onclick = () => closeModal(accModal);
   window.onclick = e => [modal, filterModal, settingsModal, accModal].forEach(m => { if(e.target === m) closeModal(m); });
   document.getElementById("reset-filters").onclick = resetFilters;
+
   // ======================
   // Init
   // ======================
