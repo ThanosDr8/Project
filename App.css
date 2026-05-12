@@ -147,7 +147,7 @@ label:hover {
   display: flex;
   height: 40px;
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 13px;
   background: none;
   margin: 3px;
 }
@@ -158,7 +158,7 @@ label:hover {
 .close-button:hover,
 .settings-button:hover {
   cursor: pointer;
-  background-color: rgb(121, 121, 121);
+  background-color: rgba(121, 121, 121, 0.723);
   transition: 0.2s;
 }
 
