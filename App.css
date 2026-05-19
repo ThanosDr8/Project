@@ -140,14 +140,32 @@ label:hover {
 
 .menu-button,
 .close-button,
-.settings-button,
-.filter-button,
-.view-type-button {
+.settings-button {
   border: none;
   display: flex;
   height: 40px;
   padding: 10px;
-  border-radius: 13px;
+  border-radius: 0px;
+  background: none;
+  margin: 3px;
+}
+
+.view-type-button {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0px;
+  background: none;
+  margin: 3px;
+}
+
+.filter-button {
+  border: none;
+  display: flex;
+  height: 40px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0px;
   background: none;
   margin: 3px;
 }
