@@ -157,7 +157,7 @@ label:hover {
   border: none;
   display: flex;
   height: 40px;
-  padding: 10px;
+  padding: 10px 10px 10px 11px;
   border-radius: 13px;
   background: none;
   margin: 3px;
@@ -167,7 +167,7 @@ label:hover {
   border: none;
   display: flex;
   height: 40px;
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
   border-radius: 13px;
   background: none;
   margin: 3px;
