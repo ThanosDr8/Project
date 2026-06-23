@@ -141,11 +141,9 @@
     </aside>
 
     <!-- Settings Modal -->
-    <div class="settings-modal modal" id="settingsModal" style="display: none" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="settings-modal modal" id="settingsModal" style="display: none;">
       <div class="settings-modal-content" id="settings-modal-content">
-        <button class="close-settings" type="button" aria-label="Close settings">
-          <img src="Icons/cross.png" class="close" alt="Close" />
-        </button>
+        <span class="close-settings"><img src="Icons/cross.png" class="close"></span>
 
         <h3>Settings</h3>
 
@@ -162,30 +160,6 @@
           </label>
         </div>
 
-      </div>
-    </div>
-
-    <!-- Account Modal -->
-    <div class="acc-modal" id="accModal" style="display: none" role="dialog" aria-modal="true" aria-label="Sign in">
-      <div class="acc-modal-content" id="accModalContent">
-        <button class="close-acc-modal" id="closeAccModal" type="button" aria-label="Close sign in">
-          <img src="Icons/cross.png" class="close" alt="Close" />
-        </button>
-
-        <h3 style="margin: 10px 0px">Username:</h3>
-        <label>
-          <input type="text" class="username" placeholder="Enter Username" maxlength="12" />
-        </label>
-
-        <h3 style="margin: 10px 0px">Password:</h3>
-        <label>
-          <input type="password" class="password" placeholder="Enter Password" />
-        </label>
-
-        <div class="modal-actions">
-          <button class="cancel" id="cancel" type="button">Cancel</button>
-          <button class="sign-in" id="signIn" type="button">Sign In</button>
-        </div>
       </div>
     </div>
 
