@@ -28,14 +28,14 @@ function toggleDarkMode(isLight) {
       el.classList.contains("close-task-module") ||
       el.classList.contains("filter-close") ||
       el.classList.contains("close-settings") ||
+      el.classList.contains("delete-button") ||
+      el.classList.contains("edit-button") ||
+      el.classList.contains("task-card") || 
+      el.classList.contains("task-details") ||
       el.id === "closeAccModal" ||
       el.id === "cancel" ||
       el.id === "apply-filters-button" ||
-      el.id === "reset-filters" ||
-      el.classList.contains("delete-button") ||
-      el.classList.contains("edit-button") ||
-      el.classList.contains("task-card")|| 
-      el.classList.contains("task-details");
+      el.id === "reset-filters";
       
     if (!isSearchBar && !isNewTaskBtn && !isSpecificControlBtn) {
       el.classList.toggle("light-input", isLight);
