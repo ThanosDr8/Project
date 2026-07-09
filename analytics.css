@@ -26,14 +26,6 @@ input, textarea, select, button {
   border-radius: 13px;
 }
 
-body.light-mode input,
-body.light-mode textarea,
-body.light-mode select,
-body.light-mode button {
-  background-color: var(--container-bg-light);
-  color: var(--text-light);
-}
-
 h1, h2, h3, h4, h5, h6, p, span, label, .task-title, .task-details {
   color: var(--text-dark);
 }
@@ -43,12 +35,7 @@ body.light-mode h2,
 body.light-mode h3, 
 body.light-mode h4, 
 body.light-mode h5, 
-body.light-mode h6, 
-body.light-mode p, 
-body.light-mode span, 
-body.light-mode label, 
-body.light-mode .task-title, 
-body.light-mode .task-details {
+body.light-mode h6 {
   color: var(--text-light);
 }
 
@@ -112,4 +99,106 @@ input[type="color" i] {
     border-image: initial;
     padding: 1px 2px;
     border-radius: 0px;
+}
+
+
+.light-input {
+  background-color: rgb(255, 255, 255) !important;
+  color: black !important;
+  border: 1px solid !important;
+}
+
+.light-input::placeholder {
+  color: #d3d3d3 !important;
+}
+
+.light-mode {
+  background-color: rgba(213, 213, 213, 0.762);
+  color: black;
+}
+
+.light-mode .task-card {
+  background-color: rgba(227, 227, 227, 0.816) !important;
+  color: black !important;
+  border: 1px solid rgb(176, 176, 176) !important;
+  box-shadow: 0px 5px 5px rgba(30, 30, 30, 0.25);
+}
+
+.light-mode .task-card:hover {
+  background-color: rgba(194, 194, 194, 0.27) !important;
+  transition: 0.1s;
+}
+
+.light-mode .menu-button,
+.light-mode .close-button,
+.light-mode .settings-button,
+.light-mode .filter-button,
+.light-mode .view-type-button {
+  background: none !important;
+}
+
+.light-mode .newtask {
+  color: black !important;
+  background: none;
+}
+
+.light-mode .newtask:hover {
+  background-color: rgb(192, 192, 192);
+  transition: 0.1s ease;
+}
+
+.light-mode .menu-button:hover,
+.light-mode .close-button:hover,
+.light-mode .settings-button:hover,
+.light-mode .filter-button:hover,
+.light-mode .view-type-button:hover {
+  background-color: rgb(121, 121, 121) !important;
+}
+
+.light-mode .search-bar input {
+  color: black !important;
+}
+
+.light-mode .sign-in-button,
+.light-mode .submit-button,
+.light-mode .sign-in {
+  color: white !important;
+}
+
+.light-modal-bg {
+  background-color: rgba(196, 196, 196, 0.434) !important;
+}
+
+.light-filter-bg {
+  background-color: rgba(196, 196, 196, 0.434) !important;
+}
+
+.light-modal-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-filter-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-setting-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-acc-content {
+  background-color: rgb(227, 227, 227) !important;
+  color: black !important;
+}
+
+.light-input {
+  background-color: rgba(255, 255, 255, 0.627) !important;
+  color: black !important;
+  border-color: rgb(176, 176, 176) !important;
+}
+
+.light-input::placeholder {
+  color: black !important;
 }
